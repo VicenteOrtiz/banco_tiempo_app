@@ -30,11 +30,14 @@ class AuthenticationDatasource {
   Future<UserDetailsDto> getUserDetails(String token) async {
     var url = Uri.https(baseUrl, "/api/userData");
     try {
-      var response = await http.post(url, headers: {
-        'Authorization': token,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      });
+      var response = await http.post(
+        url,
+        headers: {
+          'Authorization': token,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      );
       var jsonResponse =
           convert.jsonDecode(response.body) as Map<String, dynamic>;
       print(jsonResponse);

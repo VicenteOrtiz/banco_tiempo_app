@@ -1,4 +1,5 @@
 import 'package:banco_tiempo_app/cross_features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:banco_tiempo_app/features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => AuthenticationBloc(),
         ),
+        BlocProvider(create: (_) => DashboardBloc())
       ],
       child: MaterialApp(
         title: 'Overlay Loader',

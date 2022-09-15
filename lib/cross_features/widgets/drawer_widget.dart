@@ -41,28 +41,77 @@ Widget buildMenuItems(BuildContext context) => Container(
         runSpacing: 16,
         children: [
           ListTile(
-            leading: const Icon(Icons.home_filled),
-            title: const Text("Home"),
+            leading: const Icon(
+              Icons.search,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text("Buscar Servicio"),
             onTap: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.home_filled),
-            title: const Text("Home"),
+            leading: const Icon(
+              Icons.list,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text("Mis Servicios"),
             onTap: () {},
           ),
           ListTile(
-            leading: const Icon(Icons.home_filled),
-            title: const Text("Home"),
+            leading: const Icon(
+              Icons.lock_clock,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text("Mis Reservas"),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.mail,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text("Mensajes"),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.help,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text("Ayuda"),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(
+              Icons.person,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text("Mi Cuenta"),
             onTap: () {},
           ),
           Divider(
             color: ColorPrimary.primaryColor,
           ),
           ListTile(
-            leading: const Icon(Icons.home_filled),
+            leading: const Icon(
+              Icons.home_filled,
+              color: ColorPrimary.primaryColor,
+            ),
             title: const Text("Home"),
             onTap: () {},
           ),
+          ListTile(
+            leading: const Icon(
+              Icons.logout,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text('Cerrar Sesión'),
+            onTap: () {
+              // Update the state of the app.
+              // ...
+              Navigator.of(context)
+                  .pushNamedAndRemoveUntil("/", ModalRoute.withName("/"));
+            },
+          )
         ],
       ),
     );

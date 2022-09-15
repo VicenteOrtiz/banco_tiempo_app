@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cross_features/authentication/presentation/bloc/authentication_bloc.dart';
@@ -24,13 +25,12 @@ class RouteGenerator {
       case '/dashboard':
         if (args is String) {
           return MaterialPageRoute(
-            builder: (_) => BlocProvider<DashboardBloc>.value(
-              value: _dashboardBloc,
-              child: Dashboard(title: "Dashboard", username: args),
-            ),
+            builder: (context) => Dashboard(title: "Dashboard", username: args),
           );
         }
         return _errorRoute();
+      case '/profile':
+        return MaterialPageRoute(builder: (context) => ProfilePage());
 
       default:
         return _errorRoute();

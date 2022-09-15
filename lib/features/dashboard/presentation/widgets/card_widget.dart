@@ -13,27 +13,31 @@ Widget CardWidget(int opt, BuildContext context) {
   ];
   List<IconData> icons = [
     Icons.search,
-    Icons.person_add,
-    Icons.car_rental,
+    Icons.list,
+    Icons.lock_clock,
     Icons.mail,
-    Icons.info,
-    Icons.location_city
+    Icons.help,
+    Icons.person
   ];
   return InkWell(
     onTap: () {
-      print("clicksss");
-      if (opt == 3) {
-        print("opt33");
-        /* Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => ClaimMenuPage())); */
+      if (opt == 0) {
+        print("opt0");
+        //Navigator.of(context).pushNamed('/profile');
       } else if (opt == 1) {
         print("opt1");
-        /* Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => NewGuestPage())); */
-      } else if (opt == 4) {
+      } else if (opt == 2) {
         /* Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => CommunityMessagesPage())); */
+        print("opt2");
+        print("opt2");
+      } else if (opt == 3) {
+        print("opt3");
+      } else if (opt == 4) {
         print("opt4");
+      } else if (opt == 5) {
+        print("opt5");
+        Navigator.of(context).pushNamed('/profile');
       }
     },
     child: Container(
