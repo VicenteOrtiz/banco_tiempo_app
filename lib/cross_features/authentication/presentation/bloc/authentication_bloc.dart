@@ -32,6 +32,7 @@ class AuthenticationBloc
             //HAY QUE IR A BUSCAR USERDETAILS
             final userDetails = await _authenticationRepository
                 .getUserDetails("Bearer ${loginResponse.token!}");
+            _storageService.setUserId(userDetails.id);
             emit(AuthenticationLoaded(
               event.username,
               userDetails.admin,

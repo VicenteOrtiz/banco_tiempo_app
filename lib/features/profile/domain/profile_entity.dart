@@ -21,6 +21,7 @@ class Profile {
     required this.activo,
     required this.admin,
     required this.mensajesAyuda,
+    required this.birthday,
   });
 
   final String id;
@@ -44,4 +45,5 @@ class Profile {
   final bool activo;
   final bool admin;
   final List<String> mensajesAyuda;
+  final String birthday;
 }

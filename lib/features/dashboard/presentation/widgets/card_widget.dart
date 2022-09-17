@@ -23,6 +23,7 @@ Widget CardWidget(int opt, BuildContext context) {
     onTap: () {
       if (opt == 0) {
         print("opt0");
+        Navigator.of(context).pushNamed('/services-list');
         //Navigator.of(context).pushNamed('/profile');
       } else if (opt == 1) {
         print("opt1");

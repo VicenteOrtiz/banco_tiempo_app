@@ -95,6 +95,14 @@ final labels = GoogleFonts.firaSans(
   ),
 );
 
+final titleLable = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 16,
+    height: 1.57,
+    fontWeight: bold,
+  ),
+);
+
 class IconSize {
   static const xs = 16.0;
   static const sm = 20.0;

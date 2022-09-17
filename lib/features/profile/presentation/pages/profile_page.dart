@@ -34,7 +34,7 @@ class ProfilePage extends StatelessWidget {
 
   Widget profileLayout(BuildContext context, Profile profile) {
     return Container(
-      width: double.infinity,
+      //width: double.infinity,
       decoration: BoxDecoration(color: ColorPrimary.primaryColor),
       child: Column(
         children: [
@@ -85,28 +85,58 @@ class ProfilePage extends StatelessWidget {
                       topRight: Radius.circular(20)),
                   color: Colors.white,
                 ),
-                width: double.infinity,
+                width: MediaQuery.of(context).size.width,
                 child: SingleChildScrollView(
-                  child: Column(children: [
-                    verticalSpace20,
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [],
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [],
-                    ),
-                    SizedBox(height: 15),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [],
-                    ),
-                  ]),
+                  //padding: EdgeInsets.all(1),
+                  child: Column(
+                    children: [
+                      verticalSpace20,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _auxInfo("Rut", profile.rut, context),
+                          _auxInfo(
+                              "Fecha de Nacimiento", profile.birthday, context),
+                        ],
+                      ),
+                      SizedBox(height: 15),
+                      _auxInfo("Correo", profile.email, context, isLarge: true),
+                      Divider(),
+                      _auxInfo("Dirección", profile.address, context,
+                          isLarge: true),
+                    ],
+                  ),
                 )),
           )
         ],
+      ),
+    );
+  }
+
+  Widget _auxInfo(String title, String content, BuildContext context,
+      {bool isLarge = false}) {
+    return Container(
+      width: isLarge
+          ? MediaQuery.of(context).size.width * 0.6
+          : MediaQuery.of(context).size.width * 0.4,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: Column(
+          //crossAxisAlignment: CrossAxisAlignment.,
+          children: [
+            Text(title,
+                style: titleLable.copyWith(
+                  color: ColorPrimary.primaryColor,
+                )),
+            Padding(
+              padding: const EdgeInsets.only(left: 12),
+              child: Text(
+                content,
+                textAlign: TextAlign.center,
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

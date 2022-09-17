@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
+
 import '../../domain/profile_entity.dart';
 
 ProfileDto profileDtoFromJson(String str) =>
@@ -30,6 +32,7 @@ class ProfileDto {
     required this.activo,
     required this.admin,
     required this.mensajesAyuda,
+    required this.fechaNacimiento,
   });
 
   String id;
@@ -53,30 +56,34 @@ class ProfileDto {
   bool activo;
   bool admin;
   List<String> mensajesAyuda;
+  String fechaNacimiento;
 
   Profile toDomain() {
     return Profile(
-        id: id,
-        address: address,
-        rut: rut,
-        userType: userType,
-        age: age,
-        phone: phone,
-        relation: relation,
-        lastName: lastName,
-        email: email,
-        name: name,
-        v: v,
-        logros: logros,
-        notificacionesLeidas: notificacionesLeidas,
-        notificaciones: notificaciones,
-        categorias: categorias,
-        historialTransacciones: historialTransacciones,
-        transaccionesPendientes: transaccionesPendientes,
-        imagenUrl: imagenUrl,
-        activo: activo,
-        admin: admin,
-        mensajesAyuda: mensajesAyuda);
+      id: id,
+      address: address,
+      rut: rut,
+      userType: userType,
+      age: age,
+      phone: phone,
+      relation: relation,
+      lastName: lastName,
+      email: email,
+      name: name,
+      v: v,
+      logros: logros,
+      notificacionesLeidas: notificacionesLeidas,
+      notificaciones: notificaciones,
+      categorias: categorias,
+      historialTransacciones: historialTransacciones,
+      transaccionesPendientes: transaccionesPendientes,
+      imagenUrl: imagenUrl,
+      activo: activo,
+      admin: admin,
+      mensajesAyuda: mensajesAyuda,
+      birthday:
+          DateFormat('dd/MM/yyyy').format(DateTime.parse(fechaNacimiento)),
+    );
   }
 
   factory ProfileDto.fromJson(Map<String, dynamic> json) => ProfileDto(
@@ -104,6 +111,7 @@ class ProfileDto {
         activo: json["activo"],
         admin: json["admin"],
         mensajesAyuda: List<String>.from(json["mensajesAyuda"].map((x) => x)),
+        fechaNacimiento: json["fechaNacimiento"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {

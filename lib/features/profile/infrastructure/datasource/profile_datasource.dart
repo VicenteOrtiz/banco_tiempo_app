@@ -24,6 +24,7 @@ class ProfileDataSource {
       if (response.statusCode == 200) {
         var jsonResponse =
             convert.jsonDecode(response.body) as Map<String, dynamic>;
+        print(jsonResponse);
         return ProfileDto.fromJson(jsonResponse);
       } else {
         print(response.statusCode);

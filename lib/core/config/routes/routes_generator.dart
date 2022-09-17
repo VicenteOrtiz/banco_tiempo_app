@@ -1,4 +1,5 @@
 import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
+import 'package:banco_tiempo_app/features/services/presentation/pages/service_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cross_features/authentication/presentation/bloc/authentication_bloc.dart';
@@ -31,6 +32,9 @@ class RouteGenerator {
         return _errorRoute();
       case '/profile':
         return MaterialPageRoute(builder: (context) => ProfilePage());
+
+      case '/services-list':
+        return MaterialPageRoute(builder: (context) => ServiceListPage());
 
       default:
         return _errorRoute();

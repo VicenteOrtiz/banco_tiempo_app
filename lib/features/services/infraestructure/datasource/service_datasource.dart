@@ -1,0 +1,36 @@
+import 'dart:convert';
+
+import 'package:banco_tiempo_app/core/config/services/secure_storage.dart';
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/service_payload.dart';
+import 'package:banco_tiempo_app/secrets.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
+
+import '../models/service_dto.dart';
+
+class ServiceDataSource {
+  StorageService _storageService = StorageService();
+
+  Future<ServicesDto?> getServices(ServicePayload servicePayload) async {
+    var url = Uri.https(baseUrl, "/api/busquedaServicios");
+    var token = await _storageService.getToken();
+    try {
+      var response = await http.post(url,
+          headers: {
+            'Authorization': token!,
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: json.encode(servicePayload.toJson()));
+      if (response.statusCode == 200) {
+        var jsonResponse =
+            convert.jsonDecode(response.body) as Map<String, dynamic>;
+        return ServicesDto.fromJson(jsonResponse);
+      } else {
+        return null;
+      }
+    } catch (e, s) {
+      return null;
+    }
+  }
+}
