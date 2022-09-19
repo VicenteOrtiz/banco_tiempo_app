@@ -37,7 +37,7 @@ class CustomAppBar extends PreferredSize {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0.0,
-      //title: Text(title),
+      title: title,
       backgroundColor: ColorPrimary.primaryColor,
     );
   }
