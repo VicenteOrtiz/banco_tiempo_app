@@ -23,9 +23,10 @@ Widget CardWidget(int opt, BuildContext context) {
     onTap: () {
       if (opt == 0) {
         print("opt0");
-        Navigator.of(context).pushNamed('/services-list');
+        Navigator.of(context).pushNamed('/service');
         //Navigator.of(context).pushNamed('/profile');
       } else if (opt == 1) {
+        Navigator.of(context).pushNamed('/poc');
         print("opt1");
       } else if (opt == 2) {
         /* Navigator.of(context).push(MaterialPageRoute(
@@ -35,6 +36,7 @@ Widget CardWidget(int opt, BuildContext context) {
       } else if (opt == 3) {
         print("opt3");
       } else if (opt == 4) {
+        Navigator.of(context).pushNamed('/services-list');
         print("opt4");
       } else if (opt == 5) {
         print("opt5");

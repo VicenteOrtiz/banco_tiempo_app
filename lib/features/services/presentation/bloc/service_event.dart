@@ -8,3 +8,11 @@ class GetServices extends ServiceEvent {
 
   GetServices({this.servicePayload});
 }
+
+class RefreshServices extends ServiceEvent {}
+
+class FilterServices extends ServiceEvent {
+  final ServicePayload? servicePayload;
+
+  FilterServices({this.servicePayload});
+}

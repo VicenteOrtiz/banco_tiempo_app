@@ -20,9 +20,21 @@ class ServiceInitial extends ServiceState {
 class ServiceLoading extends ServiceState {}
 
 class ServiceLoaded extends ServiceState {
+  final bool hasReachedMax;
   final List<Service> services;
+  final int actualPage;
 
-  ServiceLoaded(this.services);
+  ServiceLoaded(this.services, this.hasReachedMax, this.actualPage)
+      : super(actualPage: actualPage);
+
+  ServiceLoaded copyWith(
+      {List<Service>? services, bool? hasReachedMax, int? actualPage}) {
+    return ServiceLoaded(
+      services!,
+      hasReachedMax!,
+      actualPage!,
+    );
+  }
 }
 
 class ServiceError extends ServiceState {}

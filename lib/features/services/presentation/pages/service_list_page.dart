@@ -18,7 +18,7 @@ class ServiceListPage extends StatelessWidget {
         title: Text("Servicios, Talentos o Bienes"),
       ),
       body: BlocProvider<ServiceBloc>(
-        create: (context) => ServiceBloc()..add(GetServices()),
+        create: (context) => ServiceBloc()..add(RefreshServices()),
         child: BlocBuilder<ServiceBloc, ServiceState>(
           builder: (context, state) {
             if (state is ServiceLoaded) {
