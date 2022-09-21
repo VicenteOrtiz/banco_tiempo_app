@@ -10,15 +10,15 @@ class ServicePayload {
     required this.categorias,
     required this.pagina,
     required this.query,
-    required this.size,
-    required this.usuarioId,
+    this.size,
+    this.usuarioId,
   });
 
   List<String> categorias;
   int pagina;
   String query;
-  int size;
-  String usuarioId;
+  int? size = 10;
+  String? usuarioId;
 
   factory ServicePayload.fromJson(Map<String, dynamic> json) => ServicePayload(
         categorias: List<String>.from(json["categorias"].map((x) => x)),

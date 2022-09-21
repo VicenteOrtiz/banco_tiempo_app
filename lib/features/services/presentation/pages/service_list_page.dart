@@ -1,12 +1,14 @@
 import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
 import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
 import 'package:banco_tiempo_app/features/profile/presentation/bloc/profile_bloc.dart';
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/service_payload.dart';
 import 'package:banco_tiempo_app/features/services/presentation/bloc/service_bloc.dart';
 import 'package:banco_tiempo_app/secrets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/service_entity.dart';
+import '../controller/service_controller.dart';
 
 class ServiceListPage extends StatelessWidget {
   const ServiceListPage({Key? key}) : super(key: key);
@@ -22,11 +24,15 @@ class ServiceListPage extends StatelessWidget {
         child: BlocBuilder<ServiceBloc, ServiceState>(
           builder: (context, state) {
             if (state is ServiceLoaded) {
+              print(state);
+              //print(state.actualPage);
+              //print(state.pages);
+              //print(state.services);
               /* return Container(
                 child: Text(state.services[0].titulo),
               ); */
               //return _buildServicesList(state.services);
-              return _serviceLayout(context, state.services);
+              return _serviceLayout(context, state.serviceController!);
             } else {
               return Center(
                 child: CircularProgressIndicator(),
@@ -38,7 +44,8 @@ class ServiceListPage extends StatelessWidget {
     );
   }
 
-  Widget _serviceLayout(BuildContext context, List<Service> services) {
+  Widget _serviceLayout(
+      BuildContext context, ServiceController serviceController) {
     return Container(
       decoration: BoxDecoration(color: ColorPrimary.primaryColor),
       child: Column(
@@ -61,7 +68,7 @@ class ServiceListPage extends StatelessWidget {
                     topRight: Radius.circular(20)),
                 color: Colors.white,
               ),
-              child: _buildServicesList(services),
+              child: _buildServicesList(serviceController, context),
             ),
           ),
         ],
@@ -69,7 +76,9 @@ class ServiceListPage extends StatelessWidget {
     );
   }
 
-  Widget _buildServicesList(List<Service> services) {
+  Widget _buildServicesList(
+      ServiceController serviceController, BuildContext context) {
+    ServiceBloc _serviceBloc = context.read<ServiceBloc>();
     return GridView.builder(
       gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 300,
@@ -77,16 +86,25 @@ class ServiceListPage extends StatelessWidget {
         mainAxisSpacing: 12,
         childAspectRatio: 0.7,
       ),
-      itemCount: services.length,
+      itemCount: serviceController.services.length,
       itemBuilder: ((context, index) {
-        //return Text(services[index].descripcion);
-        return _serviceBox(services[index]);
+        if (index == serviceController.services.length - 1) {
+          print(serviceController.services.length);
+          ServicePayload payload = ServicePayload(
+            categorias: [],
+            pagina: serviceController.actualPage,
+            query: "",
+          );
+          _serviceBloc
+            ..add(GetServices(
+                serviceController: serviceController, servicePayload: payload));
+        }
+        return _serviceBox(serviceController.services[index]);
       }),
     );
   }
 
   Widget _serviceBox(Service service) {
-    print(service.imagenes);
     return InkWell(
       onTap: () => print("TE AMO VALENTINA"),
       child: Container(
@@ -118,7 +136,6 @@ class ServiceListPage extends StatelessWidget {
         color: Colors.grey,
       );
     } else {
-      print("https://${baseUrl}${imagenes.first}");
       return Image.network(
         "https://${baseUrl}${imagenes.first}",
         fit: BoxFit.cover,
@@ -133,3 +150,17 @@ class ServiceListPage extends StatelessWidget {
     }
   }
 }
+
+/* class ServiceList extends StatefulWidget {
+  const ServiceList({Key? key});
+
+  @override
+  State<ServiceList> createState() => _ServiceListState();
+}
+
+class _ServiceListState extends State<ServiceList> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
+  }
+} */

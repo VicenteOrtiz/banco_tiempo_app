@@ -2,27 +2,24 @@ part of 'service_bloc.dart';
 
 @immutable
 abstract class ServiceState {
-  final int? pages;
-  final int actualPage;
-  final List<Service>? services;
+  final ServiceController? serviceController;
 
   const ServiceState({
-    this.actualPage = 0,
-    this.pages,
-    this.services,
+    this.serviceController,
   });
 }
 
 class ServiceInitial extends ServiceState {
-  const ServiceInitial() : super(actualPage: 0);
+  const ServiceInitial()
+      : super(serviceController: const ServiceController(0, 0, []));
 }
 
 class ServiceLoading extends ServiceState {}
 
 class ServiceLoaded extends ServiceState {
-  final List<Service> services;
+  final ServiceController newState;
 
-  ServiceLoaded(this.services);
+  ServiceLoaded(this.newState) : super(serviceController: newState);
 }
 
 class ServiceError extends ServiceState {}
