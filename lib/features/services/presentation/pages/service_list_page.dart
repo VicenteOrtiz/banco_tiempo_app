@@ -86,7 +86,7 @@ class ServiceListPage extends StatelessWidget {
   }
 
   Widget _serviceBox(Service service) {
-    print(service.imagenes);
+    //print(service.imagenes);
     return InkWell(
       onTap: () => print("TE AMO VALENTINA"),
       child: Container(

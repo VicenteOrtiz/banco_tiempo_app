@@ -4,11 +4,10 @@ import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
 import '../../../../core/config/services/secure_storage.dart';
+import '../../../../secrets.dart';
 import '../models/login_response_dto.dart';
 
 class AuthenticationDatasource {
-  final String baseUrl = 'bancotiempo.cl';
-
   Future<LoginResponseDto> logIn(LoginUserEntity loginUserEntity) async {
     var url = Uri.https(baseUrl, "/api/login");
     try {

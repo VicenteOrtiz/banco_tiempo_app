@@ -1,5 +1,7 @@
 import 'package:banco_tiempo_app/features/poc/presentation/pages/post_page.dart';
 import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
+import 'package:banco_tiempo_app/features/services/domain/service_entity.dart';
+import 'package:banco_tiempo_app/features/services/presentation/pages/service_detail.dart';
 import 'package:banco_tiempo_app/features/services/presentation/pages/service_list_page.dart';
 import 'package:banco_tiempo_app/features/services/presentation/pages/service_page.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +45,13 @@ class RouteGenerator {
 
       case '/service':
         return MaterialPageRoute(builder: ((context) => ServicePage()));
+
+      case '/service/details':
+        if (args is Service) {
+          return MaterialPageRoute(
+              builder: ((context) => ServiceDetail(service: args)));
+        }
+        return _errorRoute();
 
       default:
         return _errorRoute();

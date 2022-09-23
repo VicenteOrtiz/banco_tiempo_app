@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/presentation/app_theme.dart';
+import '../../../../secrets.dart';
 import '../../domain/profile_entity.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -50,8 +51,8 @@ class ProfilePage extends StatelessWidget {
                   backgroundColor: Colors.white,
                   child: CircleAvatar(
                     radius: 79,
-                    backgroundImage: NetworkImage(
-                        "https://bancotiempo.cl${profile.imagenUrl}"),
+                    backgroundImage:
+                        NetworkImage("https://${baseUrl}${profile.imagenUrl}"),
                     backgroundColor: Colors.white,
                   ),
                 ),

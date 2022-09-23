@@ -4,10 +4,12 @@ import '../../../../app/presentation/app_theme.dart';
 import '../../../../secrets.dart';
 import '../../domain/service_entity.dart';
 
-Widget serviceBox(Service service) {
+Widget serviceBox(BuildContext context, Service service) {
   //print(service.imagenes);
   return InkWell(
-    onTap: () => print("TE AMO VALENTINA"),
+    onTap: () {
+      Navigator.of(context).pushNamed('/service/details', arguments: service);
+    },
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 10),
       height: 250,
@@ -39,7 +41,7 @@ Widget _serviceImage(List<String> imagenes) {
       color: Colors.grey,
     );
   } else {
-    print("https://${baseUrl}${imagenes.first}");
+    //print("https://${baseUrl}${imagenes.first}");
     return Image.network(
       "https://${baseUrl}${imagenes.first}",
       fit: BoxFit.cover,

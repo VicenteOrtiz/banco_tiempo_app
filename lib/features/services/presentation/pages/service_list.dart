@@ -32,7 +32,7 @@ class ServiceList extends StatelessWidget {
 
         //return Text(state.services[index].titulo);
 
-        return serviceBox(state.services[index]);
+        return serviceBox(context, state.services[index]);
         /* return ListTile(
           leading: Text(state.services[index].id.toString()),
           title: Text(

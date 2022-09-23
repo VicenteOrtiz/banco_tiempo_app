@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class ColorPrimary {
   static const primaryColor = Color.fromARGB(255, 147, 48, 106);
+  static const primaryDark = Color(0xFF3DA49B);
 }
 
 class ColorGradient {
@@ -80,6 +81,14 @@ class SemanticApproved {
   static const approvedPositive = Color(0xFF318728);
 }
 
+final linkInline1 = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: semiBold,
+  ),
+);
+
 final bodyText1Light = GoogleFonts.firaSans(
   textStyle: const TextStyle(
     fontSize: 16,
@@ -87,6 +96,15 @@ final bodyText1Light = GoogleFonts.firaSans(
     fontWeight: light,
   ),
 );
+
+final bodyText1 = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 20,
+    height: 1.5,
+    fontWeight: regular,
+  ),
+);
+
 final labels = GoogleFonts.firaSans(
   textStyle: const TextStyle(
     fontSize: 14,
@@ -110,6 +128,23 @@ class IconSize {
   static const lg = 28.0;
   static const xl = 32.0;
 }
+
+//BUTTON
+
+final buttonSmall = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 12,
+    fontWeight: bold,
+    letterSpacing: 0.5,
+  ),
+);
+final buttonMedium = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 14,
+    fontWeight: bold,
+    letterSpacing: 1,
+  ),
+);
 
 // REVISAR
 
