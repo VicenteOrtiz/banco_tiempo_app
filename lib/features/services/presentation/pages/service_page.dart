@@ -170,11 +170,14 @@ class _ServiceBodyState extends State<ServiceBody> {
                         ),
                         onTap: () {
                           print(searchBarController.text);
+                          print(selectedCategory.id);
                           _serviceBloc
                             ..add(
                               FilterServices(
                                 servicePayload: ServicePayload(
-                                    categorias: [],
+                                    categorias: (selectedCategory.id != 0)
+                                        ? [selectedCategory.id]
+                                        : [],
                                     pagina: 0,
                                     query: searchBarController.text),
                               ),

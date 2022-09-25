@@ -13,7 +13,10 @@ class CategoryRepository {
         return null;
       } else {
         List<Categoria> categorias = value.map((e) => e.toDomain()).toList();
-        print(categorias);
+        // Se agrega un elemento inicial para que haya un "no seleccionado"
+        categorias.insert(0,
+            Categoria(id: '0', imagenUrl: '', nombre: 'Seleccionar Categoría'));
+        //print(categorias);
         return categorias;
       }
     });
