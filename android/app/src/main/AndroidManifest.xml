@@ -1,7 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.banco_tiempo_app">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="banco_tiempo_app"
+        android:label="Banco Tiempo"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity

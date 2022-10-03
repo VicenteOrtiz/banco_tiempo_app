@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../app/presentation/app_theme.dart';
+import '../../../../cross_features/widgets/in_progress_dialog.dart';
 
 Widget CardWidget(int opt, BuildContext context) {
   List<String> titles = [
@@ -19,6 +20,7 @@ Widget CardWidget(int opt, BuildContext context) {
     Icons.help,
     Icons.person
   ];
+
   return InkWell(
     onTap: () {
       if (opt == 0) {
@@ -26,17 +28,21 @@ Widget CardWidget(int opt, BuildContext context) {
         Navigator.of(context).pushNamed('/service');
         //Navigator.of(context).pushNamed('/profile');
       } else if (opt == 1) {
-        Navigator.of(context).pushNamed('/poc');
+        //Navigator.of(context).pushNamed('/poc');
+        // set up the button
+        dialog(context);
         print("opt1");
       } else if (opt == 2) {
         /* Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => CommunityMessagesPage())); */
-        print("opt2");
+        dialog(context);
         print("opt2");
       } else if (opt == 3) {
+        dialog(context);
         print("opt3");
       } else if (opt == 4) {
-        Navigator.of(context).pushNamed('/services-list');
+        //Navigator.of(context).pushNamed('/services-list');
+        dialog(context);
         print("opt4");
       } else if (opt == 5) {
         print("opt5");

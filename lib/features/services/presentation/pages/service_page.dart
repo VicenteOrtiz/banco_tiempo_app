@@ -79,11 +79,8 @@ class _ServiceBodyState extends State<ServiceBody> {
   _getCategories() async {
     await _categoryRepository.getCategories().then((value) {
       setState(() {
-        print("entra aqui o ke");
-        print(value);
         categories = value ?? categories;
         selectedCategory = categories.first;
-        print(categories);
       });
     });
   }

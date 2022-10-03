@@ -2,6 +2,8 @@ import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
 import 'package:banco_tiempo_app/app/presentation/shared_widgets/bounce_button.dart';
 import 'package:banco_tiempo_app/app/presentation/shared_widgets/link_button.dart';
 import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
+import 'package:banco_tiempo_app/secrets.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/service_entity.dart';
@@ -22,6 +24,7 @@ class ServiceDetail extends StatelessWidget {
   }
 
   Widget _serviceLayout(BuildContext context, Service service) {
+    print("ESTE SERVICIO TIENE: ${service.imagenes.length} IMAGENES");
     return Container(
       decoration: BoxDecoration(color: ColorPrimary.primaryColor),
       child: Column(
@@ -40,6 +43,14 @@ class ServiceDetail extends StatelessWidget {
               ],
             ),
           ),
+          if (service.imagenes.isNotEmpty)
+            CarouselSlider(
+              options: CarouselOptions(height: 300.0),
+              items: service.imagenes
+                  .map((e) => Image.network("https://$baseUrl${e}"))
+                  .toList(),
+            ),
+          verticalSpace12,
           Expanded(
             child: Container(
                 decoration: BoxDecoration(
@@ -53,6 +64,18 @@ class ServiceDetail extends StatelessWidget {
                   //padding: EdgeInsets.all(1),
                   child: Column(
                     children: [
+                      verticalSpace10,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: BounceButton(
+                          buttonSize: ButtonSize.medium,
+                          type: ButtonType.primary,
+                          label: "Solicitar",
+                          onPressed: () {},
+                          textColor: Colors.white,
+                          iconLeft: Icons.calendar_month,
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Column(
@@ -70,17 +93,6 @@ class ServiceDetail extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: BounceButton(
-                          buttonSize: ButtonSize.medium,
-                          type: ButtonType.primary,
-                          label: "Solicitar",
-                          onPressed: () {},
-                          textColor: Colors.white,
-                          iconLeft: Icons.calendar_month,
-                        ),
-                      )
                     ],
                   ),
                 )),

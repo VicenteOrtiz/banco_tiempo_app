@@ -18,8 +18,6 @@ class RouteGenerator {
   Route<dynamic> generateRoute(RouteSettings settings) {
     final args = settings.arguments;
 
-    print("PASO POR ACA");
-
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
@@ -28,12 +26,11 @@ class RouteGenerator {
         );
 
       case '/dashboard':
-        if (args is String) {
-          return MaterialPageRoute(
-            builder: (context) => Dashboard(title: "Dashboard", username: args),
-          );
-        }
-        return _errorRoute();
+        return MaterialPageRoute(
+          builder: (context) => Dashboard(),
+        );
+
+      //return _errorRoute();
       case '/profile':
         return MaterialPageRoute(builder: (context) => ProfilePage());
 

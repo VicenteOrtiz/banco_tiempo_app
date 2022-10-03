@@ -5,6 +5,8 @@ import 'package:banco_tiempo_app/cross_features/authentication/infrastructure/mo
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
+import '../../../../core/config/shared_preferences/app_preferences.dart';
+
 part 'authentication_event.dart';
 part 'authentication_state.dart';
 
@@ -15,6 +17,7 @@ class AuthenticationBloc
         AuthenticationRepository();
 
     final StorageService _storageService = StorageService();
+    var appPreferences = AppPreferences();
 
     on<Login>(
       ((event, emit) async {
@@ -33,6 +36,9 @@ class AuthenticationBloc
             final userDetails = await _authenticationRepository
                 .getUserDetails("Bearer ${loginResponse.token!}");
             _storageService.setUserId(userDetails.id);
+            appPreferences.isFirstTime = false;
+            appPreferences.userName = event.username;
+            print("isFirstTime ${appPreferences.isFirstTime}");
             emit(AuthenticationLoaded(
               event.username,
               userDetails.admin,

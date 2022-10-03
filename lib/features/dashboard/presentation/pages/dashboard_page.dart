@@ -7,17 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/presentation/shared_widgets/loader.dart';
+import '../../../../core/config/shared_preferences/app_preferences.dart';
 import '../bloc/dashboard_bloc.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({
     Key? key,
-    required this.title,
-    required this.username,
   }) : super(key: key);
-
-  final String title;
-  final String username;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +40,7 @@ class Dashboard extends StatelessWidget {
   }
 
   Widget initialLayout(BuildContext context) {
+    var appPreferences = AppPreferences();
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       builder: (context, state) {
         return Container(
@@ -67,7 +64,7 @@ class Dashboard extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize: 30),
                         ),
                         Text(
-                          state.name!,
+                          state.name ?? appPreferences.userName,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
