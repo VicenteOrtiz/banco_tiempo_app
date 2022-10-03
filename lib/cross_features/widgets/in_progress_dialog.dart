@@ -1,8 +1,12 @@
+import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
 import 'package:flutter/material.dart';
 
 Future<dynamic> dialog(BuildContext context) {
   Widget okButton = TextButton(
-    child: Text("OK"),
+    child: Text(
+      "OK",
+      style: TextStyle(color: ColorPrimary.primaryColor),
+    ),
     onPressed: () {
       Navigator.of(context).pop();
     },

@@ -16,3 +16,8 @@ class FilterServices extends ServiceEvent {
 
   FilterServices({this.servicePayload});
 }
+
+class RequestService extends ServiceEvent {
+  final Service? service;
+  RequestService({this.service});
+}

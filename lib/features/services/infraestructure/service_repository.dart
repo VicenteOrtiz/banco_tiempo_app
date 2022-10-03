@@ -21,4 +21,9 @@ class ServicesRepository {
 
     return services;
   }
+
+  Future<bool> requestServices(Service service) async {
+    bool isServiceRequested = await _datasource.requestService(service);
+    return isServiceRequested;
+  }
 }

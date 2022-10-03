@@ -7,7 +7,7 @@ Widget CardWidget(int opt, BuildContext context) {
   List<String> titles = [
     "Buscar Servicio",
     "Mis Servicios",
-    "Mis Reservas",
+    "Mis Publicaciones",
     "Mensajes",
     "Ayuda",
     "Mi Cuenta"
@@ -28,10 +28,10 @@ Widget CardWidget(int opt, BuildContext context) {
         Navigator.of(context).pushNamed('/service');
         //Navigator.of(context).pushNamed('/profile');
       } else if (opt == 1) {
-        //Navigator.of(context).pushNamed('/poc');
+        Navigator.of(context).pushNamed('/my-services');
         // set up the button
-        dialog(context);
-        print("opt1");
+        //dialog(context);
+        //print("opt1");
       } else if (opt == 2) {
         /* Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => CommunityMessagesPage())); */

@@ -7,6 +7,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
 import '../../domain/service_entity.dart';
+import '../../infraestructure/service_repository.dart';
 
 class ServiceDetail extends StatelessWidget {
   final Service service;
@@ -24,6 +25,7 @@ class ServiceDetail extends StatelessWidget {
   }
 
   Widget _serviceLayout(BuildContext context, Service service) {
+    ServicesRepository _servicesRepository = ServicesRepository();
     print("ESTE SERVICIO TIENE: ${service.imagenes.length} IMAGENES");
     return Container(
       decoration: BoxDecoration(color: ColorPrimary.primaryColor),
@@ -71,7 +73,16 @@ class ServiceDetail extends StatelessWidget {
                           buttonSize: ButtonSize.medium,
                           type: ButtonType.primary,
                           label: "Solicitar",
-                          onPressed: () {},
+                          onPressed: () async {
+                            print("Se esta solicitando un servicio");
+                            bool isServiceRequested = await _servicesRepository
+                                .requestServices(service);
+                            if (isServiceRequested) {
+                              print("SE SOLICITO CON EXITO");
+                            } else {
+                              print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
+                            }
+                          },
                           textColor: Colors.white,
                           iconLeft: Icons.calendar_month,
                         ),

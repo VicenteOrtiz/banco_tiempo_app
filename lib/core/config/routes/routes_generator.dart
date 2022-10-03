@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/features/my_services/presentation/pages/my_services_page.dart';
 import 'package:banco_tiempo_app/features/poc/presentation/pages/post_page.dart';
 import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
 import 'package:banco_tiempo_app/features/services/domain/service_entity.dart';
@@ -49,6 +50,9 @@ class RouteGenerator {
               builder: ((context) => ServiceDetail(service: args)));
         }
         return _errorRoute();
+
+      case '/my-services':
+        return MaterialPageRoute(builder: (((context) => MyServicesPage())));
 
       default:
         return _errorRoute();

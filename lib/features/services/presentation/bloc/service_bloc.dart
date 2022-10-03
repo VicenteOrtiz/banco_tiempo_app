@@ -86,5 +86,7 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
         }
       }
     });
+
+    on<RequestService>((event, emit) async {});
   }
 }

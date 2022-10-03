@@ -6,6 +6,7 @@ import 'package:banco_tiempo_app/secrets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
+import '../../domain/service_entity.dart';
 import '../models/service_dto.dart';
 
 class ServiceDataSource {
@@ -31,6 +32,32 @@ class ServiceDataSource {
       }
     } catch (e, s) {
       return null;
+    }
+  }
+
+  Future<bool> requestService(Service service) async {
+    var url = Uri.https(baseUrl, "/api/solicitarServicio");
+    var token = await _storageService.getToken();
+    Map<String, dynamic> requestBody = {
+      "servicioID": service.id,
+    };
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          'Authorization': token!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: json.encode(requestBody),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
     }
   }
 }
