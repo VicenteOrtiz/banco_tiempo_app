@@ -39,6 +39,15 @@ class CustomAppBar extends PreferredSize {
       elevation: 0.0,
       title: title,
       backgroundColor: ColorPrimary.primaryColor,
+      actions: [
+        InkWell(
+          child: Icon(Icons.notifications),
+          onTap: () {
+            print("ALGO PASA CON LAS NOTIFICACIONES");
+          },
+        ),
+        horizontalSpace16,
+      ],
     );
   }
 }

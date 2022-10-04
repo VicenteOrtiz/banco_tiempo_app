@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/features/my_services/infraestructure/models/pending_services_dto.dart';
 import 'package:banco_tiempo_app/features/my_services/presentation/pages/my_services_page.dart';
 import 'package:banco_tiempo_app/features/poc/presentation/pages/post_page.dart';
 import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
@@ -11,6 +12,7 @@ import '../../../cross_features/authentication/presentation/bloc/authentication_
 import '../../../cross_features/authentication/presentation/pages/login_page.dart';
 import '../../../features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import '../../../features/dashboard/presentation/pages/dashboard_page.dart';
+import '../../../features/my_services/presentation/pages/my_services_detail_page.dart';
 
 class RouteGenerator {
   //final AuthenticationBloc _authBloc = AuthenticationBloc();
@@ -53,6 +55,15 @@ class RouteGenerator {
 
       case '/my-services':
         return MaterialPageRoute(builder: (((context) => MyServicesPage())));
+
+      case '/my-services/details':
+        if (args is RequestedServiceDto) {
+          return MaterialPageRoute(
+              builder: ((context) => MyServicesDetailPage(
+                    requestedService: args,
+                  )));
+        }
+        return _errorRoute();
 
       default:
         return _errorRoute();

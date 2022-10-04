@@ -17,4 +17,7 @@ class MyServicesRepository {
       return myServices;
     }
   }
+
+  Future<bool> cancelService(String serviceId) async =>
+      await _datasource.cancelService(serviceId);
 }

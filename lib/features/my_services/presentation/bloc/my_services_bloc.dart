@@ -25,5 +25,24 @@ class MyServicesBloc extends Bloc<MyServicesEvent, MyServicesState> {
         }
       },
     );
+
+    on<CancelService>(
+      (event, emit) async {
+        print("ENTRA ACA");
+        emit(MyServicesCanceling());
+        try {
+          print("ENTRO EN EL TRY");
+          bool isServiceCancelled =
+              await _myServicesRepository.cancelService(event.serviceId);
+          if (isServiceCancelled) {
+            emit(MyServicesCancelled());
+          } else {
+            print("NO SE PUDO CANCELAR");
+          }
+        } catch (e) {
+          emit(MyServicesError());
+        }
+      },
+    );
   }
 }

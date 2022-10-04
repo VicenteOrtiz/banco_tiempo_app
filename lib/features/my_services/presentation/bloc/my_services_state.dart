@@ -7,6 +7,10 @@ class MyServicesInitial extends MyServicesState {}
 
 class MyServicesLoading extends MyServicesState {}
 
+class MyServicesCanceling extends MyServicesState {}
+
+class MyServicesCancelled extends MyServicesState {}
+
 class MyServicesLoaded extends MyServicesState {
   final MyServices myServices;
 
