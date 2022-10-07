@@ -33,9 +33,10 @@ Widget CardWidget(int opt, BuildContext context) {
         //dialog(context);
         //print("opt1");
       } else if (opt == 2) {
+        Navigator.of(context).pushNamed('/publications');
         /* Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => CommunityMessagesPage())); */
-        dialog(context);
+        //dialog(context);
         print("opt2");
       } else if (opt == 3) {
         dialog(context);

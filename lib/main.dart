@@ -1,11 +1,11 @@
-import 'package:banco_tiempo_app/cross_features/authentication/presentation/bloc/authentication_bloc.dart';
-import 'package:banco_tiempo_app/features/dashboard/presentation/bloc/dashboard_bloc.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/bloc/my_services_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'core/config/routes/routes_generator.dart';
 import 'core/config/shared_preferences/app_preferences.dart';
+import 'cross_features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'features/dashboard/presentation/bloc/dashboard_bloc.dart';
+import 'features/my_services/presentation/bloc/my_services_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -2,6 +2,7 @@ import 'package:banco_tiempo_app/features/my_services/infraestructure/models/pen
 import 'package:banco_tiempo_app/features/my_services/presentation/pages/my_services_page.dart';
 import 'package:banco_tiempo_app/features/poc/presentation/pages/post_page.dart';
 import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
+import 'package:banco_tiempo_app/features/publications/presentation/pages/publication_page.dart';
 import 'package:banco_tiempo_app/features/services/domain/service_entity.dart';
 import 'package:banco_tiempo_app/features/services/presentation/pages/service_detail.dart';
 import 'package:banco_tiempo_app/features/services/presentation/pages/service_list_page.dart';
@@ -64,6 +65,11 @@ class RouteGenerator {
                   )));
         }
         return _errorRoute();
+
+      case '/publications':
+        return MaterialPageRoute(
+          builder: (context) => PublicationPage(),
+        );
 
       default:
         return _errorRoute();
