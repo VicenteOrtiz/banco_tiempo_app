@@ -52,17 +52,6 @@ class MyServicesBody extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
-                    /* Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-            child: Text(
-              "Servicios",
-              style: TextStyle(
-                fontSize: 16,
-                height: 1.5,
-                fontWeight: semiBold,
-              ),
-            ),
-          ), */
                     _buildTransactionSection("Servicios Confirmados", true),
                     verticalSpace12,
                     _buildTransactionSection("Servicios por Confirmar", false),
@@ -74,27 +63,6 @@ class MyServicesBody extends StatelessWidget {
         ],
       ),
     );
-
-    /* return BlocBuilder<MyServicesBloc, MyServicesState>(
-      builder: (context, state) {
-        if (state is MyServicesLoaded) {
-          return Column(
-            children: [
-              Text("Servicios Confirmados"),
-              Text(
-                  "Hay ${state.myServices.solicitado.length} servicios confirmados"),
-              Text("Servicios Pendientes"),
-              Text(
-                  "Hay ${state.myServices.porConfirmar.length} servicios pendientes"),
-            ],
-          );
-        } else {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-      },
-    ); */
   }
 
   Widget _buildTransactionSection(

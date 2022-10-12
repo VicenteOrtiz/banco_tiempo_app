@@ -2,6 +2,8 @@ import 'package:banco_tiempo_app/features/my_services/infraestructure/models/pen
 import 'package:banco_tiempo_app/features/my_services/presentation/pages/my_services_page.dart';
 import 'package:banco_tiempo_app/features/poc/presentation/pages/post_page.dart';
 import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
+import 'package:banco_tiempo_app/features/publications/domain/publication_entity.dart';
+import 'package:banco_tiempo_app/features/publications/presentation/pages/create_publication_page.dart';
 import 'package:banco_tiempo_app/features/publications/presentation/pages/publication_page.dart';
 import 'package:banco_tiempo_app/features/services/domain/service_entity.dart';
 import 'package:banco_tiempo_app/features/services/presentation/pages/service_detail.dart';
@@ -14,6 +16,7 @@ import '../../../cross_features/authentication/presentation/pages/login_page.dar
 import '../../../features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import '../../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../../features/my_services/presentation/pages/my_services_detail_page.dart';
+import '../../../features/publications/presentation/pages/publication_detail_page.dart';
 
 class RouteGenerator {
   //final AuthenticationBloc _authBloc = AuthenticationBloc();
@@ -69,6 +72,20 @@ class RouteGenerator {
       case '/publications':
         return MaterialPageRoute(
           builder: (context) => PublicationPage(),
+        );
+
+      case '/publications/details':
+        if (args is Publication) {
+          return MaterialPageRoute(
+              builder: ((context) => PublicationDetailPage(
+                    publication: args,
+                  )));
+        }
+        return _errorRoute();
+
+      case '/publications/create':
+        return MaterialPageRoute(
+          builder: (context) => CreatePublicationPage(),
         );
 
       default:
