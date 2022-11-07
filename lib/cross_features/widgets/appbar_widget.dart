@@ -39,6 +39,7 @@ class CustomAppBar extends PreferredSize {
       elevation: 0.0,
       title: title,
       backgroundColor: ColorPrimary.primaryColor,
+      centerTitle: centerTitle ?? false,
       actions: [
         InkWell(
           child: Icon(Icons.notifications),

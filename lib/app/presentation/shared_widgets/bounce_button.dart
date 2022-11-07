@@ -54,19 +54,21 @@ class BounceButton extends StatefulWidget {
   //TODO make default true, review implementations
   final bool contentBasedWidth;
   final bool horizontalPadding;
+  final Color? backgroundColor;
 
-  const BounceButton({
-    Key? key,
-    this.onPressed,
-    this.iconRight,
-    this.iconLeft,
-    this.textColor = Colors.black,
-    this.contentBasedWidth = false,
-    this.horizontalPadding = true,
-    required this.buttonSize,
-    required this.type,
-    required this.label,
-  }) : super(key: key);
+  const BounceButton(
+      {Key? key,
+      this.onPressed,
+      this.iconRight,
+      this.iconLeft,
+      this.textColor = Colors.black,
+      this.contentBasedWidth = false,
+      this.horizontalPadding = true,
+      required this.buttonSize,
+      required this.type,
+      required this.label,
+      this.backgroundColor})
+      : super(key: key);
 
   @override
   State<BounceButton> createState() => _BounceButtonState();
@@ -96,7 +98,7 @@ class _BounceButtonState extends State<BounceButton>
     ));
 
     _colorAnimation = ColorTween(
-      begin: primaryColor,
+      begin: widget.backgroundColor ?? primaryColor,
       end: primaryColorDark,
     ).animate(CurvedAnimation(
       curve: const Interval(0.8, 1, curve: Curves.decelerate),

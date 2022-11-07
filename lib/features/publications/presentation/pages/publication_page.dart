@@ -1,74 +1,123 @@
+import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
 import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/bloc/my_services_bloc.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/widgets/service_list.dart';
+import 'package:banco_tiempo_app/features/publications/presentation/bloc/publication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../app/presentation/app_theme.dart';
+import '../../../../app/presentation/shared_widgets/bounce_button.dart';
 import '../../../../app/presentation/shared_widgets/custom_label.dart';
+import '../../domain/publication_entity.dart';
+import '../widgets/publication_list.dart';
 
-class MyServicesPage extends StatelessWidget {
-  const MyServicesPage({Key? key}) : super(key: key);
+class PublicationPage extends StatelessWidget {
+  const PublicationPage({Key? key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: Text("Mis Servicios"),
+      appBar: const CustomAppBar(
+        title: Text("Mis Publicaciones"),
+        centerTitle: true,
       ),
-      body: BlocProvider(
-        create: (context) => MyServicesBloc()
-          ..add(
-            GetMyServices(),
-          ),
-        child: MyServicesBody(),
+      body: BlocProvider<PublicationBloc>(
+        create: (context) => PublicationBloc()..add(GetPublications()),
+        child: BlocBuilder<PublicationBloc, PublicationState>(
+          builder: (context, state) {
+            if (state is PublicationLoaded) {
+              print(state.publications);
+              return publicationLayout(context, state.publications);
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }
-}
 
-class MyServicesBody extends StatelessWidget {
-  const MyServicesBody({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    var appTextTheme;
+  Widget publicationLayout(
+      BuildContext context, List<Publication> publications) {
     return Container(
-      decoration: BoxDecoration(color: ColorPrimary.primaryColor),
+      color: ColorPrimary.primaryColor,
       child: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.only(
+                right: 8.0, left: 8.0, top: 0, bottom: 10),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: BounceButton(
+                    buttonSize: ButtonSize.medium,
+                    type: ButtonType.primary,
+                    label: "Nueva Publicación",
+                    onPressed: () async {
+                      print("NUEVA PUBLICACIÓN");
+                      Navigator.of(context).pushNamed(
+                        '/publications/create',
+                      );
+                    },
+                    textColor: ColorPrimary.primaryColor,
+                    iconLeft: Icons.add_box,
+                    backgroundColor: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.only(top: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(20),
                     topRight: Radius.circular(20)),
                 color: Colors.white,
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ListView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  children: [
-                    _buildTransactionSection("Servicios Confirmados", true),
-                    verticalSpace12,
-                    _buildTransactionSection("Servicios por Confirmar", false),
-                  ],
-                ),
+              width: double.infinity,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 20),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20)),
+                        color: Colors.white,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: ListView(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          children: [
+                            _buildPublicationsSection("Publicadas", false),
+                            verticalSpace12,
+                            _buildPublicationsSection("Ocultas", true),
+                            //_buildTransactionSection("Servicios por Confirmar", false),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  //_buildPublicationsSection("Publicadas", true),
+                ],
               ),
+              //width: double.infinity,
             ),
-          ),
+          )
         ],
       ),
     );
   }
 
-  Widget _buildTransactionSection(
+  Widget _buildPublicationsSection(
     String title,
     //PageRouteInfo viewAllPage,
-    bool confirmed,
+    bool hidden,
   ) =>
       Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -94,30 +143,30 @@ class MyServicesBody extends StatelessWidget {
                   thickness: 1,
                   color: ColorPrimary.primaryColor,
                 ),
-                BlocBuilder<MyServicesBloc, MyServicesState>(
+                BlocBuilder<PublicationBloc, PublicationState>(
                   builder: (context, state) {
-                    if (state is MyServicesLoaded) {
-                      var servicesList = confirmed
-                          ? state.myServices.solicitado
-                          : state.myServices.porConfirmar;
-                      if (servicesList.isNotEmpty) {
-                        return MyServiceList(
-                          services: servicesList.length > 5
-                              ? servicesList.sublist(0, 5)
-                              : servicesList,
-                          footer: servicesList.length > 1
+                    if (state is PublicationLoaded) {
+                      var publications = hidden
+                          ? state.hiddenPublications
+                          : state.publications;
+                      if (publications.isNotEmpty) {
+                        return MyPublicationsList(
+                          publications: publications.length > 5
+                              ? publications.sublist(0, 5)
+                              : publications,
+                          /* footer: publications.length > 1
                               ? CustomLabel(
                                   labelText: 'Ver todos los Servicios',
                                   //nextPage: viewAllPage,
                                 )
-                              : null,
+                              : null, */
                         );
                       } else {
                         return Column(children: [
                           Padding(
                             padding: const EdgeInsets.all(8),
                             child: Center(
-                              child: confirmed
+                              child: hidden
                                   ? Text(
                                       "No se encontraron Servicios Confirmados")
                                   : Text(
@@ -126,7 +175,7 @@ class MyServicesBody extends StatelessWidget {
                           )
                         ]);
                       }
-                    } else if (state is MyServicesError) {
+                    } else if (state is PublicationError) {
                       return Text("HUBO UN ERROR");
                     } else {
                       return Center(
