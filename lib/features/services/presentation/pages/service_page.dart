@@ -172,7 +172,7 @@ class _ServiceBodyState extends State<ServiceBody> {
                             ..add(
                               FilterServices(
                                 servicePayload: ServicePayload(
-                                    categorias: (selectedCategory.id != 0)
+                                    categorias: (selectedCategory.id != "0")
                                         ? [selectedCategory.id]
                                         : [],
                                     pagina: 0,
