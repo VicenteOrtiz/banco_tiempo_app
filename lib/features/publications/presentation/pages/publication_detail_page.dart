@@ -67,7 +67,35 @@ Widget _serviceLayout(BuildContext context, Publication publication) {
                   .map((e) => Image.network("https://$baseUrl" + e))
                   .toList(),
             ),
-          verticalSpace12,
+          //verticalSpace12,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BounceButton(
+              buttonSize: ButtonSize.medium,
+              type: ButtonType.primary,
+              label: "SERVICIOS PENDIENTES",
+              onPressed: () async {
+                print(publication.inscritos);
+                /* print("SE QUIERE OCULTAR EL SERVICIO");
+                //bloc..add(CancelService(serviceId: publication.id));
+                /* bool isServiceRequested = await _servicesRepository
+                                  .requestServices(service);
+                              if (isServiceRequested) {
+                                print("SE SOLICITO CON EXITO");
+                              } else {
+                                print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
+                              } */
+                publication.oculta
+                    ? BlocProvider.of<PublicationBloc>(context)
+                        .add(RepublishPublication(publication.id))
+                    : BlocProvider.of<PublicationBloc>(context)
+                        .add(HidePublication(publication.id)); */
+              },
+              textColor: ColorPrimary.primaryColor,
+              backgroundColor: Colors.white,
+              iconLeft: Icons.watch,
+            ),
+          ),
           Expanded(
             child: Container(
                 decoration: BoxDecoration(
@@ -115,7 +143,7 @@ Widget _serviceLayout(BuildContext context, Publication publication) {
                         context,
                       ),
                       _statusInfo(
-                        "Vecina",
+                        "Vecine",
                         publication.ofrece.name +
                             " " +
                             publication.ofrece.lastName,

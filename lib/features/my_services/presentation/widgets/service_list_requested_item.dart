@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import '../../../../app/presentation/app_theme.dart';
 import '../../infraestructure/models/pending_services_dto.dart';
 
-class ServiceListItem extends StatelessWidget {
+class ServiceListRequestedItem extends StatelessWidget {
   final RequestedServiceDto requestedService;
-  const ServiceListItem({
+  const ServiceListRequestedItem({
     required this.requestedService,
     Key? key,
   }) : super(key: key);
@@ -30,7 +30,7 @@ class ServiceListItem extends StatelessWidget {
         style: labels,
       ),
       trailing: Text(
-        '${requestedService.servicio.horas} bono',
+        '${requestedService.servicio.horas} bonoS',
         style:
             appTextTheme.subtitle1?.copyWith(color: ColorPrimary.primaryColor),
       ),

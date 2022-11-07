@@ -1,6 +1,5 @@
 import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
 import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/my_services/infraestructure/payload/confirm_service_payload.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,9 +9,9 @@ import '../../../../secrets.dart';
 import '../../infraestructure/models/pending_services_dto.dart';
 import '../bloc/my_services_bloc.dart';
 
-class MyServicesDetailPage extends StatelessWidget {
+class MyServicesRequestedDetailPage extends StatelessWidget {
   final RequestedServiceDto requestedService;
-  const MyServicesDetailPage({
+  const MyServicesRequestedDetailPage({
     required this.requestedService,
     Key? key,
   }) : super(key: key);
@@ -21,8 +20,8 @@ class MyServicesDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(
+        title: Text("Servicio en Curso"),
         centerTitle: true,
-        title: Text("Servicio Solicitado"),
       ),
       body: _serviceLayout(
           context, requestedService, context.read<MyServicesBloc>()),
@@ -116,80 +115,86 @@ Widget _serviceLayout(BuildContext context,
                       ),
                       _statusInfo(
                         "Vecine",
-                        requestedService.ofrece.name +
+                        requestedService.solicita.name +
                             " " +
-                            requestedService.ofrece.lastName,
+                            requestedService.solicita.lastName,
                         context,
                       ),
                       verticalSpace10,
-                      if (!isPending)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: BounceButton(
-                            buttonSize: ButtonSize.medium,
-                            type: ButtonType.primary,
-                            label: "MENSAJES",
-                            onPressed: () async {
-                              print("SE QUIERE ENVIAR UN MENSAJE");
-                            },
-                            textColor: Colors.white,
-                            iconLeft: Icons.chat,
-                            backgroundColor: ColorPrimary.primaryDark,
-                          ),
-                        ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: BounceButton(
-                          buttonSize: ButtonSize.medium,
-                          type: ButtonType.primary,
-                          label: "CANCELAR",
-                          onPressed: () async {
-                            print("SE QUIERE CANCELAR EL SERVICIO");
-                            bloc
-                              ..add(CancelService(
-                                  serviceId: requestedService.id));
-                            /* bool isServiceRequested = await _servicesRepository
+                      isPending
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: BounceButton(
+                                buttonSize: ButtonSize.medium,
+                                type: ButtonType.primary,
+                                label: "RECHAZAR",
+                                onPressed: () async {
+                                  print("SE QUIERE ENVIAR UN MENSAJE");
+                                  bloc
+                                    ..add(RejectService(
+                                        serviceId: requestedService.id));
+                                  /* bool isServiceRequested = await _servicesRepository
                                   .requestServices(service);
                               if (isServiceRequested) {
                                 print("SE SOLICITO CON EXITO");
                               } else {
                                 print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
                               } */
-                          },
-                          textColor: Colors.white,
-                          iconLeft: Icons.cancel,
-                          backgroundColor: ColorButton.cancel,
-                        ),
-                      ),
-                      if (!isPending)
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: BounceButton(
-                            buttonSize: ButtonSize.medium,
-                            type: ButtonType.primary,
-                            label: "FINALIZAR",
-                            onPressed: () async {
-                              print("SE QUIERE FINALIZAR EL SERVICIO");
-                              var payload = ConfirmServicePayload(
-                                  puntaje: 4,
-                                  comentario: "Prueba",
-                                  cualidades: [],
-                                  transaccionId: requestedService.id);
-                              bloc
-                                ..add(FinishService(
-                                    confirmServicePayload: payload));
-                              /* bool isServiceRequested = await _servicesRepository
-                                  .requestServices(service);
-                              if (isServiceRequested) {
-                                print("SE SOLICITO CON EXITO");
-                              } else {
-                                print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
-                              } */
-                            },
-                            textColor: Colors.white,
-                            iconLeft: Icons.cancel,
-                          ),
-                        ),
+                                },
+                                textColor: Colors.white,
+                                iconLeft: Icons.cancel,
+                                backgroundColor: ColorButton.cancel,
+                              ),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: BounceButton(
+                                buttonSize: ButtonSize.medium,
+                                type: ButtonType.primary,
+                                label: "MENSAJES",
+                                onPressed: () async {
+                                  print("SE QUIERE ENVIAR UN MENSAJE");
+                                },
+                                textColor: Colors.white,
+                                iconLeft: Icons.chat,
+                                backgroundColor: ColorPrimary.primaryDark,
+                              ),
+                            ),
+                      isPending
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: BounceButton(
+                                buttonSize: ButtonSize.medium,
+                                type: ButtonType.primary,
+                                label: "ACEPTAR",
+                                onPressed: () async {
+                                  print("SE QUIERE ACEPTAR EL SERVICIO");
+                                  bloc
+                                    ..add(AcceptService(
+                                        serviceId: requestedService.id));
+                                },
+                                textColor: Colors.white,
+                                iconLeft: Icons.cancel,
+                                //backgroundColor: ColorButton.cancel,
+                              ),
+                            )
+                          : Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: BounceButton(
+                                buttonSize: ButtonSize.medium,
+                                type: ButtonType.primary,
+                                label: "CANCELAR",
+                                onPressed: () async {
+                                  print("SE QUIERE CANCELAR EL SERVICIO");
+                                  bloc
+                                    ..add(CancelService(
+                                        serviceId: requestedService.id));
+                                },
+                                textColor: Colors.white,
+                                iconLeft: Icons.cancel,
+                                backgroundColor: ColorButton.cancel,
+                              ),
+                            ),
                     ],
                   ),
                 )),
@@ -200,16 +205,6 @@ Widget _serviceLayout(BuildContext context,
   );
 }
 
-bool _isPending(RequestedServiceDto service) {
-  if (service.aceptado) {
-    return false;
-  } else if (service.cancelado) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
 String _statusText(RequestedServiceDto service) {
   if (service.aceptado) {
     return "Confirmado";
@@ -217,6 +212,16 @@ String _statusText(RequestedServiceDto service) {
     return "Cancelado";
   } else {
     return "Pendiente";
+  }
+}
+
+bool _isPending(RequestedServiceDto service) {
+  if (service.aceptado) {
+    return false;
+  } else if (service.cancelado) {
+    return false;
+  } else {
+    return true;
   }
 }
 

@@ -10,3 +10,21 @@ class CancelService extends MyServicesEvent {
 
   CancelService({required this.serviceId});
 }
+
+class AcceptService extends MyServicesEvent {
+  final String serviceId;
+
+  AcceptService({required this.serviceId});
+}
+
+class RejectService extends MyServicesEvent {
+  final String serviceId;
+
+  RejectService({required this.serviceId});
+}
+
+class FinishService extends MyServicesEvent {
+  final ConfirmServicePayload confirmServicePayload;
+
+  FinishService({required this.confirmServicePayload});
+}

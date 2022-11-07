@@ -16,6 +16,7 @@ import '../../../cross_features/authentication/presentation/pages/login_page.dar
 import '../../../features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import '../../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../../features/my_services/presentation/pages/my_services_detail_page.dart';
+import '../../../features/my_services/presentation/pages/my_services_requested_detail_page.dart';
 import '../../../features/publications/presentation/pages/publication_detail_page.dart';
 
 class RouteGenerator {
@@ -64,6 +65,15 @@ class RouteGenerator {
         if (args is RequestedServiceDto) {
           return MaterialPageRoute(
               builder: ((context) => MyServicesDetailPage(
+                    requestedService: args,
+                  )));
+        }
+        return _errorRoute();
+
+      case '/my-services/requested-details':
+        if (args is RequestedServiceDto) {
+          return MaterialPageRoute(
+              builder: ((context) => MyServicesRequestedDetailPage(
                     requestedService: args,
                   )));
         }

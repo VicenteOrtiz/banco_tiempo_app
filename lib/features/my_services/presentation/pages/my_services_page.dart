@@ -52,9 +52,9 @@ class MyServicesBody extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
-                    _buildTransactionSection("Servicios Confirmados", true),
+                    _buildTransactionSection("Servicios en Curso", true),
                     verticalSpace12,
-                    _buildTransactionSection("Servicios por Confirmar", false),
+                    _buildTransactionSection("Servicios que solicité", false),
                   ],
                 ),
               ),
@@ -102,6 +102,7 @@ class MyServicesBody extends StatelessWidget {
                           : state.myServices.porConfirmar;
                       if (servicesList.isNotEmpty) {
                         return MyServiceList(
+                          confirmed: confirmed,
                           services: servicesList.length > 5
                               ? servicesList.sublist(0, 5)
                               : servicesList,
@@ -118,10 +119,9 @@ class MyServicesBody extends StatelessWidget {
                             padding: const EdgeInsets.all(8),
                             child: Center(
                               child: confirmed
-                                  ? Text(
-                                      "No se encontraron Servicios Confirmados")
+                                  ? Text("No se encontraron Servicios en Curso")
                                   : Text(
-                                      "No se encontraron Servicios por Confirmar"),
+                                      "No se encontraron Servicios que solicité"),
                             ),
                           )
                         ]);
