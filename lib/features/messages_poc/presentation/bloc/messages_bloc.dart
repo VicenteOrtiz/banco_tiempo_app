@@ -1,4 +1,5 @@
 import 'package:banco_tiempo_app/features/messages_poc/infrastructure/messages_repository.dart';
+import 'package:banco_tiempo_app/features/messages_poc/infrastructure/models/messages_dto.dart';
 import 'package:banco_tiempo_app/features/messages_poc/infrastructure/models/pending_messages_dto.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
@@ -20,6 +21,23 @@ class MessagesBloc extends Bloc<MessagesEvent, MessagesState> {
             emit(PendingMessagesError());
           } else {
             emit(PendingMessagesLoaded(pendingMessages: pendingMessages));
+          }
+        } catch (e) {
+          emit(PendingMessagesError());
+        }
+      },
+    );
+
+    on<GetMessages>(
+      (event, emit) async {
+        emit(MessagesLoading());
+        try {
+          MessagesDto? messages =
+              await _messagesRepository.getMessages(event.serviceId);
+          if (messages == null) {
+            emit(PendingMessagesError());
+          } else {
+            emit(MessagesLoaded(messages: messages));
           }
         } catch (e) {
           emit(PendingMessagesError());

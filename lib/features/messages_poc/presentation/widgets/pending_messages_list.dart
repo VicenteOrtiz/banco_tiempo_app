@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/features/messages_poc/presentation/bloc/messages_bloc.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/widgets/pending_messages_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,6 +79,15 @@ class PendingMessagesList extends StatelessWidget {
                     return GestureDetector(
                       onTap: () {
                         print("HIZO CLICK EN EL SERVICIO");
+                        BlocProvider.of<MessagesBloc>(context)
+                          ..add(GetMessages(serviceId: s.id));
+                        Navigator.of(context)
+                            .pushNamed('/message')
+                            .then((value) {
+                          print("HOLA");
+                          /* BlocProvider.of<MessagesBloc>(context)
+                            ..add(GetPendingMessages()); */
+                        });
                         /* if (confirmed) {
                           Navigator.of(context)
                               .pushNamed('/my-services/requested-details',

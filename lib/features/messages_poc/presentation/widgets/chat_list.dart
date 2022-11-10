@@ -1,5 +1,8 @@
+import 'package:banco_tiempo_app/cross_features/validators/is_me_validator.dart';
+import 'package:banco_tiempo_app/features/messages_poc/presentation/bloc/messages_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 /* import 'package:app_admision/src/providers/chat_messages.dart';
 import 'package:app_admision/src/models/message.dart';
@@ -18,13 +21,35 @@ class _ChatListState extends State<ChatList> {
     //final chatData = Provider.of<ChatMessages>(context);
     //final chatMessages = chatData.chats;
 
-    final chatMessages = [
-      Message(sender: 0, time: "time", text: "hola"),
-      Message(sender: -1, time: "time", text: "chao"),
-      Message(sender: 0, time: "time", text: "xd")
-    ];
+    return BlocBuilder<MessagesBloc, MessagesState>(
+      builder: ((context, state) {
+        if (state is MessagesLoaded) {
+          return ListView.builder(
+              reverse: true,
+              padding: EdgeInsets.only(top: 15.0),
+              itemCount: state.messages.transaccion.mensajes.length,
+              itemBuilder: (BuildContext context, int index) {
+                final mensaje = state.messages.transaccion.mensajes[index];
+                final Message message = Message(
+                    authorName:
+                        mensaje.autor.name + " " + mensaje.autor.lastName,
+                    sender: 0,
+                    time: mensaje.fecha.toString(),
+                    text: mensaje.texto);
+                //final bool isMe = message.sender == -1;
+                //final bool isMe = ;
+                print(message.text);
+                return _buildMessage(message, isMe(context, mensaje.autor.id));
+              });
+        } else {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+      }),
+    );
 
-    return ListView.builder(
+    /* return ListView.builder(
         reverse: true,
         padding: EdgeInsets.only(top: 15.0),
         itemCount: chatMessages.length,
@@ -33,7 +58,7 @@ class _ChatListState extends State<ChatList> {
           final bool isMe = message.sender == -1;
           print(message.text);
           return _buildMessage(message, isMe);
-        });
+        }); */
   }
 
   _buildMessage(Message message, bool isMe) {
@@ -66,7 +91,7 @@ class _ChatListState extends State<ChatList> {
             !isMe ? CrossAxisAlignment.start : CrossAxisAlignment.end,
         children: <Widget>[
           Text(
-            isMe ? "Yo" : "Monitor@ USACH",
+            message.authorName,
             style: TextStyle(
               color: Colors.white,
               fontSize: 16.0,

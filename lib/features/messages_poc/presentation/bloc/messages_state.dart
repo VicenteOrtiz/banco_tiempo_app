@@ -14,3 +14,10 @@ class PendingMessagesLoaded extends MessagesState {
 }
 
 class PendingMessagesError extends MessagesState {}
+
+class MessagesLoading extends MessagesState {}
+
+class MessagesLoaded extends MessagesState {
+  final MessagesDto messages;
+  MessagesLoaded({required this.messages});
+}

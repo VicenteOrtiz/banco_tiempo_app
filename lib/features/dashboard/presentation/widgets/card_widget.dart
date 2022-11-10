@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/presentation/app_theme.dart';
 import '../../../../cross_features/widgets/in_progress_dialog.dart';
+import '../../../messages_poc/presentation/bloc/messages_bloc.dart';
 
 Widget CardWidget(int opt, BuildContext context) {
   List<String> titles = [
@@ -39,6 +41,7 @@ Widget CardWidget(int opt, BuildContext context) {
         //dialog(context);
         print("opt2");
       } else if (opt == 3) {
+        BlocProvider.of<MessagesBloc>(context)..add(GetPendingMessages());
         Navigator.of(context).pushNamed('/pending-messages');
         //dialog(context);
         print("opt3");

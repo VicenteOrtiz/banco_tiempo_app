@@ -38,8 +38,10 @@ class AuthenticationBloc
             _storageService.setUserId(userDetails.id);
             appPreferences.isFirstTime = false;
             appPreferences.userName = event.username;
-            print("isFirstTime ${appPreferences.isFirstTime}");
+            //print("isFirstTime ${appPreferences.isFirstTime}");
+            //TODO: guardar el nombre en vez del username
             emit(AuthenticationLoaded(
+              userDetails.id,
               event.username,
               userDetails.admin,
               userDetails.balance,

@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/cross_features/validators/is_me_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/presentation/app_theme.dart';
@@ -26,7 +27,7 @@ class PendingMessagesListItem extends StatelessWidget {
         style: appTextTheme.bodyText2,
       ),
       subtitle: Text(
-        requestedService.id,
+        _name(requestedService, context),
         style: labels,
       ),
       trailing: Text(
@@ -45,5 +46,13 @@ String _statusText(RequestedServiceDto service) {
     return "Cancelado";
   } else {
     return "Pendiente";
+  }
+}
+
+String _name(RequestedServiceDto service, BuildContext context) {
+  if (isMe(context, service.ofrece.id)) {
+    return service.solicita.name + " " + service.solicita.lastName;
+  } else {
+    return service.ofrece.name + " " + service.ofrece.lastName;
   }
 }
