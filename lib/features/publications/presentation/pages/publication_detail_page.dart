@@ -1,7 +1,7 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/publications/domain/publication_entity.dart';
-import 'package:banco_tiempo_app/features/publications/presentation/bloc/publication_bloc.dart';
+import '../../../../app/presentation/app_theme.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../domain/publication_entity.dart';
+import '../bloc/publication_bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,6 +76,7 @@ Widget _serviceLayout(BuildContext context, Publication publication) {
               label: "SERVICIOS PENDIENTES",
               onPressed: () async {
                 print(publication.inscritos);
+
                 /* print("SE QUIERE OCULTAR EL SERVICIO");
                 //bloc..add(CancelService(serviceId: publication.id));
                 /* bool isServiceRequested = await _servicesRepository

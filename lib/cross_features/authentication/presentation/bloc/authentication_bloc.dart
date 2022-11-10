@@ -1,7 +1,7 @@
-import 'package:banco_tiempo_app/core/config/services/secure_storage.dart';
-import 'package:banco_tiempo_app/cross_features/authentication/domain/login_user_entity.dart';
-import 'package:banco_tiempo_app/cross_features/authentication/infrastructure/authentication_repository.dart';
-import 'package:banco_tiempo_app/cross_features/authentication/infrastructure/models/login_response_dto.dart';
+import '../../../../core/config/services/secure_storage.dart';
+import '../../domain/login_user_entity.dart';
+import '../../infrastructure/authentication_repository.dart';
+import '../../infrastructure/models/login_response_dto.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

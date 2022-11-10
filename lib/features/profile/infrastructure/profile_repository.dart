@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/features/profile/infrastructure/datasource/profile_datasource.dart';
-import 'package:banco_tiempo_app/features/profile/infrastructure/models/profile_dto.dart';
+import 'datasource/profile_datasource.dart';
+import 'models/profile_dto.dart';
 
 import '../domain/profile_entity.dart';
 

@@ -1,12 +1,12 @@
-import '../../domain/publication_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/presentation/app_theme.dart';
+import '../../../my_services/infraestructure/models/pending_services_dto.dart';
 
-class PublicationListItem extends StatelessWidget {
-  final Publication publication;
-  const PublicationListItem({
-    required this.publication,
+class PendingMessagesListItem extends StatelessWidget {
+  final RequestedServiceDto requestedService;
+  const PendingMessagesListItem({
+    required this.requestedService,
     Key? key,
   }) : super(key: key);
 
@@ -22,18 +22,28 @@ class PublicationListItem extends StatelessWidget {
         ),
       ),
       title: Text(
-        publication.titulo,
+        requestedService.servicio.titulo,
         style: appTextTheme.bodyText2,
       ),
       subtitle: Text(
-        publication.publicado.toString(),
+        requestedService.id,
         style: labels,
       ),
       trailing: Text(
-        'Ver más',
+        '${requestedService.servicio.horas} bono',
         style:
             appTextTheme.subtitle1?.copyWith(color: ColorPrimary.primaryColor),
       ),
     );
+  }
+}
+
+String _statusText(RequestedServiceDto service) {
+  if (service.aceptado) {
+    return "Confirmado";
+  } else if (service.cancelado) {
+    return "Cancelado";
+  } else {
+    return "Pendiente";
   }
 }

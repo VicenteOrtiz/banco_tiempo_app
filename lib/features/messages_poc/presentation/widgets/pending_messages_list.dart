@@ -1,17 +1,18 @@
-import '../../domain/publication_entity.dart';
-import '../bloc/publication_bloc.dart';
+import 'package:banco_tiempo_app/features/messages_poc/presentation/widgets/pending_messages_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'publication_list_item.dart';
+import '../../../my_services/infraestructure/models/pending_services_dto.dart';
 
-class MyPublicationsList extends StatelessWidget {
-  final List<Publication> publications;
+class PendingMessagesList extends StatelessWidget {
+  final List<RequestedServiceDto> services;
   final Widget? header;
   final Widget? footer;
+  final bool confirmed;
 
-  const MyPublicationsList({
-    required this.publications,
+  const PendingMessagesList({
+    required this.services,
+    required this.confirmed,
     this.footer,
     this.header,
     Key? key,
@@ -66,32 +67,38 @@ class MyPublicationsList extends StatelessWidget {
   }
 
   Widget _buildBody() =>
-      publications.isNotEmpty ? _buildTransactionList() : _buildNoTransaction();
+      services.isNotEmpty ? _buildTransactionList() : _buildNoTransaction();
 
   Widget _buildTransactionList() => Column(
         children: [
-          ...publications
+          ...services
               .map(
                 (s) => Builder(
                   builder: (context) {
                     return GestureDetector(
                       onTap: () {
                         print("HIZO CLICK EN EL SERVICIO");
-                        /* AutoRouter.of(context).push(
-                          TransactionDetailsView(
-                            transaction: t,
-                          ),
-                        ); */
-                        Navigator.of(context)
-                            .pushNamed('/publications/details', arguments: s)
-                            .then((value) {
-                          print("VOLVIO");
-                          BlocProvider.of<PublicationBloc>(context)
-                            ..add(GetPublications());
-                        });
+                        /* if (confirmed) {
+                          Navigator.of(context)
+                              .pushNamed('/my-services/requested-details',
+                                  arguments: s)
+                              .then((value) {
+                            print("VOLVIO");
+                            BlocProvider.of<MyServicesBloc>(context)
+                              ..add(GetMyServices());
+                          });
+                        } else {
+                          Navigator.of(context)
+                              .pushNamed('/my-services/details', arguments: s)
+                              .then((value) {
+                            print("VOLVIO");
+                            BlocProvider.of<MyServicesBloc>(context)
+                              ..add(GetMyServices());
+                          });
+                        } */
                       },
-                      child: PublicationListItem(
-                        publication: s,
+                      child: PendingMessagesListItem(
+                        requestedService: s,
                       ),
                     );
                   },

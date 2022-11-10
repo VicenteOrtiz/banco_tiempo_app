@@ -1,4 +1,4 @@
-import 'package:banco_tiempo_app/secrets.dart';
+import '../../../../secrets.dart';
 
 import '../models/category_dto.dart';
 import 'package:http/http.dart' as http;

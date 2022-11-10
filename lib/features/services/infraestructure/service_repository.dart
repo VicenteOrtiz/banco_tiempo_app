@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/features/services/infraestructure/datasource/service_datasource.dart';
-import 'package:banco_tiempo_app/features/services/infraestructure/payload/service_payload.dart';
+import 'datasource/service_datasource.dart';
+import 'payload/service_payload.dart';
 
 import '../domain/service_entity.dart';
 import 'models/service_dto.dart';

@@ -1,18 +1,22 @@
-import '../../../../core/config/services/secure_storage.dart';
-import '../models/profile_dto.dart';
+import 'dart:convert';
+
+import '../../../my_services/infraestructure/models/pending_services_dto.dart';
+import '../../../my_services/infraestructure/payload/confirm_service_payload.dart';
 import '../../../../secrets.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-class ProfileDataSource {
+import '../../../../core/config/services/secure_storage.dart';
+import '../models/pending_messages_dto.dart';
+
+class MessagesDatasource {
   StorageService _storageService = StorageService();
 
-  Future<ProfileDto?> getProfile() async {
-    var url = Uri.https(baseUrl, "/api/profile");
+  Future<PendingMessagesDto?> getPendingMessages() async {
+    var url = Uri.https(baseUrl, "/api/mensajesPendientes");
     var token = await _storageService.getToken();
-    print("GETPROFILE - token: ${token}");
     try {
-      print(token);
       var response = await http.get(
         url,
         headers: {
@@ -24,17 +28,14 @@ class ProfileDataSource {
       if (response.statusCode == 200) {
         var jsonResponse =
             convert.jsonDecode(response.body) as Map<String, dynamic>;
-        print(jsonResponse);
-        return ProfileDto.fromJson(jsonResponse);
+        return PendingMessagesDto.fromJson(jsonResponse);
       } else {
-        print(response.statusCode);
-        print(response.body);
-        print(response);
         return null;
       }
     } catch (e, s) {
-      print(e);
+      print("LLEGO ACA?");
       print(s);
+      print(e);
       return null;
     }
   }

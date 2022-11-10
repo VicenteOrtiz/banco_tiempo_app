@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/features/publications/create/entity/create_publication_form_entity.dart';
-import 'package:banco_tiempo_app/features/publications/infraestructure/datasource/publication_datasource.dart';
+import '../create/entity/create_publication_form_entity.dart';
+import 'datasource/publication_datasource.dart';
 import 'package:banco_tiempo_app/features/publications/infraestructure/models/publication_dto.dart';
 
 import '../domain/publication_entity.dart';

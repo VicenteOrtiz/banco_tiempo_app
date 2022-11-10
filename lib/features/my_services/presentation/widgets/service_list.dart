@@ -1,9 +1,9 @@
-import 'package:banco_tiempo_app/features/my_services/presentation/bloc/my_services_bloc.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/widgets/service_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../infraestructure/models/pending_services_dto.dart';
+import '../bloc/my_services_bloc.dart';
+import 'service_list_item.dart';
 
 class MyServiceList extends StatelessWidget {
   final List<RequestedServiceDto> services;

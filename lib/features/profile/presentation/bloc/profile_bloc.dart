@@ -1,4 +1,4 @@
-import 'package:banco_tiempo_app/features/profile/infrastructure/profile_repository.dart';
+import '../../infrastructure/profile_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

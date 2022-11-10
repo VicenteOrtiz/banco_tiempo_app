@@ -1,6 +1,6 @@
-import 'package:banco_tiempo_app/features/my_services/domain/my_services_entity.dart';
-import 'package:banco_tiempo_app/features/my_services/infraestructure/my_services_repository.dart';
-import 'package:banco_tiempo_app/features/my_services/infraestructure/payload/confirm_service_payload.dart';
+import '../../domain/my_services_entity.dart';
+import '../../infraestructure/my_services_repository.dart';
+import '../../infraestructure/payload/confirm_service_payload.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

@@ -1,6 +1,6 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/publications/presentation/bloc/publication_bloc.dart';
+import '../../../../app/presentation/app_theme.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../bloc/publication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -154,6 +154,10 @@ class PublicationPage extends StatelessWidget {
                           publications: publications.length > 5
                               ? publications.sublist(0, 5)
                               : publications,
+
+
+
+
                           /* footer: publications.length > 1
                               ? CustomLabel(
                                   labelText: 'Ver todos los Servicios',

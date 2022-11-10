@@ -1,6 +1,6 @@
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/bloc/my_services_bloc.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/widgets/service_list.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../bloc/my_services_bloc.dart';
+import '../widgets/service_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
