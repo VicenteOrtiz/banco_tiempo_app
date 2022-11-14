@@ -13,9 +13,21 @@ class ChatScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).primaryColor,
       //appBar: chatAppBarWidget(context),
       appBar: CustomAppBar(
+        leading: InkWell(
+          child: Icon(Icons.arrow_back),
+          onTap: () {
+            print("ALGO PASA CON LAS NOTIFICACIONES");
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/dashboard', (route) => false);
+          },
+        ),
         title: Text("Chat"),
         centerTitle: true,
-        //customBack: () => Navigator.of(context).pop(true),
+        customBack: () {
+          /* print("GOLA");
+          Navigator.of(context).pop();
+          Navigator.of(context).pop(); */
+        },
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),

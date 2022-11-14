@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           create: (_) => PublicationBloc(),
         ),
         BlocProvider(
-          create: (_) => MessagesBloc()..add(GetPendingMessages()),
+          create: (_) => MessagesBloc(),
         )
       ],
       child: MaterialApp(

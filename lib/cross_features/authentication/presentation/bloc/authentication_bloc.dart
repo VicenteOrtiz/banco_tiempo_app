@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/features/profile/infrastructure/profile_repository.dart';
+
 import '../../../../core/config/services/secure_storage.dart';
 import '../../domain/login_user_entity.dart';
 import '../../infrastructure/authentication_repository.dart';
@@ -16,9 +18,13 @@ class AuthenticationBloc
     final AuthenticationRepository _authenticationRepository =
         AuthenticationRepository();
 
+    //TODO: Fix this relationship with profile
+    final ProfileRepository _profileRepository = ProfileRepository();
+
     final StorageService _storageService = StorageService();
     var appPreferences = AppPreferences();
 
+    //TODO: too much dependency between different APIS, they should be fixed.
     on<Login>(
       ((event, emit) async {
         LoginUserEntity loginUserEntity = LoginUserEntity();
@@ -36,13 +42,15 @@ class AuthenticationBloc
             final userDetails = await _authenticationRepository
                 .getUserDetails("Bearer ${loginResponse.token!}");
             _storageService.setUserId(userDetails.id);
+            final userProfile = await _profileRepository.getProfile();
+            //print(userProfile!.name);
             appPreferences.isFirstTime = false;
             appPreferences.userName = event.username;
             //print("isFirstTime ${appPreferences.isFirstTime}");
             //TODO: guardar el nombre en vez del username
             emit(AuthenticationLoaded(
               userDetails.id,
-              event.username,
+              "${userProfile!.name} ${userProfile.lastName}",
               userDetails.admin,
               userDetails.balance,
               userDetails.imagenUrl,

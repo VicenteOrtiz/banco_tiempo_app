@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/features/dashboard/presentation/pages/dashboard_page.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/bloc/messages_bloc.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/widgets/pending_messages_list_item.dart';
 import 'package:flutter/material.dart';
@@ -81,13 +82,21 @@ class PendingMessagesList extends StatelessWidget {
                         print("HIZO CLICK EN EL SERVICIO");
                         BlocProvider.of<MessagesBloc>(context)
                           ..add(GetMessages(serviceId: s.id));
-                        Navigator.of(context)
+                        Navigator.pushNamedAndRemoveUntil(
+                          context,
+                          '/message',
+                          (Route<dynamic> route) => route is Dashboard,
+                        );
+                        /* Navigator.of(context)
                             .pushNamed('/message')
                             .then((value) {
                           print("HOLA");
+
                           /* BlocProvider.of<MessagesBloc>(context)
                             ..add(GetPendingMessages()); */
-                        });
+                          /* context.read<MessagesBloc>()
+                            ..add(GetPendingMessages()); */
+                        }); */
                         /* if (confirmed) {
                           Navigator.of(context)
                               .pushNamed('/my-services/requested-details',

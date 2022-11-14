@@ -36,6 +36,7 @@ class CustomAppBar extends PreferredSize {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+      leading: leading,
       elevation: 0.0,
       title: title,
       backgroundColor: ColorPrimary.primaryColor,

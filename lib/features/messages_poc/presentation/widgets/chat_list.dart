@@ -16,6 +16,25 @@ class ChatList extends StatefulWidget {
 }
 
 class _ChatListState extends State<ChatList> {
+  late NavigatorState _navigator;
+  late BuildContext _context;
+
+  /*  @override
+  void didChangeDependencies() {
+    _navigator = Navigator.of(context);
+    _context = context;
+    // TODO: implement didChangeDependencies
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    print("SE DISPOSEO");
+    BlocProvider.of<MessagesBloc>(_context)..add(GetPendingMessages());
+    super.dispose();
+  } */
+
   @override
   Widget build(BuildContext context) {
     //final chatData = Provider.of<ChatMessages>(context);

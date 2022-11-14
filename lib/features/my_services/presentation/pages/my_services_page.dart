@@ -1,4 +1,5 @@
 import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../../../cross_features/widgets/drawer_widget.dart';
 import '../bloc/my_services_bloc.dart';
 import '../widgets/service_list.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class MyServicesPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: Text("Mis Servicios"),
       ),
+      drawer: DrawerWidget(context),
       body: BlocProvider(
         create: (context) => MyServicesBloc()
           ..add(

@@ -1,4 +1,5 @@
 import '../../../../app/presentation/app_theme.dart';
+import '../../../../app/presentation/shared_widgets/custom_popup.dart';
 import '../../../../cross_features/widgets/appbar_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -38,6 +39,37 @@ Widget _serviceLayout(BuildContext context,
         print("SE ESTA CANCELANDO EL SERVICIO");
       } else if (state is MyServicesCancelled) {
         Navigator.of(context).pop();
+      } else if (state is MyServicesAccepted) {
+        print("LLEGA ACAAA");
+        showDialog(
+          context: context,
+          builder: (context) => CustomPopup(
+            message: "Tu Servicio ha sido aceptado con éxito!",
+            buttonAccept: BounceButton(
+              textColor: Colors.white,
+              type: ButtonType.primary,
+              buttonSize: ButtonSize.small,
+              label: "Entendido",
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ).then((value) => Navigator.of(context).pop());
+
+        //Navigator.of(context).pop();
+      } else if (state is MyServicesRejected) {
+        showDialog(
+          context: context,
+          builder: (context) => CustomPopup(
+            message: "Tu Servicio ha sido rechazado con éxito!",
+            buttonAccept: BounceButton(
+              textColor: Colors.white,
+              type: ButtonType.primary,
+              buttonSize: ButtonSize.small,
+              label: "Entendido",
+              onPressed: () => Navigator.of(context).pop(),
+            ),
+          ),
+        ).then((value) => Navigator.of(context).pop());
       }
       // TODO: implement listener
     },
@@ -129,17 +161,35 @@ Widget _serviceLayout(BuildContext context,
                                 type: ButtonType.primary,
                                 label: "RECHAZAR",
                                 onPressed: () async {
-                                  print("SE QUIERE ENVIAR UN MENSAJE");
-                                  bloc
-                                    ..add(RejectService(
-                                        serviceId: requestedService.id));
-                                  /* bool isServiceRequested = await _servicesRepository
-                                  .requestServices(service);
-                              if (isServiceRequested) {
-                                print("SE SOLICITO CON EXITO");
-                              } else {
-                                print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
-                              } */
+                                  print("SE QUIERE RECHAZAR UN SERVICIO");
+
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => CustomPopup(
+                                      message: "Quieres rechazar el servicio?",
+                                      buttonCancel: BounceButton(
+                                        textColor: Colors.white,
+                                        type: ButtonType.primary,
+                                        buttonSize: ButtonSize.small,
+                                        label: "SI",
+                                        onPressed: () {
+                                          bloc
+                                            ..add(RejectService(
+                                                serviceId:
+                                                    requestedService.id));
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                      buttonAccept: BounceButton(
+                                        textColor: Colors.white,
+                                        type: ButtonType.primary,
+                                        buttonSize: ButtonSize.small,
+                                        label: "NO",
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                      ),
+                                    ),
+                                  );
                                 },
                                 textColor: Colors.white,
                                 iconLeft: Icons.cancel,
@@ -160,41 +210,50 @@ Widget _serviceLayout(BuildContext context,
                                 backgroundColor: ColorPrimary.primaryDark,
                               ),
                             ),
-                      isPending
-                          ? Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: BounceButton(
-                                buttonSize: ButtonSize.medium,
-                                type: ButtonType.primary,
-                                label: "ACEPTAR",
-                                onPressed: () async {
-                                  print("SE QUIERE ACEPTAR EL SERVICIO");
-                                  bloc
+                      if (isPending)
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: BounceButton(
+                            buttonSize: ButtonSize.medium,
+                            type: ButtonType.primary,
+                            label: "ACEPTAR",
+                            onPressed: () async {
+                              print("SE QUIERE ACEPTAR EL SERVICIO");
+                              showDialog(
+                                context: context,
+                                builder: (context) => CustomPopup(
+                                  message: "Quieres aceptar el servicio?",
+                                  buttonCancel: BounceButton(
+                                    textColor: Colors.white,
+                                    type: ButtonType.primary,
+                                    buttonSize: ButtonSize.small,
+                                    label: "SI",
+                                    onPressed: () {
+                                      bloc
+                                        ..add(AcceptService(
+                                            serviceId: requestedService.id));
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  buttonAccept: BounceButton(
+                                    textColor: Colors.white,
+                                    type: ButtonType.primary,
+                                    buttonSize: ButtonSize.small,
+                                    label: "NO",
+                                    onPressed: () =>
+                                        Navigator.of(context).pop(),
+                                  ),
+                                ),
+                              );
+                              /* bloc
                                     ..add(AcceptService(
-                                        serviceId: requestedService.id));
-                                },
-                                textColor: Colors.white,
-                                iconLeft: Icons.cancel,
-                                //backgroundColor: ColorButton.cancel,
-                              ),
-                            )
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: BounceButton(
-                                buttonSize: ButtonSize.medium,
-                                type: ButtonType.primary,
-                                label: "CANCELAR",
-                                onPressed: () async {
-                                  print("SE QUIERE CANCELAR EL SERVICIO");
-                                  bloc
-                                    ..add(CancelService(
-                                        serviceId: requestedService.id));
-                                },
-                                textColor: Colors.white,
-                                iconLeft: Icons.cancel,
-                                backgroundColor: ColorButton.cancel,
-                              ),
-                            ),
+                                        serviceId: requestedService.id)); */
+                            },
+                            textColor: Colors.white,
+                            iconLeft: Icons.cancel,
+                            //backgroundColor: ColorButton.cancel,
+                          ),
+                        ),
                     ],
                   ),
                 )),

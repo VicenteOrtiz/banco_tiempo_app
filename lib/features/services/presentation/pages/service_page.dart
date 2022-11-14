@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/cross_features/widgets/drawer_widget.dart';
+
 import '../../../../app/presentation/shared_widgets/custom_input_text_widget.dart';
 import '../../../../cross_features/authentication/presentation/widgets/input_field.dart';
 import '../../../../cross_features/category/domain/category_entity.dart';
@@ -23,6 +25,7 @@ class ServicePage extends StatelessWidget {
         appBar: CustomAppBar(
           title: Text("Servicios, Talentos o Bienes"),
         ),
+        drawer: DrawerWidget(context),
         body: BlocProvider(
           create: (context) => ServiceBloc()
             ..add(

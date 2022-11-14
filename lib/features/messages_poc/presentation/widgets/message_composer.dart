@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
+import '../bloc/messages_bloc.dart';
+
 class MessageComposer extends StatefulWidget {
+  /* final String serviceId;
+
+  const MessageComposer({Key? key, required this.serviceId}) : super(key: key); */
   @override
   _MessageComposerState createState() => _MessageComposerState();
 }
@@ -38,6 +44,12 @@ class _MessageComposerState extends State<MessageComposer> {
             color: Theme.of(context).primaryColor,
             onPressed: () {
               print("se quiere enviar un mensaje");
+
+              /* BlocConsumer
+
+              print(context.read<MessagesBloc>().state); */
+              BlocProvider.of<MessagesBloc>(context)
+                ..add(GetMessages(serviceId: "623a07ba2df2cf35b733ba0d"));
               //_sendMessage();
             },
           ),
