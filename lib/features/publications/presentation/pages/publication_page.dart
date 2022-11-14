@@ -60,11 +60,15 @@ class PublicationPage extends StatelessWidget {
                     type: ButtonType.primary,
                     label: "Nueva Publicación",
                     onPressed: () async {
-                      print("NUEVA PUBLICACIÓN");
                       var categorias =
                           await _categoryRepository.getCategories();
-                      Navigator.of(context).pushNamed('/publications/create',
-                          arguments: categorias);
+                      Navigator.of(context)
+                          .pushNamed('/publications/create',
+                              arguments: categorias)
+                          .then((value) {
+                        BlocProvider.of<PublicationBloc>(context)
+                          ..add(GetPublications());
+                      });
                     },
                     textColor: ColorPrimary.primaryColor,
                     iconLeft: Icons.add_box,
