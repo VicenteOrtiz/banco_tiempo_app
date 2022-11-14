@@ -120,9 +120,14 @@ class RouteGenerator {
         return _errorRoute();
 
       case '/message':
-        return MaterialPageRoute(
-          builder: (context) => ChatScreen(),
-        );
+        if (args is String) {
+          return MaterialPageRoute(
+            builder: (context) => ChatScreen(
+              serviceId: args,
+            ),
+          );
+        }
+        return _errorRoute();
 
       case '/pending-messages':
         return MaterialPageRoute(

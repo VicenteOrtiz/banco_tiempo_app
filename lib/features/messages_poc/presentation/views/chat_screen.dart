@@ -5,7 +5,8 @@ import '../widgets/chat_list.dart';
 import '../widgets/message_composer.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({Key? key});
+  final String serviceId;
+  const ChatScreen({Key? key, required this.serviceId});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,9 @@ class ChatScreen extends StatelessWidget {
                 ),
               ),
             ),
-            MessageComposer(),
+            MessageComposer(
+              serviceId: serviceId,
+            ),
           ],
         ),
       ),

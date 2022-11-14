@@ -84,7 +84,8 @@ class ServiceDetail extends StatelessWidget {
                             showDialog(
                               context: context,
                               builder: (context) => CustomPopup(
-                                message: "Quieres solicitar el servicio?",
+                                message:
+                                    "Quieres solicitar el servicio? Esto te costara ${service.horas} bono(s).",
                                 buttonCancel: BounceButton(
                                   textColor: Colors.white,
                                   type: ButtonType.primary,
@@ -158,6 +159,23 @@ class ServiceDetail extends StatelessWidget {
                             ),
                             Text(
                               service.descripcion,
+                              style: bodyText1,
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              "Costo",
+                              style: titleLable.copyWith(
+                                  fontSize: 25,
+                                  color: ColorPrimary.primaryColor),
+                            ),
+                            Text(
+                              "${service.horas.toString()} bono",
                               style: bodyText1,
                             ),
                           ],

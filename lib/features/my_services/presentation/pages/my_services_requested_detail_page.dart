@@ -7,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/presentation/shared_widgets/bounce_button.dart';
 import '../../../../secrets.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
+import '../../../messages_poc/presentation/bloc/messages_bloc.dart';
 import '../../infraestructure/models/pending_services_dto.dart';
 import '../bloc/my_services_bloc.dart';
 
@@ -204,6 +206,15 @@ Widget _serviceLayout(BuildContext context,
                                 label: "MENSAJES",
                                 onPressed: () async {
                                   print("SE QUIERE ENVIAR UN MENSAJE");
+                                  BlocProvider.of<MessagesBloc>(context)
+                                    ..add(GetMessages(
+                                        serviceId: requestedService.id));
+                                  Navigator.pushNamedAndRemoveUntil(
+                                      context,
+                                      '/message',
+                                      (Route<dynamic> route) =>
+                                          route is Dashboard,
+                                      arguments: requestedService.id);
                                 },
                                 textColor: Colors.white,
                                 iconLeft: Icons.chat,
