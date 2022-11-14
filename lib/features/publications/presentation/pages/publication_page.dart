@@ -18,6 +18,16 @@ class PublicationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorPrimary.primaryColor,
+        child: Icon(Icons.home),
+        onPressed: () {
+          print("Hola");
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/dashboard', (route) => false);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: const CustomAppBar(
         title: Text("Mis Publicaciones"),
         centerTitle: true,

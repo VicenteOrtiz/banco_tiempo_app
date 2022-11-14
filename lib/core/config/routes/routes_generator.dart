@@ -1,9 +1,11 @@
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
 
+import '../../../cross_features/badges/domain/badges_entity.dart';
 import '../../../features/messages_poc/presentation/views/chat_screen.dart';
 import '../../../features/my_services/infraestructure/models/pending_services_dto.dart';
 import '../../../features/my_services/presentation/pages/my_services_page.dart';
+import '../../../features/my_services/presentation/pages/my_services_review_page.dart';
 import '../../../features/poc/presentation/pages/post_page.dart';
 import '../../../features/profile/presentation/pages/profile_page.dart';
 import '../../../features/publications/domain/publication_entity.dart';
@@ -82,6 +84,16 @@ class RouteGenerator {
                   )));
         }
         return _errorRoute();
+
+      //TODO: FALTO MAPEARLO A RUTA
+      /* case '/my-services/review':
+        if (args is List<Badge>) {
+          return MaterialPageRoute(
+              builder: ((context) => ServiceReviewPage(
+                    badges: args,
+                  )));
+        }
+        return _errorRoute(); */
 
       case '/publications':
         return MaterialPageRoute(
