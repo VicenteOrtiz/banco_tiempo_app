@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/app/presentation/shared_widgets/custom_input_text_widget.dart';
+import '../../app/presentation/app_theme.dart';
+import '../../app/presentation/shared_widgets/custom_input_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

@@ -1,9 +1,13 @@
-import 'package:banco_tiempo_app/core/config/services/secure_storage.dart';
-import 'package:banco_tiempo_app/cross_features/authentication/domain/login_user_entity.dart';
-import 'package:banco_tiempo_app/cross_features/authentication/infrastructure/authentication_repository.dart';
-import 'package:banco_tiempo_app/cross_features/authentication/infrastructure/models/login_response_dto.dart';
+import 'package:banco_tiempo_app/features/profile/infrastructure/profile_repository.dart';
+
+import '../../../../core/config/services/secure_storage.dart';
+import '../../domain/login_user_entity.dart';
+import '../../infrastructure/authentication_repository.dart';
+import '../../infrastructure/models/login_response_dto.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+
+import '../../../../core/config/shared_preferences/app_preferences.dart';
 
 part 'authentication_event.dart';
 part 'authentication_state.dart';
@@ -14,8 +18,13 @@ class AuthenticationBloc
     final AuthenticationRepository _authenticationRepository =
         AuthenticationRepository();
 
-    final StorageService _storageService = StorageService();
+    //TODO: Fix this relationship with profile
+    final ProfileRepository _profileRepository = ProfileRepository();
 
+    final StorageService _storageService = StorageService();
+    var appPreferences = AppPreferences();
+
+    //TODO: too much dependency between different APIS, they should be fixed.
     on<Login>(
       ((event, emit) async {
         LoginUserEntity loginUserEntity = LoginUserEntity();
@@ -32,8 +41,16 @@ class AuthenticationBloc
             //HAY QUE IR A BUSCAR USERDETAILS
             final userDetails = await _authenticationRepository
                 .getUserDetails("Bearer ${loginResponse.token!}");
+            _storageService.setUserId(userDetails.id);
+            final userProfile = await _profileRepository.getProfile();
+            //print(userProfile!.name);
+            appPreferences.isFirstTime = false;
+            appPreferences.userName = event.username;
+            //print("isFirstTime ${appPreferences.isFirstTime}");
+            //TODO: guardar el nombre en vez del username
             emit(AuthenticationLoaded(
-              event.username,
+              userDetails.id,
+              "${userProfile!.name} ${userProfile.lastName}",
               userDetails.admin,
               userDetails.balance,
               userDetails.imagenUrl,

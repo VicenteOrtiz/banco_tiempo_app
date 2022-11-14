@@ -15,7 +15,15 @@ class AppPreferences {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  late bool firstTime;
+  //late bool firstTime;
+
+  String get userName {
+    return _prefs.getString('userName') ?? "";
+  }
+
+  set userName(String value) {
+    _prefs.setString('userName', value);
+  }
 
   bool get isFirstTime {
     return _prefs.getBool('firstTime') ?? true;

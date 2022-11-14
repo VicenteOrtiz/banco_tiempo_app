@@ -1,13 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+final appTextTheme = GoogleFonts.firaSansTextTheme(_textTheme).apply(
+  bodyColor: Colors.black,
+  displayColor: Colors.black,
+);
+
+const _textTheme = TextTheme(
+  headline1: TextStyle(
+    fontSize: 48,
+    height: 1.16,
+    fontWeight: semiBold,
+    letterSpacing: -2,
+  ),
+  headline2: TextStyle(
+    fontSize: 40,
+    height: 1.2,
+    fontWeight: semiBold,
+    letterSpacing: -2,
+  ),
+  headline3: TextStyle(fontSize: 36, height: 1.2, fontWeight: semiBold),
+  headline4: TextStyle(fontSize: 28, height: 1.4, fontWeight: semiBold),
+  headline5: TextStyle(fontSize: 24, height: 1.3, fontWeight: semiBold),
+  headline6: TextStyle(fontSize: 20, height: 1.4, fontWeight: semiBold),
+  subtitle1: TextStyle(
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: semiBold,
+  ),
+  bodyText1: TextStyle(
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: regular,
+  ),
+  bodyText2: TextStyle(
+    fontSize: 14,
+    height: 1.5,
+    fontWeight: regular,
+  ),
+  subtitle2: TextStyle(
+    fontSize: 14,
+    height: 1.5,
+    fontWeight: semiBold,
+  ),
+  button: TextStyle(
+    fontSize: 16,
+    fontWeight: semiBold,
+  ),
+);
+
 class ColorPrimary {
   static const primaryColor = Color.fromARGB(255, 147, 48, 106);
+  static const primaryDark = Color.fromARGB(255, 0, 123, 197);
 }
 
 class ColorGradient {
   static const leftColor = Color.fromARGB(255, 145, 30, 91);
   static const rightColor = Color.fromARGB(255, 25, 24, 96);
+}
+
+class ColorButton {
+  static const cancel = Color.fromARGB(255, 211, 20, 30);
+  static const message = Color.fromARGB(255, 0, 123, 197);
 }
 
 class ColorNeutral {
@@ -80,6 +134,14 @@ class SemanticApproved {
   static const approvedPositive = Color(0xFF318728);
 }
 
+final linkInline1 = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 16,
+    height: 1.5,
+    fontWeight: semiBold,
+  ),
+);
+
 final bodyText1Light = GoogleFonts.firaSans(
   textStyle: const TextStyle(
     fontSize: 16,
@@ -87,11 +149,28 @@ final bodyText1Light = GoogleFonts.firaSans(
     fontWeight: light,
   ),
 );
+
+final bodyText1 = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 20,
+    height: 1.5,
+    fontWeight: regular,
+  ),
+);
+
 final labels = GoogleFonts.firaSans(
   textStyle: const TextStyle(
     fontSize: 14,
     height: 1.57,
     fontWeight: light,
+  ),
+);
+
+final titleLable = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 16,
+    height: 1.57,
+    fontWeight: bold,
   ),
 );
 
@@ -102,6 +181,23 @@ class IconSize {
   static const lg = 28.0;
   static const xl = 32.0;
 }
+
+//BUTTON
+
+final buttonSmall = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 12,
+    fontWeight: bold,
+    letterSpacing: 0.5,
+  ),
+);
+final buttonMedium = GoogleFonts.firaSans(
+  textStyle: const TextStyle(
+    fontSize: 14,
+    fontWeight: bold,
+    letterSpacing: 1,
+  ),
+);
 
 // REVISAR
 

@@ -1,4 +1,5 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
+import '../../../../app/assets_manager.dart';
+import '../../../../app/presentation/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -86,8 +87,9 @@ class _LoginPageState extends State<LoginPage> {
         ),
         child: Column(
           children: [
+            verticalSpace80,
             //ImageBuilder(imagePath: loginImages[1]),
-            ImageBuilder(imagePath: 'assets/images/logo_banco.png'),
+            ImageBuilder(imagePath: AssetsManager.logoBanco),
             verticalSpace24,
             //const TextData(message: "User"),
             Text(
@@ -118,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
               password: password,
             ),
             verticalSpace24,
+            ImageBuilder(imagePath: AssetsManager.logoCitiaps),
             //const SocialSignIn(),
           ],
         ),
