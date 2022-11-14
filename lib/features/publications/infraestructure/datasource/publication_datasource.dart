@@ -55,6 +55,7 @@ class PublicationDataSource {
       if (response.statusCode == 200) {
         return true;
       } else {
+        print(response.body);
         return false;
       }
     } catch (e, s) {
