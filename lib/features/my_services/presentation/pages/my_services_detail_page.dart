@@ -1,3 +1,7 @@
+import 'package:banco_tiempo_app/cross_features/badges/infraestructure/badge_repository.dart';
+import 'package:banco_tiempo_app/cross_features/badges/infraestructure/datasource/badge_datasource.dart';
+import 'package:banco_tiempo_app/features/my_services/presentation/pages/my_services_review_page.dart';
+
 import '../../../../app/presentation/app_theme.dart';
 import '../../../../app/presentation/shared_widgets/custom_popup.dart';
 import '../../../../cross_features/widgets/appbar_widget.dart';
@@ -219,7 +223,26 @@ Widget _serviceLayout(BuildContext context,
                             label: "FINALIZAR",
                             onPressed: () async {
                               print("SE QUIERE FINALIZAR EL SERVICIO");
-                              var payload = ConfirmServicePayload(
+                              var badges =
+                                  await BadgeRepository().getCategories();
+
+                              /* Navigator.of(context).pushNamed(
+                                  "/my-services/review",
+                                  arguments: badges); */
+
+                              Navigator.of(context)
+                                  .push(
+                                    MaterialPageRoute(
+                                      builder: ((context) => ServiceReviewPage(
+                                            badges: badges!,
+                                            serviceId: requestedService.id,
+                                            bloc: bloc,
+                                          )),
+                                    ),
+                                  )
+                                  .then((value) => Navigator.of(context).pop());
+
+                              /* var payload = ConfirmServicePayload(
                                   puntaje: 4,
                                   comentario: "Prueba",
                                   cualidades: [],
@@ -250,7 +273,7 @@ Widget _serviceLayout(BuildContext context,
                                         Navigator.of(context).pop(),
                                   ),
                                 ),
-                              );
+                              ); */
 
                               /* bool isServiceRequested = await _servicesRepository
                                   .requestServices(service);

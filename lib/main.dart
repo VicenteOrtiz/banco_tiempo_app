@@ -1,4 +1,4 @@
-import 'package:banco_tiempo_app/features/messages_poc/presentation/bloc/messages_bloc.dart';
+import 'features/messages_poc/presentation/bloc/messages_bloc.dart';
 
 import 'features/publications/presentation/bloc/publication_bloc.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,5 @@
-import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
-import 'package:banco_tiempo_app/cross_features/category/infraestructure/datasource/category_datasource.dart';
-
-import 'models/category_dto.dart';
+import '../domain/category_entity.dart';
+import 'datasource/category_datasource.dart';
 
 class CategoryRepository {
   final _dataSource = CategoryDatasource();

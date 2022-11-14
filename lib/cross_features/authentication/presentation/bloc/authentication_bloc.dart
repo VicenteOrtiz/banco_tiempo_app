@@ -1,9 +1,8 @@
-import 'package:banco_tiempo_app/features/profile/infrastructure/profile_repository.dart';
+import '../../../../features/profile/infrastructure/profile_repository.dart';
 
 import '../../../../core/config/services/secure_storage.dart';
 import '../../domain/login_user_entity.dart';
 import '../../infrastructure/authentication_repository.dart';
-import '../../infrastructure/models/login_response_dto.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

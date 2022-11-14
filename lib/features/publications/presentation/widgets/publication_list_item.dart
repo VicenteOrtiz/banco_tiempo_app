@@ -1,7 +1,7 @@
-import '../../domain/publication_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/presentation/app_theme.dart';
+import '../../domain/publication_entity.dart';
 
 class PublicationListItem extends StatelessWidget {
   final Publication publication;

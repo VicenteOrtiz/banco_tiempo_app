@@ -1,8 +1,8 @@
-import '../../infrastructure/profile_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 import '../../domain/profile_entity.dart';
+import '../../infrastructure/profile_repository.dart';
 
 part 'profile_event.dart';
 part 'profile_state.dart';

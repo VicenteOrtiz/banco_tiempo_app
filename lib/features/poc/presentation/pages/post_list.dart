@@ -1,8 +1,8 @@
-import '../bloc/poc_bloc.dart';
-import 'post_detail.dart';
 import 'package:flutter/material.dart';
 
+import '../bloc/poc_bloc.dart';
 import '../widgets/bottom_loader.dart';
+import 'post_detail.dart';
 
 class PostList extends StatelessWidget {
   const PostList({

@@ -56,7 +56,7 @@ class ProfileDto {
   bool activo;
   bool admin;
   List<String> mensajesAyuda;
-  String fechaNacimiento;
+  String? fechaNacimiento;
 
   Profile toDomain() {
     return Profile(
@@ -81,8 +81,9 @@ class ProfileDto {
       activo: activo,
       admin: admin,
       mensajesAyuda: mensajesAyuda,
-      birthday:
-          DateFormat('dd/MM/yyyy').format(DateTime.parse(fechaNacimiento)),
+      birthday: (fechaNacimiento != "")
+          ? DateFormat('dd/MM/yyyy').format(DateTime.parse(fechaNacimiento!))
+          : "",
     );
   }
 
