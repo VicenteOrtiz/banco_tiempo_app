@@ -1,24 +1,33 @@
-import '../../../../app/presentation/app_theme.dart';
-import '../../../../cross_features/authentication/presentation/bloc/authentication_bloc.dart';
-import '../../../../cross_features/widgets/appbar_widget.dart';
-import '../../../../cross_features/widgets/drawer_widget.dart';
-import '../widgets/card_widget.dart';
+import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
+import 'package:banco_tiempo_app/cross_features/authentication/presentation/bloc/authentication_bloc.dart';
+import 'package:banco_tiempo_app/cross_features/widgets/drawer_widget.dart';
+import 'package:banco_tiempo_app/features/dashboard/presentation/widgets/card_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/presentation/shared_widgets/loader.dart';
-import '../../../../core/config/shared_preferences/app_preferences.dart';
+import '../../../../core/config/services/secure_storage.dart';
 import '../bloc/dashboard_bloc.dart';
 
 class Dashboard extends StatelessWidget {
-  const Dashboard({
-    Key? key,
-  }) : super(key: key);
+  const Dashboard({Key? key, required this.title, required this.username})
+      : super(key: key);
+
+  final String title;
+  final String username;
 
   @override
   Widget build(BuildContext context) {
+    final StorageService _storageService = StorageService();
+    _storageService.getToken().then(
+          (value) => print(value),
+        );
     return Scaffold(
-      appBar: const CustomAppBar(),
+      appBar: AppBar(
+        elevation: 0.0,
+        //title: Text(title),
+        backgroundColor: ColorPrimary.primaryColor,
+      ),
       drawer: DrawerWidget(context),
       body: BlocConsumer<DashboardBloc, DashboardState>(
         listener: (context, state) {
@@ -40,7 +49,6 @@ class Dashboard extends StatelessWidget {
   }
 
   Widget initialLayout(BuildContext context) {
-    var appPreferences = AppPreferences();
     return BlocBuilder<AuthenticationBloc, AuthenticationState>(
       builder: (context, state) {
         return Container(
@@ -64,7 +72,7 @@ class Dashboard extends StatelessWidget {
                           style: TextStyle(color: Colors.white, fontSize: 30),
                         ),
                         Text(
-                          state.name ?? appPreferences.userName,
+                          state.name!,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 20,
