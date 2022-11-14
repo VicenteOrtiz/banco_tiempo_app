@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:banco_tiempo_app/core/config/services/secure_storage.dart';
-import 'package:banco_tiempo_app/features/services/infraestructure/payload/service_payload.dart';
-import 'package:banco_tiempo_app/secrets.dart';
+import '../../../../core/config/services/secure_storage.dart';
+import '../payload/service_payload.dart';
+import '../../../../secrets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 

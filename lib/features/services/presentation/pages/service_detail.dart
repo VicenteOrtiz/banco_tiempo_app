@@ -1,8 +1,11 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/app/presentation/shared_widgets/bounce_button.dart';
-import 'package:banco_tiempo_app/app/presentation/shared_widgets/link_button.dart';
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/secrets.dart';
+import 'package:banco_tiempo_app/app/presentation/shared_widgets/generic_error_pop_up.dart';
+
+import '../../../../app/presentation/app_theme.dart';
+import '../../../../app/presentation/shared_widgets/bounce_button.dart';
+import '../../../../app/presentation/shared_widgets/custom_popup.dart';
+import '../../../../app/presentation/shared_widgets/link_button.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../../../secrets.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
@@ -75,13 +78,69 @@ class ServiceDetail extends StatelessWidget {
                           label: "Solicitar",
                           onPressed: () async {
                             print("Se esta solicitando un servicio");
-                            bool isServiceRequested = await _servicesRepository
-                                .requestServices(service);
-                            if (isServiceRequested) {
+                            /* bool isServiceRequested = await _servicesRepository
+                                .requestServices(service); */
+                            //bool isServiceRequested;
+                            showDialog(
+                              context: context,
+                              builder: (context) => CustomPopup(
+                                message: "Quieres solicitar el servicio?",
+                                buttonCancel: BounceButton(
+                                  textColor: Colors.white,
+                                  type: ButtonType.primary,
+                                  buttonSize: ButtonSize.small,
+                                  label: "Si",
+                                  onPressed: () async {
+                                    bool isServiceRequested =
+                                        await _servicesRepository
+                                            .requestServices(service);
+                                    Navigator.of(context)
+                                        .pop(isServiceRequested);
+                                    //return isServiceRequested;
+                                  },
+                                ),
+                                buttonAccept: BounceButton(
+                                  textColor: Colors.white,
+                                  type: ButtonType.primary,
+                                  buttonSize: ButtonSize.small,
+                                  label: "No",
+                                  onPressed: () => Navigator.of(context).pop(),
+                                ),
+                              ),
+                            ).then((value) {
+                              if (value != null) {
+                                if (value) {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => CustomPopup(
+                                      message:
+                                          "Su servicio se solicitó con éxito!",
+                                      buttonAccept: BounceButton(
+                                        textColor: Colors.white,
+                                        type: ButtonType.primary,
+                                        buttonSize: ButtonSize.small,
+                                        label: "Entendido",
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(),
+                                      ),
+                                    ),
+                                  ).then(
+                                      (value) => Navigator.of(context).pop());
+                                } else {
+                                  print("HUBO UN PROBLEMA");
+                                  showDialog(
+                                      context: context,
+                                      builder: (context) => GenericErrorPopUp(
+                                          message:
+                                              "Hubo un problema con la solicitud del servicio"));
+                                }
+                              }
+                            });
+                            /* if (isServiceRequested) {
                               print("SE SOLICITO CON EXITO");
                             } else {
                               print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
-                            }
+                            } */
                           },
                           textColor: Colors.white,
                           iconLeft: Icons.calendar_month,

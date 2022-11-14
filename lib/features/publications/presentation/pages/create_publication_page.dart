@@ -1,7 +1,7 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/publications/create/bloc/create_publication_bloc.dart';
-import 'package:banco_tiempo_app/features/publications/create/entity/create_publication_form_entity.dart';
+import '../../../../app/presentation/app_theme.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../create/bloc/create_publication_bloc.dart';
+import '../../create/entity/create_publication_form_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -51,12 +51,17 @@ const _textTheme = TextTheme(
 
 class ColorPrimary {
   static const primaryColor = Color.fromARGB(255, 147, 48, 106);
-  static const primaryDark = Color(0xFF3DA49B);
+  static const primaryDark = Color.fromARGB(255, 0, 123, 197);
 }
 
 class ColorGradient {
   static const leftColor = Color.fromARGB(255, 145, 30, 91);
   static const rightColor = Color.fromARGB(255, 25, 24, 96);
+}
+
+class ColorButton {
+  static const cancel = Color.fromARGB(255, 211, 20, 30);
+  static const message = Color.fromARGB(255, 0, 123, 197);
 }
 
 class ColorNeutral {

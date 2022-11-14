@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/features/publications/domain/publication_entity.dart';
-import 'package:banco_tiempo_app/features/publications/presentation/bloc/publication_bloc.dart';
+import '../../domain/publication_entity.dart';
+import '../bloc/publication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
+import '../../domain/category_entity.dart';
 
 List<CategoryDto> categoryDtoFromJson(String str) {
   return List<CategoryDto>.from(

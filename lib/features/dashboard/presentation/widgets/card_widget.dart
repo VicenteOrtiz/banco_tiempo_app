@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/presentation/app_theme.dart';
 import '../../../../cross_features/widgets/in_progress_dialog.dart';
+import '../../../messages_poc/presentation/bloc/messages_bloc.dart';
 
 Widget CardWidget(int opt, BuildContext context) {
   List<String> titles = [
@@ -24,29 +26,18 @@ Widget CardWidget(int opt, BuildContext context) {
   return InkWell(
     onTap: () {
       if (opt == 0) {
-        print("opt0");
         Navigator.of(context).pushNamed('/service');
-        //Navigator.of(context).pushNamed('/profile');
       } else if (opt == 1) {
         Navigator.of(context).pushNamed('/my-services');
-        // set up the button
-        //dialog(context);
-        //print("opt1");
       } else if (opt == 2) {
         Navigator.of(context).pushNamed('/publications');
-        /* Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => CommunityMessagesPage())); */
-        //dialog(context);
-        print("opt2");
       } else if (opt == 3) {
-        dialog(context);
-        print("opt3");
+        BlocProvider.of<MessagesBloc>(context)..add(GetPendingMessages());
+        Navigator.of(context).pushNamed('/pending-messages');
       } else if (opt == 4) {
         //Navigator.of(context).pushNamed('/services-list');
         dialog(context);
-        print("opt4");
       } else if (opt == 5) {
-        print("opt5");
         Navigator.of(context).pushNamed('/profile');
       }
     },

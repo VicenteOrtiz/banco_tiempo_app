@@ -1,4 +1,4 @@
-import 'package:banco_tiempo_app/features/publications/domain/publication_entity.dart';
+import '../../domain/publication_entity.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../app/presentation/app_theme.dart';

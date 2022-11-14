@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/features/publications/create/entity/create_publication_form_entity.dart';
-import 'package:banco_tiempo_app/features/publications/infraestructure/publication_repository.dart';
+import '../../create/entity/create_publication_form_entity.dart';
+import '../../infraestructure/publication_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

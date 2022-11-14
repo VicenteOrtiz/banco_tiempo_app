@@ -26,7 +26,7 @@ class ServiceListItem extends StatelessWidget {
         style: appTextTheme.bodyText2,
       ),
       subtitle: Text(
-        requestedService.creado.toString(),
+        _statusText(requestedService),
         style: labels,
       ),
       trailing: Text(
@@ -35,5 +35,15 @@ class ServiceListItem extends StatelessWidget {
             appTextTheme.subtitle1?.copyWith(color: ColorPrimary.primaryColor),
       ),
     );
+  }
+}
+
+String _statusText(RequestedServiceDto service) {
+  if (service.aceptado) {
+    return "Confirmado";
+  } else if (service.cancelado) {
+    return "Cancelado";
+  } else {
+    return "Pendiente";
   }
 }

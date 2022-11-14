@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/features/poc/presentation/bloc/poc_bloc.dart';
-import 'package:banco_tiempo_app/features/poc/presentation/pages/post_detail.dart';
+import '../bloc/poc_bloc.dart';
+import 'post_detail.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/bottom_loader.dart';

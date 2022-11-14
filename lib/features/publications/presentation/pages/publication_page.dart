@@ -1,6 +1,7 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/publications/presentation/bloc/publication_bloc.dart';
+import '../../../../app/presentation/app_theme.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../../../cross_features/widgets/drawer_widget.dart';
+import '../bloc/publication_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -19,6 +20,7 @@ class PublicationPage extends StatelessWidget {
         title: Text("Mis Publicaciones"),
         centerTitle: true,
       ),
+      drawer: DrawerWidget(context),
       body: BlocProvider<PublicationBloc>(
         create: (context) => PublicationBloc()..add(GetPublications()),
         child: BlocBuilder<PublicationBloc, PublicationState>(
@@ -151,9 +153,12 @@ class PublicationPage extends StatelessWidget {
                           : state.publications;
                       if (publications.isNotEmpty) {
                         return MyPublicationsList(
-                          publications: publications.length > 5
+                          /* publications: publications.length > 5
                               ? publications.sublist(0, 5)
-                              : publications,
+                              : publications, */
+
+                          publications: publications,
+
                           /* footer: publications.length > 1
                               ? CustomLabel(
                                   labelText: 'Ver todos los Servicios',

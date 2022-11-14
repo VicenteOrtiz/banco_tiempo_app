@@ -1,7 +1,9 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/publications/domain/publication_entity.dart';
-import 'package:banco_tiempo_app/features/publications/presentation/bloc/publication_bloc.dart';
+import 'package:banco_tiempo_app/app/presentation/shared_widgets/custom_popup.dart';
+
+import '../../../../app/presentation/app_theme.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../domain/publication_entity.dart';
+import '../bloc/publication_bloc.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -67,7 +69,36 @@ Widget _serviceLayout(BuildContext context, Publication publication) {
                   .map((e) => Image.network("https://$baseUrl" + e))
                   .toList(),
             ),
-          verticalSpace12,
+          //verticalSpace12,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BounceButton(
+              buttonSize: ButtonSize.medium,
+              type: ButtonType.primary,
+              label: "SERVICIOS PENDIENTES",
+              onPressed: () async {
+                print(publication.inscritos);
+
+                /* print("SE QUIERE OCULTAR EL SERVICIO");
+                //bloc..add(CancelService(serviceId: publication.id));
+                /* bool isServiceRequested = await _servicesRepository
+                                  .requestServices(service);
+                              if (isServiceRequested) {
+                                print("SE SOLICITO CON EXITO");
+                              } else {
+                                print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
+                              } */
+                publication.oculta
+                    ? BlocProvider.of<PublicationBloc>(context)
+                        .add(RepublishPublication(publication.id))
+                    : BlocProvider.of<PublicationBloc>(context)
+                        .add(HidePublication(publication.id)); */
+              },
+              textColor: ColorPrimary.primaryColor,
+              backgroundColor: Colors.white,
+              iconLeft: Icons.watch,
+            ),
+          ),
           Expanded(
             child: Container(
                 decoration: BoxDecoration(
@@ -115,7 +146,7 @@ Widget _serviceLayout(BuildContext context, Publication publication) {
                         context,
                       ),
                       _statusInfo(
-                        "Vecina",
+                        "Vecine",
                         publication.ofrece.name +
                             " " +
                             publication.ofrece.lastName,
@@ -138,11 +169,45 @@ Widget _serviceLayout(BuildContext context, Publication publication) {
                               } else {
                                 print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
                               } */
-                            publication.oculta
+                            showDialog(
+                              context: context,
+                              builder: (context) => CustomPopup(
+                                //title: "HOLA",
+                                message: publication.oculta
+                                    ? "Quieres republicar el servicio?"
+                                    : "Quieres ocultar el servicio?",
+                                buttonCancel: BounceButton(
+                                  textColor: Colors.white,
+                                  type: ButtonType.primary,
+                                  buttonSize: ButtonSize.small,
+                                  label: "SI",
+                                  onPressed: () {
+                                    publication.oculta
+                                        ? BlocProvider.of<PublicationBloc>(
+                                                context)
+                                            .add(RepublishPublication(
+                                                publication.id))
+                                        : BlocProvider.of<PublicationBloc>(
+                                                context)
+                                            .add(HidePublication(
+                                                publication.id));
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                buttonAccept: BounceButton(
+                                  textColor: Colors.white,
+                                  type: ButtonType.primary,
+                                  buttonSize: ButtonSize.small,
+                                  label: "NO",
+                                  onPressed: () => Navigator.of(context).pop(),
+                                ),
+                              ),
+                            );
+                            /* publication.oculta
                                 ? BlocProvider.of<PublicationBloc>(context)
                                     .add(RepublishPublication(publication.id))
                                 : BlocProvider.of<PublicationBloc>(context)
-                                    .add(HidePublication(publication.id));
+                                    .add(HidePublication(publication.id)); */
                           },
                           textColor: Colors.white,
                           iconLeft: Icons.cancel,

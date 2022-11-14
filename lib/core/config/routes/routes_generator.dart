@@ -1,14 +1,17 @@
-import 'package:banco_tiempo_app/features/my_services/infraestructure/models/pending_services_dto.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/pages/my_services_page.dart';
-import 'package:banco_tiempo_app/features/poc/presentation/pages/post_page.dart';
-import 'package:banco_tiempo_app/features/profile/presentation/pages/profile_page.dart';
-import 'package:banco_tiempo_app/features/publications/domain/publication_entity.dart';
-import 'package:banco_tiempo_app/features/publications/presentation/pages/create_publication_page.dart';
-import 'package:banco_tiempo_app/features/publications/presentation/pages/publication_page.dart';
-import 'package:banco_tiempo_app/features/services/domain/service_entity.dart';
-import 'package:banco_tiempo_app/features/services/presentation/pages/service_detail.dart';
-import 'package:banco_tiempo_app/features/services/presentation/pages/service_list_page.dart';
-import 'package:banco_tiempo_app/features/services/presentation/pages/service_page.dart';
+import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
+
+import '../../../features/messages_poc/presentation/views/chat_screen.dart';
+import '../../../features/my_services/infraestructure/models/pending_services_dto.dart';
+import '../../../features/my_services/presentation/pages/my_services_page.dart';
+import '../../../features/poc/presentation/pages/post_page.dart';
+import '../../../features/profile/presentation/pages/profile_page.dart';
+import '../../../features/publications/domain/publication_entity.dart';
+import '../../../features/publications/presentation/pages/create_publication_page.dart';
+import '../../../features/publications/presentation/pages/publication_page.dart';
+import '../../../features/services/domain/service_entity.dart';
+import '../../../features/services/presentation/pages/service_detail.dart';
+import '../../../features/services/presentation/pages/service_list_page.dart';
+import '../../../features/services/presentation/pages/service_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../cross_features/authentication/presentation/bloc/authentication_bloc.dart';
@@ -16,6 +19,7 @@ import '../../../cross_features/authentication/presentation/pages/login_page.dar
 import '../../../features/dashboard/presentation/bloc/dashboard_bloc.dart';
 import '../../../features/dashboard/presentation/pages/dashboard_page.dart';
 import '../../../features/my_services/presentation/pages/my_services_detail_page.dart';
+import '../../../features/my_services/presentation/pages/my_services_requested_detail_page.dart';
 import '../../../features/publications/presentation/pages/publication_detail_page.dart';
 
 class RouteGenerator {
@@ -69,6 +73,15 @@ class RouteGenerator {
         }
         return _errorRoute();
 
+      case '/my-services/requested-details':
+        if (args is RequestedServiceDto) {
+          return MaterialPageRoute(
+              builder: ((context) => MyServicesRequestedDetailPage(
+                    requestedService: args,
+                  )));
+        }
+        return _errorRoute();
+
       case '/publications':
         return MaterialPageRoute(
           builder: (context) => PublicationPage(),
@@ -86,6 +99,16 @@ class RouteGenerator {
       case '/publications/create':
         return MaterialPageRoute(
           builder: (context) => CreatePublicationPage(),
+        );
+
+      case '/message':
+        return MaterialPageRoute(
+          builder: (context) => ChatScreen(),
+        );
+
+      case '/pending-messages':
+        return MaterialPageRoute(
+          builder: (context) => PendingMessagesPage(),
         );
 
       default:

@@ -1,5 +1,5 @@
-import 'package:banco_tiempo_app/cross_features/authentication/domain/login_user_entity.dart';
-import 'package:banco_tiempo_app/cross_features/authentication/infrastructure/models/user_details_dto.dart';
+import '../../domain/login_user_entity.dart';
+import '../models/user_details_dto.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 

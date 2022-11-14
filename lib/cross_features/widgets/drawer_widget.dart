@@ -1,7 +1,11 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../app/presentation/app_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../../app/presentation/shared_widgets/image_builder.dart';
+import '../../features/messages_poc/presentation/bloc/messages_bloc.dart';
+import 'in_progress_dialog.dart';
 
 Widget DrawerWidget(BuildContext context) {
   return Drawer(
@@ -46,7 +50,9 @@ Widget buildMenuItems(BuildContext context) => Container(
               color: ColorPrimary.primaryColor,
             ),
             title: const Text("Buscar Servicio"),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/service');
+            },
           ),
           ListTile(
             leading: const Icon(
@@ -54,15 +60,19 @@ Widget buildMenuItems(BuildContext context) => Container(
               color: ColorPrimary.primaryColor,
             ),
             title: const Text("Mis Servicios"),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/my-services');
+            },
           ),
           ListTile(
             leading: const Icon(
               Icons.lock_clock,
               color: ColorPrimary.primaryColor,
             ),
-            title: const Text("Mis Reservas"),
-            onTap: () {},
+            title: const Text("Mis Publicaciones"),
+            onTap: () {
+              Navigator.of(context).pushNamed('/publications');
+            },
           ),
           ListTile(
             leading: const Icon(
@@ -70,7 +80,10 @@ Widget buildMenuItems(BuildContext context) => Container(
               color: ColorPrimary.primaryColor,
             ),
             title: const Text("Mensajes"),
-            onTap: () {},
+            onTap: () {
+              BlocProvider.of<MessagesBloc>(context)..add(GetPendingMessages());
+              Navigator.of(context).pushNamed('/pending-messages');
+            },
           ),
           ListTile(
             leading: const Icon(
@@ -78,7 +91,9 @@ Widget buildMenuItems(BuildContext context) => Container(
               color: ColorPrimary.primaryColor,
             ),
             title: const Text("Ayuda"),
-            onTap: () {},
+            onTap: () {
+              dialog(context);
+            },
           ),
           ListTile(
             leading: const Icon(
@@ -86,18 +101,12 @@ Widget buildMenuItems(BuildContext context) => Container(
               color: ColorPrimary.primaryColor,
             ),
             title: const Text("Mi Cuenta"),
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed('/profile');
+            },
           ),
           Divider(
             color: ColorPrimary.primaryColor,
-          ),
-          ListTile(
-            leading: const Icon(
-              Icons.home_filled,
-              color: ColorPrimary.primaryColor,
-            ),
-            title: const Text("Home"),
-            onTap: () {},
           ),
           ListTile(
             leading: const Icon(

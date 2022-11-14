@@ -1,6 +1,7 @@
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/bloc/my_services_bloc.dart';
-import 'package:banco_tiempo_app/features/my_services/presentation/widgets/service_list.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../../../cross_features/widgets/drawer_widget.dart';
+import '../bloc/my_services_bloc.dart';
+import '../widgets/service_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +17,7 @@ class MyServicesPage extends StatelessWidget {
       appBar: CustomAppBar(
         title: Text("Mis Servicios"),
       ),
+      drawer: DrawerWidget(context),
       body: BlocProvider(
         create: (context) => MyServicesBloc()
           ..add(
@@ -52,9 +54,9 @@ class MyServicesBody extends StatelessWidget {
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   children: [
-                    _buildTransactionSection("Servicios Confirmados", true),
+                    _buildTransactionSection("Servicios en Curso", true),
                     verticalSpace12,
-                    _buildTransactionSection("Servicios por Confirmar", false),
+                    _buildTransactionSection("Servicios que solicité", false),
                   ],
                 ),
               ),
@@ -102,6 +104,7 @@ class MyServicesBody extends StatelessWidget {
                           : state.myServices.porConfirmar;
                       if (servicesList.isNotEmpty) {
                         return MyServiceList(
+                          confirmed: confirmed,
                           services: servicesList.length > 5
                               ? servicesList.sublist(0, 5)
                               : servicesList,
@@ -118,10 +121,9 @@ class MyServicesBody extends StatelessWidget {
                             padding: const EdgeInsets.all(8),
                             child: Center(
                               child: confirmed
-                                  ? Text(
-                                      "No se encontraron Servicios Confirmados")
+                                  ? Text("No se encontraron Servicios en Curso")
                                   : Text(
-                                      "No se encontraron Servicios por Confirmar"),
+                                      "No se encontraron Servicios que solicité"),
                             ),
                           )
                         ]);

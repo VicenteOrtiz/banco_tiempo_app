@@ -1,8 +1,8 @@
-import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/cross_features/widgets/appbar_widget.dart';
-import 'package:banco_tiempo_app/features/profile/presentation/bloc/profile_bloc.dart';
-import 'package:banco_tiempo_app/features/services/presentation/bloc/service_bloc.dart';
-import 'package:banco_tiempo_app/secrets.dart';
+import '../../../../app/presentation/app_theme.dart';
+import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../../profile/presentation/bloc/profile_bloc.dart';
+import '../bloc/service_bloc.dart';
+import '../../../../secrets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
