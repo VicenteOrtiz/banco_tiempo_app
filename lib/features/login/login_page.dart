@@ -1,74 +1,44 @@
 import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
-import 'package:banco_tiempo_app/app/presentation/shared_widgets/custom_input_text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterPage extends StatefulWidget {
-  RegisterPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
-
-class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: Container(
-          //color: ColorPrimary.primaryColor,
+          width: double.infinity,
           decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topLeft,
-                end: Alignment.centerRight,
+                end: Alignment.bottomRight,
                 colors: [
                   ColorGradient.leftColor,
                   ColorGradient.rightColor,
                 ]),
           ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Flexible(
-                flex: 3,
-                child: Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
-                    gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [
-                          ColorGradient.leftColor,
-                          ColorGradient.rightColor,
-                        ]),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        'assets/images/logo_banco.png',
-                        width: 150,
-                      ),
-                    ],
-                  ),
-                ),
+              Image.asset(
+                'assets/images/logo_banco.png',
+                width: 100,
               ),
-              Flexible(
-                flex: 5,
+              SizedBox(
+                height: 25,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(50),
-                      topRight: Radius.circular(50),
-                    ),
-                    color: ColorNeutral.neutralWhite,
-                  ),
                   width: double.infinity,
+                  color: Colors.white,
                   child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      verticalSpace16,
                       Text(
-                        "Ingresar al Banco del Tiempo",
+                        "Ingresar al sistema",
                         style: GoogleFonts.roboto(
                           textStyle: TextStyle(
                               color: Colors.black,
@@ -76,9 +46,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      verticalSpace16,
                       Divider(),
-                      verticalSpace16,
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -93,9 +61,8 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           Container(
                             width: 300,
-                            //height: 20,
-                            //color: Colors.grey,
-                            child: TextFormField(),
+                            height: 20,
+                            color: Colors.grey,
                           )
                         ],
                       ),
@@ -116,10 +83,9 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           Container(
                             width: 300,
-                            //height: 20,
-                            //color: Colors.grey,
-                            child: TextFormField(),
-                          ),
+                            height: 20,
+                            color: Colors.grey,
+                          )
                         ],
                       ),
                       SizedBox(
@@ -144,7 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     ],
                   ),
                 ),
-              ),
+              )
             ],
           ),
         ),

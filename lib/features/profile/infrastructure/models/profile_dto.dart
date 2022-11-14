@@ -1,8 +1,9 @@
+// To parse this JSON data, do
+//
+//     final profileDto = profileDtoFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
-
-import 'package:intl/intl.dart';
-
-import '../../domain/profile_entity.dart';
 
 ProfileDto profileDtoFromJson(String str) =>
     ProfileDto.fromJson(json.decode(str));
@@ -32,7 +33,6 @@ class ProfileDto {
     required this.activo,
     required this.admin,
     required this.mensajesAyuda,
-    required this.fechaNacimiento,
   });
 
   String id;
@@ -47,44 +47,15 @@ class ProfileDto {
   String name;
   int v;
   List<dynamic> logros;
-  List<String> notificacionesLeidas;
-  List<String> notificaciones;
-  List<String> categorias;
-  List<String> historialTransacciones;
+  List<dynamic> notificacionesLeidas;
+  List<dynamic> notificaciones;
+  List<dynamic> categorias;
+  List<dynamic> historialTransacciones;
   List<String> transaccionesPendientes;
   String imagenUrl;
   bool activo;
   bool admin;
-  List<String> mensajesAyuda;
-  String fechaNacimiento;
-
-  Profile toDomain() {
-    return Profile(
-      id: id,
-      address: address,
-      rut: rut,
-      userType: userType,
-      age: age,
-      phone: phone,
-      relation: relation,
-      lastName: lastName,
-      email: email,
-      name: name,
-      v: v,
-      logros: logros,
-      notificacionesLeidas: notificacionesLeidas,
-      notificaciones: notificaciones,
-      categorias: categorias,
-      historialTransacciones: historialTransacciones,
-      transaccionesPendientes: transaccionesPendientes,
-      imagenUrl: imagenUrl,
-      activo: activo,
-      admin: admin,
-      mensajesAyuda: mensajesAyuda,
-      birthday:
-          DateFormat('dd/MM/yyyy').format(DateTime.parse(fechaNacimiento)),
-    );
-  }
+  List<dynamic> mensajesAyuda;
 
   factory ProfileDto.fromJson(Map<String, dynamic> json) => ProfileDto(
         id: json["_id"],
@@ -100,18 +71,18 @@ class ProfileDto {
         v: json["__v"],
         logros: List<dynamic>.from(json["logros"].map((x) => x)),
         notificacionesLeidas:
-            List<String>.from(json["notificacionesLeidas"].map((x) => x)),
-        notificaciones: List<String>.from(json["notificaciones"].map((x) => x)),
-        categorias: List<String>.from(json["categorias"].map((x) => x)),
+            List<dynamic>.from(json["notificacionesLeidas"].map((x) => x)),
+        notificaciones:
+            List<dynamic>.from(json["notificaciones"].map((x) => x)),
+        categorias: List<dynamic>.from(json["categorias"].map((x) => x)),
         historialTransacciones:
-            List<String>.from(json["historialTransacciones"].map((x) => x)),
+            List<dynamic>.from(json["historialTransacciones"].map((x) => x)),
         transaccionesPendientes:
             List<String>.from(json["transaccionesPendientes"].map((x) => x)),
         imagenUrl: json["imagenUrl"],
         activo: json["activo"],
         admin: json["admin"],
-        mensajesAyuda: List<String>.from(json["mensajesAyuda"].map((x) => x)),
-        fechaNacimiento: json["fechaNacimiento"] ?? "",
+        mensajesAyuda: List<dynamic>.from(json["mensajesAyuda"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {

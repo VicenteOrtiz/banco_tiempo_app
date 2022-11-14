@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/presentation/app_theme.dart';
-import '../../../../cross_features/widgets/in_progress_dialog.dart';
-import '../../../messages_poc/presentation/bloc/messages_bloc.dart';
 
 Widget CardWidget(int opt, BuildContext context) {
   List<String> titles = [
     "Buscar Servicio",
     "Mis Servicios",
-    "Mis Publicaciones",
+    "Mis Reservas",
     "Mensajes",
     "Ayuda",
     "Mi Cuenta"
   ];
   List<IconData> icons = [
     Icons.search,
-    Icons.list,
-    Icons.lock_clock,
+    Icons.person_add,
+    Icons.car_rental,
     Icons.mail,
-    Icons.help,
-    Icons.person
+    Icons.info,
+    Icons.location_city
   ];
-
   return InkWell(
     onTap: () {
-      if (opt == 0) {
-        Navigator.of(context).pushNamed('/service');
+      print("clicksss");
+      if (opt == 3) {
+        print("opt33");
+        /* Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => ClaimMenuPage())); */
       } else if (opt == 1) {
-        Navigator.of(context).pushNamed('/my-services');
-      } else if (opt == 2) {
-        Navigator.of(context).pushNamed('/publications');
-      } else if (opt == 3) {
-        BlocProvider.of<MessagesBloc>(context)..add(GetPendingMessages());
-        Navigator.of(context).pushNamed('/pending-messages');
+        print("opt1");
+        /* Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => NewGuestPage())); */
       } else if (opt == 4) {
-        //Navigator.of(context).pushNamed('/services-list');
-        dialog(context);
-      } else if (opt == 5) {
-        Navigator.of(context).pushNamed('/profile');
+        /* Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => CommunityMessagesPage())); */
+        print("opt4");
       }
     },
     child: Container(
