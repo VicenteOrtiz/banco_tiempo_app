@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/cross_features/category/infraestructure/category_repository.dart';
+
 import '../../../../app/presentation/app_theme.dart';
 import '../../../../cross_features/widgets/appbar_widget.dart';
 import '../../../../cross_features/widgets/drawer_widget.dart';
@@ -41,6 +43,7 @@ class PublicationPage extends StatelessWidget {
 
   Widget publicationLayout(
       BuildContext context, List<Publication> publications) {
+    CategoryRepository _categoryRepository = CategoryRepository();
     return Container(
       color: ColorPrimary.primaryColor,
       child: Column(
@@ -58,9 +61,10 @@ class PublicationPage extends StatelessWidget {
                     label: "Nueva Publicación",
                     onPressed: () async {
                       print("NUEVA PUBLICACIÓN");
-                      Navigator.of(context).pushNamed(
-                        '/publications/create',
-                      );
+                      var categorias =
+                          await _categoryRepository.getCategories();
+                      Navigator.of(context).pushNamed('/publications/create',
+                          arguments: categorias);
                     },
                     textColor: ColorPrimary.primaryColor,
                     iconLeft: Icons.add_box,
@@ -79,10 +83,10 @@ class PublicationPage extends StatelessWidget {
                 color: Colors.white,
               ),
               width: double.infinity,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
                       padding: EdgeInsets.only(top: 20),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.only(
@@ -104,9 +108,9 @@ class PublicationPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  //_buildPublicationsSection("Publicadas", true),
-                ],
+                    //_buildPublicationsSection("Publicadas", true),
+                  ],
+                ),
               ),
               //width: double.infinity,
             ),

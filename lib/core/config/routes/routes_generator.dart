@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
 
 import '../../../features/messages_poc/presentation/views/chat_screen.dart';
@@ -97,9 +98,14 @@ class RouteGenerator {
         return _errorRoute();
 
       case '/publications/create':
-        return MaterialPageRoute(
-          builder: (context) => CreatePublicationPage(),
-        );
+        if (args is List<Categoria>) {
+          return MaterialPageRoute(
+            builder: (context) => CreatePublicationPage(
+              categories: args,
+            ),
+          );
+        }
+        return _errorRoute();
 
       case '/message':
         return MaterialPageRoute(
