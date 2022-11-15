@@ -31,7 +31,7 @@ class AuthenticationBloc
           emit(AuthenticationError("Ingrese datos válidos porfavor."));
         } else {
           emit(AuthenticationLoading());
-          loginUserEntity.username = event.username;
+          loginUserEntity.username = event.username.toLowerCase();
           loginUserEntity.password = event.password;
           final loginResponse =
               await _authenticationRepository.logIn(loginUserEntity);

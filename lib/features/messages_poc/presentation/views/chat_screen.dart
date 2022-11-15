@@ -1,6 +1,10 @@
+import 'package:banco_tiempo_app/app/presentation/app_theme.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../../cross_features/widgets/appbar_widget.dart';
 import 'package:flutter/material.dart';
 
+import '../bloc/messages_bloc.dart';
 import '../widgets/chat_list.dart';
 import '../widgets/message_composer.dart';
 
@@ -13,11 +17,10 @@ class ChatScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       //appBar: chatAppBarWidget(context),
-      appBar: CustomAppBar(
+      /* appBar: CustomAppBar(
         leading: InkWell(
           child: Icon(Icons.arrow_back),
           onTap: () {
-            print("ALGO PASA CON LAS NOTIFICACIONES");
             Navigator.pushNamedAndRemoveUntil(
                 context, '/dashboard', (route) => false);
           },
@@ -29,6 +32,29 @@ class ChatScreen extends StatelessWidget {
           Navigator.of(context).pop();
           Navigator.of(context).pop(); */
         },
+      ), */
+      appBar: AppBar(
+        backgroundColor: ColorPrimary.primaryColor,
+        leading: InkWell(
+          child: Icon(Icons.arrow_back),
+          onTap: () {
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/dashboard', (route) => false);
+          },
+        ),
+        title: Text("Chat"),
+        centerTitle: true,
+        actions: [
+          InkWell(
+            child: Icon(Icons.update),
+            onTap: () {
+              print("SE ACTUALIZA CHAT");
+              BlocProvider.of<MessagesBloc>(context)
+                ..add(GetMessages(serviceId: serviceId));
+            },
+          ),
+          horizontalSpace10
+        ],
       ),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
