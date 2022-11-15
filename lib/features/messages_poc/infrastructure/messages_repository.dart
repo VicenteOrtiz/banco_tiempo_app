@@ -32,4 +32,7 @@ class MessagesRepository {
       return messages;
     }
   }
+
+  Future<bool> sendMessage(String msg, String serviceId) async =>
+      await _datasource.sendMessage(msg, serviceId);
 }

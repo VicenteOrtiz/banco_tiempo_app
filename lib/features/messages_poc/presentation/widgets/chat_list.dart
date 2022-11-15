@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:banco_tiempo_app/cross_features/validators/is_me_validator.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/bloc/messages_bloc.dart';
 import 'package:flutter/gestures.dart';
@@ -18,22 +20,20 @@ class ChatList extends StatefulWidget {
 class _ChatListState extends State<ChatList> {
   late NavigatorState _navigator;
   late BuildContext _context;
+  //late Timer timer;
 
-  /*  @override
-  void didChangeDependencies() {
-    _navigator = Navigator.of(context);
-    _context = context;
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    print("SE DISPOSEO");
-    BlocProvider.of<MessagesBloc>(_context)..add(GetPendingMessages());
     super.dispose();
-  } */
+    //timer.cancel();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,11 @@ class _ChatListState extends State<ChatList> {
     return BlocBuilder<MessagesBloc, MessagesState>(
       builder: ((context, state) {
         if (state is MessagesLoaded) {
+          /* timer = Timer.periodic(Duration(seconds: 5), (timer) {
+            BlocProvider.of<MessagesBloc>(context)
+              ..add(GetMessages(serviceId: state.messages.transaccion.id));
+            print("Gik");
+          }); */
           return ListView.builder(
               reverse: true,
               padding: EdgeInsets.only(top: 15.0),
@@ -181,3 +186,9 @@ class _ChatListState extends State<ChatList> {
     throw 'Could not launch $url';
   }
 } */
+
+chatTimer(Timer timer) {
+  Timer.periodic(Duration(seconds: 5), (timer) {
+    print("HOLA");
+  });
+}

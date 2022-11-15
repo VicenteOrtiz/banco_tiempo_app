@@ -5,6 +5,8 @@ import 'package:banco_tiempo_app/features/my_services/presentation/pages/my_serv
 import '../../../../app/presentation/app_theme.dart';
 import '../../../../app/presentation/shared_widgets/custom_popup.dart';
 import '../../../../cross_features/widgets/appbar_widget.dart';
+import '../../../dashboard/presentation/pages/dashboard_page.dart';
+import '../../../messages_poc/presentation/bloc/messages_bloc.dart';
 import '../../infraestructure/payload/confirm_service_payload.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -167,6 +169,14 @@ Widget _serviceLayout(BuildContext context,
                             label: "MENSAJES",
                             onPressed: () async {
                               print("SE QUIERE ENVIAR UN MENSAJE");
+                              BlocProvider.of<MessagesBloc>(context)
+                                ..add(GetMessages(
+                                    serviceId: requestedService.id));
+                              Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  '/message',
+                                  (Route<dynamic> route) => route is Dashboard,
+                                  arguments: requestedService.id);
                             },
                             textColor: Colors.white,
                             iconLeft: Icons.chat,

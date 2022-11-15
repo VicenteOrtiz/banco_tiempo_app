@@ -82,11 +82,9 @@ class PendingMessagesList extends StatelessWidget {
                         print("HIZO CLICK EN EL SERVICIO");
                         BlocProvider.of<MessagesBloc>(context)
                           ..add(GetMessages(serviceId: s.id));
-                        Navigator.pushNamedAndRemoveUntil(
-                          context,
-                          '/message',
-                          (Route<dynamic> route) => route is Dashboard,
-                        );
+                        Navigator.pushNamedAndRemoveUntil(context, '/message',
+                            (Route<dynamic> route) => route is Dashboard,
+                            arguments: s.id);
                         /* Navigator.of(context)
                             .pushNamed('/message')
                             .then((value) {

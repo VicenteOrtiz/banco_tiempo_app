@@ -68,4 +68,34 @@ class MessagesDatasource {
       return null;
     }
   }
+
+  Future<bool> sendMessage(String msg, String serviceId) async {
+    var url = Uri.https(baseUrl, "/api/enviarMensaje");
+    var token = await _storageService.getToken();
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          'Authorization': token!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: json.encode(
+          {
+            "texto": msg,
+            "transaccionID": serviceId,
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print(response.body);
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
 }

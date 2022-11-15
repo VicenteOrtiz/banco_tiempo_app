@@ -51,6 +51,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomInset: true,
         //backgroundColor: ColorPrimary.primaryColor,
         body: BlocConsumer<AuthenticationBloc, AuthenticationState>(
           listener: (context, state) {
@@ -85,44 +86,47 @@ class _LoginPageState extends State<LoginPage> {
                 ColorGradient.rightColor,
               ]),
         ),
-        child: Column(
-          children: [
-            verticalSpace80,
-            //ImageBuilder(imagePath: loginImages[1]),
-            ImageBuilder(imagePath: AssetsManager.logoBanco),
-            verticalSpace24,
-            //const TextData(message: "User"),
-            Text(
-              "INICIA SESIÓN",
-              style:
-                  TextStyle(fontSize: 25.00, color: ColorNeutral.neutralWhite),
-            ),
-            verticalSpace40,
-            InputField(
-              focusNode: usernameFocus,
-              textController: userName,
-              label: "Correo",
-              icons: const Icon(Icons.person, color: ColorNeutral.neutralWhite),
-              isPassword: false,
-            ),
-            verticalSpace24,
-            InputField(
-              focusNode: passwordFocus,
-              textController: password,
-              label: "Contraseña",
-              icons: const Icon(Icons.lock, color: ColorNeutral.neutralWhite),
-              isPassword: true,
-            ),
-            verticalSpace40,
-            LoginButton(
-              focusNode: loginBtnFocus,
-              userName: userName,
-              password: password,
-            ),
-            verticalSpace24,
-            ImageBuilder(imagePath: AssetsManager.logoCitiaps),
-            //const SocialSignIn(),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              verticalSpace80,
+              //ImageBuilder(imagePath: loginImages[1]),
+              ImageBuilder(imagePath: AssetsManager.logoBanco),
+              verticalSpace24,
+              //const TextData(message: "User"),
+              Text(
+                "INICIA SESIÓN",
+                style: TextStyle(
+                    fontSize: 25.00, color: ColorNeutral.neutralWhite),
+              ),
+              verticalSpace40,
+              InputField(
+                focusNode: usernameFocus,
+                textController: userName,
+                label: "Correo",
+                icons:
+                    const Icon(Icons.person, color: ColorNeutral.neutralWhite),
+                isPassword: false,
+              ),
+              verticalSpace24,
+              InputField(
+                focusNode: passwordFocus,
+                textController: password,
+                label: "Contraseña",
+                icons: const Icon(Icons.lock, color: ColorNeutral.neutralWhite),
+                isPassword: true,
+              ),
+              verticalSpace40,
+              LoginButton(
+                focusNode: loginBtnFocus,
+                userName: userName,
+                password: password,
+              ),
+              verticalSpace24,
+              ImageBuilder(imagePath: AssetsManager.logoCitiaps),
+              //const SocialSignIn(),
+            ],
+          ),
         ),
       );
 
