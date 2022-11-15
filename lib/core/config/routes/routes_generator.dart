@@ -1,5 +1,7 @@
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
+import 'package:banco_tiempo_app/features/register/register_page.dart';
+import 'package:banco_tiempo_app/features/registration/presentation/views/registration_page.dart';
 
 import '../../../cross_features/badges/domain/badges_entity.dart';
 import '../../../features/messages_poc/presentation/views/chat_screen.dart';
@@ -37,6 +39,11 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) =>
               const LoginPage(title: "Login page with overlay"),
+        );
+
+      case '/registration':
+        return MaterialPageRoute(
+          builder: (context) => RegistrationPage(),
         );
 
       case '/dashboard':

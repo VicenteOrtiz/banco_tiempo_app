@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/features/registration/domain/registration_form_entity.dart';
+
 import '../domain/login_user_entity.dart';
 import 'datasource/authentication_datasource.dart';
 import 'models/login_response_dto.dart';
@@ -14,4 +16,7 @@ class AuthenticationRepository {
   Future<UserDetailsDto> getUserDetails(String token) {
     return _datasource.getUserDetails(token);
   }
+
+  Future<bool> register(RegistrationForm registrationForm) =>
+      _datasource.register(registrationForm);
 }

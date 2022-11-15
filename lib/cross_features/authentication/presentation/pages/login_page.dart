@@ -122,6 +122,16 @@ class _LoginPageState extends State<LoginPage> {
                 userName: userName,
                 password: password,
               ),
+              InkWell(
+                child: Text(
+                  "Si no tienes cuenta, haz click AQUÍ",
+                  style: labels.copyWith(color: ColorNeutral.neutralWhite),
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/registration');
+                  print("SE QUIERE REGISTRAR");
+                },
+              ),
               verticalSpace24,
               ImageBuilder(imagePath: AssetsManager.logoCitiaps),
               //const SocialSignIn(),

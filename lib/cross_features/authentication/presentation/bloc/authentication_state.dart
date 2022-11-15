@@ -46,6 +46,10 @@ class AuthenticationLoaded extends AuthenticationState {
             notifications: notifications);
 }
 
+class AuthenticationRegistration extends AuthenticationState {}
+
+class AuthenticationRegistrated extends AuthenticationState {}
+
 class AuthenticationError extends AuthenticationState {
   final String? message;
   AuthenticationError(this.message);

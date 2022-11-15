@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/features/registration/domain/registration_form_entity.dart';
+
 import '../../../../features/profile/infrastructure/profile_repository.dart';
 
 import '../../../../core/config/services/secure_storage.dart';
@@ -60,6 +62,21 @@ class AuthenticationBloc
           }
         }
       }),
+    );
+
+    on<Register>(
+      (event, emit) async {
+        emit(AuthenticationLoading());
+
+        final registration =
+            await _authenticationRepository.register(event.registrationForm);
+
+        if (registration) {
+          emit(AuthenticationRegistrated());
+        } else {
+          emit(AuthenticationError("No se pudo registrar"));
+        }
+      },
     );
 
     on<Initialize>(

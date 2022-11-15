@@ -31,7 +31,7 @@ class LoginButton extends StatelessWidget {
               .add(Login(userName.text, password.text));
         },
         child: const Text(
-          'Login',
+          'Iniciar Sesión',
           style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
