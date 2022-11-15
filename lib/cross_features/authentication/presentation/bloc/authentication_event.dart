@@ -10,4 +10,10 @@ class Login extends AuthenticationEvent {
   Login(this.username, this.password);
 }
 
+class Register extends AuthenticationEvent {
+  final RegistrationForm registrationForm;
+
+  Register(this.registrationForm);
+}
+
 class Initialize extends AuthenticationEvent {}
