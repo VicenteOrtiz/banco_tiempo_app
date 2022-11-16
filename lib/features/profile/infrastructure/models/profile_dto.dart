@@ -46,7 +46,7 @@ class ProfileDto {
   String email;
   String name;
   int v;
-  List<dynamic> logros;
+  List<String> logros;
   List<String> notificacionesLeidas;
   List<String> notificaciones;
   List<String> categorias;
@@ -99,7 +99,7 @@ class ProfileDto {
         email: json["email"],
         name: json["name"],
         v: json["__v"],
-        logros: List<dynamic>.from(json["logros"].map((x) => x)),
+        logros: List<String>.from(json["logros"].map((x) => x)),
         notificacionesLeidas:
             List<String>.from(json["notificacionesLeidas"].map((x) => x)),
         notificaciones: List<String>.from(json["notificaciones"].map((x) => x)),

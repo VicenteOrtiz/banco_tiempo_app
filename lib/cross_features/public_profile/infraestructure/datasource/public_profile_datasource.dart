@@ -1,31 +1,32 @@
+import 'package:banco_tiempo_app/cross_features/public_profile/infraestructure/models/public_profile_dto.dart';
+
 import '../../../../core/config/services/secure_storage.dart';
-import '../models/profile_dto.dart';
 import '../../../../secrets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
 
-class ProfileDataSource {
+class PublicProfileDataSource {
   StorageService _storageService = StorageService();
 
-  Future<ProfileDto?> getProfile() async {
-    var url = Uri.https(baseUrl, "/api/profile");
+  Future<PublicProfileDto?> getPublicProfile() async {
+    var userId = await _storageService.getUserId();
     var token = await _storageService.getToken();
+    var url = Uri.https(baseUrl, "/api/perfilPublico/$userId");
     //print("GETPROFILE - token: ${token}");
     try {
+      print(userId);
       var response = await http.get(
         url,
-        headers: {
-          'Authorization': token!,
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
       );
       if (response.statusCode == 200) {
         var jsonResponse =
             convert.jsonDecode(response.body) as Map<String, dynamic>;
         //print(jsonResponse);
-        return ProfileDto.fromJson(jsonResponse);
+        return PublicProfileDto.fromJson(jsonResponse);
       } else {
+        print(response.statusCode);
+        print(response.body);
+        print(response);
         return null;
       }
     } catch (e, s) {

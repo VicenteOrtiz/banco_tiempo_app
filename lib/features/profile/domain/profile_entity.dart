@@ -35,7 +35,7 @@ class Profile {
   final String email;
   final String name;
   final int v;
-  final List<dynamic> logros;
+  final List<String> logros;
   final List<String> notificacionesLeidas;
   final List<String> notificaciones;
   final List<String> categorias;
