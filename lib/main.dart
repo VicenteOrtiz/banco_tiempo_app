@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/features/settings/presentation/bloc/settings_bloc.dart';
+
 import 'features/messages_poc/presentation/bloc/messages_bloc.dart';
 
 import 'features/publications/presentation/bloc/publication_bloc.dart';
@@ -41,6 +43,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => MessagesBloc(),
+        ),
+        BlocProvider(
+          create: (_) => SettingsBloc(),
         )
       ],
       child: MaterialApp(

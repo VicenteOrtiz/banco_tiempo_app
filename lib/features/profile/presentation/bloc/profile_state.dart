@@ -9,7 +9,8 @@ class ProfileLoading extends ProfileState {}
 
 class ProfileLoaded extends ProfileState {
   final Profile profile;
-  ProfileLoaded(this.profile);
+  final PublicProfile publicProfile;
+  ProfileLoaded(this.profile, this.publicProfile);
 }
 
 class ProfileError extends ProfileState {}

@@ -1,7 +1,12 @@
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
+import 'package:banco_tiempo_app/features/profile/domain/profile_entity.dart';
 import 'package:banco_tiempo_app/features/register/register_page.dart';
 import 'package:banco_tiempo_app/features/registration/presentation/views/registration_page.dart';
+import 'package:banco_tiempo_app/features/settings/presentation/pages/change_password_page.dart';
+import 'package:banco_tiempo_app/features/settings/presentation/pages/contact_data_edit_page.dart';
+import 'package:banco_tiempo_app/features/settings/presentation/pages/personal_data_edit_page.dart';
+import 'package:banco_tiempo_app/features/settings/presentation/pages/settings_page.dart';
 
 import '../../../cross_features/badges/domain/badges_entity.dart';
 import '../../../features/messages_poc/presentation/views/chat_screen.dart';
@@ -14,6 +19,7 @@ import '../../../features/publications/domain/publication_entity.dart';
 import '../../../features/publications/presentation/pages/create_publication_page.dart';
 import '../../../features/publications/presentation/pages/publication_page.dart';
 import '../../../features/services/domain/service_entity.dart';
+import '../../../features/services/presentation/pages/service_comment.dart';
 import '../../../features/services/presentation/pages/service_detail.dart';
 import '../../../features/services/presentation/pages/service_list_page.dart';
 import '../../../features/services/presentation/pages/service_page.dart';
@@ -46,6 +52,11 @@ class RouteGenerator {
           builder: (context) => RegistrationPage(),
         );
 
+      case '/change-password':
+        return MaterialPageRoute(
+          builder: (context) => ChangePasswordPagePage(),
+        );
+
       case '/dashboard':
         return MaterialPageRoute(
           builder: (context) => Dashboard(),
@@ -70,6 +81,9 @@ class RouteGenerator {
               builder: ((context) => ServiceDetail(service: args)));
         }
         return _errorRoute();
+
+      case '/service/comment':
+        return MaterialPageRoute(builder: ((context) => CommentServicePage()));
 
       case '/my-services':
         return MaterialPageRoute(builder: (((context) => MyServicesPage())));
@@ -140,6 +154,30 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => PendingMessagesPage(),
         );
+
+      case '/profile/edit':
+        if (args is Profile) {
+          return MaterialPageRoute(
+            builder: (context) => PersonalDataEditPage(
+              profile: args,
+            ),
+          );
+        }
+        return _errorRoute();
+
+      case '/contact/edit':
+        if (args is Profile) {
+          return MaterialPageRoute(
+            builder: (context) => ContactDataEditPage(
+              profile: args,
+            ),
+          );
+        }
+        return _errorRoute();
+
+      //TODO: get this route working
+      /* case '/settings':
+        return MaterialPageRoute(builder: (context) => SettingsPage()); */
 
       default:
         return _errorRoute();

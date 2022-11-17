@@ -12,7 +12,8 @@ class InputField extends StatelessWidget {
       required this.isPassword,
       this.backgroundColor,
       this.padding,
-      this.color})
+      this.color,
+      this.readOnly = false})
       : super(key: key);
 
   final FocusNode focusNode;
@@ -23,12 +24,14 @@ class InputField extends StatelessWidget {
   final Color? backgroundColor;
   final Color? color;
   final EdgeInsetsGeometry? padding;
+  final bool readOnly;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding ?? kHPadding,
       child: TextFormField(
+        readOnly: readOnly,
         style: TextStyle(color: color ?? ColorNeutral.neutralWhite),
         obscureText: isPassword,
         controller: textController,

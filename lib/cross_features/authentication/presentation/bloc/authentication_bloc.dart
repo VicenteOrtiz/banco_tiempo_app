@@ -51,7 +51,7 @@ class AuthenticationBloc
             //TODO: guardar el nombre en vez del username
             emit(AuthenticationLoaded(
               userDetails.id,
-              "${userProfile!.name} ${userProfile.lastName}",
+              "${userProfile?.name} ${userProfile?.lastName}",
               userDetails.admin,
               userDetails.balance,
               userDetails.imagenUrl,
