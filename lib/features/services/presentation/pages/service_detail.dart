@@ -22,14 +22,27 @@ class ServiceDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: ColorPrimary.primaryColor,
+        actions: [
+          InkWell(
+            child: Icon(Icons.warning),
+            onTap: () {
+              print("Quiere denunciar el servicio");
+              Navigator.of(context)
+                  .pushNamed('/service/report', arguments: service);
+            },
+          ),
+          horizontalSpace10
+        ],
+      ),
       body: _serviceLayout(context, service),
     );
   }
 
   Widget _serviceLayout(BuildContext context, Service service) {
     ServicesRepository _servicesRepository = ServicesRepository();
-    print("ESTE SERVICIO TIENE: ${service.imagenes.length} IMAGENES");
     return Container(
       decoration: BoxDecoration(color: ColorPrimary.primaryColor),
       child: Column(
@@ -50,12 +63,85 @@ class ServiceDetail extends StatelessWidget {
           ),
           if (service.imagenes.isNotEmpty)
             CarouselSlider(
-              options: CarouselOptions(height: 300.0),
+              options: CarouselOptions(height: 200.0),
               items: service.imagenes
                   .map((e) => Image.network("https://$baseUrl${e}"))
                   .toList(),
             ),
           verticalSpace12,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BounceButton(
+              backgroundColor: ColorNeutral.neutralWhite,
+              buttonSize: ButtonSize.medium,
+              type: ButtonType.primary,
+              textColor: ColorPrimary.primaryColor,
+              label: "Solicitar",
+              onPressed: () async {
+                print("Se esta solicitando un servicio");
+                /* bool isServiceRequested = await _servicesRepository
+                                .requestServices(service); */
+                //bool isServiceRequested;
+                showDialog(
+                  context: context,
+                  builder: (context) => CustomPopup(
+                    message:
+                        "Quieres solicitar el servicio? Esto te costara ${service.horas} bono(s).",
+                    buttonCancel: BounceButton(
+                      textColor: Colors.white,
+                      type: ButtonType.primary,
+                      buttonSize: ButtonSize.small,
+                      label: "Si",
+                      onPressed: () async {
+                        bool isServiceRequested =
+                            await _servicesRepository.requestServices(service);
+                        Navigator.of(context).pop(isServiceRequested);
+                        //return isServiceRequested;
+                      },
+                    ),
+                    buttonAccept: BounceButton(
+                      textColor: Colors.white,
+                      type: ButtonType.primary,
+                      buttonSize: ButtonSize.small,
+                      label: "No",
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                  ),
+                ).then((value) {
+                  if (value != null) {
+                    if (value) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => CustomPopup(
+                          message: "Su servicio se solicitó con éxito!",
+                          buttonAccept: BounceButton(
+                            textColor: Colors.white,
+                            type: ButtonType.primary,
+                            buttonSize: ButtonSize.small,
+                            label: "Entendido",
+                            onPressed: () => Navigator.of(context).pop(),
+                          ),
+                        ),
+                      ).then((value) => Navigator.of(context).pop());
+                    } else {
+                      print("HUBO UN PROBLEMA");
+                      showDialog(
+                          context: context,
+                          builder: (context) => GenericErrorPopUp(
+                              message:
+                                  "Hubo un problema con la solicitud del servicio"));
+                    }
+                  }
+                });
+                /* if (isServiceRequested) {
+                              print("SE SOLICITO CON EXITO");
+                            } else {
+                              print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
+                            } */
+              },
+              iconLeft: Icons.calendar_month,
+            ),
+          ),
           Expanded(
             child: Container(
                 decoration: BoxDecoration(
@@ -69,82 +155,21 @@ class ServiceDetail extends StatelessWidget {
                   //padding: EdgeInsets.all(1),
                   child: Column(
                     children: [
-                      verticalSpace10,
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: BounceButton(
-                          buttonSize: ButtonSize.medium,
-                          type: ButtonType.primary,
-                          label: "Solicitar",
-                          onPressed: () async {
-                            print("Se esta solicitando un servicio");
-                            /* bool isServiceRequested = await _servicesRepository
-                                .requestServices(service); */
-                            //bool isServiceRequested;
-                            showDialog(
-                              context: context,
-                              builder: (context) => CustomPopup(
-                                message:
-                                    "Quieres solicitar el servicio? Esto te costara ${service.horas} bono(s).",
-                                buttonCancel: BounceButton(
-                                  textColor: Colors.white,
-                                  type: ButtonType.primary,
-                                  buttonSize: ButtonSize.small,
-                                  label: "Si",
-                                  onPressed: () async {
-                                    bool isServiceRequested =
-                                        await _servicesRepository
-                                            .requestServices(service);
-                                    Navigator.of(context)
-                                        .pop(isServiceRequested);
-                                    //return isServiceRequested;
-                                  },
-                                ),
-                                buttonAccept: BounceButton(
-                                  textColor: Colors.white,
-                                  type: ButtonType.primary,
-                                  buttonSize: ButtonSize.small,
-                                  label: "No",
-                                  onPressed: () => Navigator.of(context).pop(),
-                                ),
-                              ),
-                            ).then((value) {
-                              if (value != null) {
-                                if (value) {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => CustomPopup(
-                                      message:
-                                          "Su servicio se solicitó con éxito!",
-                                      buttonAccept: BounceButton(
-                                        textColor: Colors.white,
-                                        type: ButtonType.primary,
-                                        buttonSize: ButtonSize.small,
-                                        label: "Entendido",
-                                        onPressed: () =>
-                                            Navigator.of(context).pop(),
-                                      ),
-                                    ),
-                                  ).then(
-                                      (value) => Navigator.of(context).pop());
-                                } else {
-                                  print("HUBO UN PROBLEMA");
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) => GenericErrorPopUp(
-                                          message:
-                                              "Hubo un problema con la solicitud del servicio"));
-                                }
-                              }
-                            });
-                            /* if (isServiceRequested) {
-                              print("SE SOLICITO CON EXITO");
-                            } else {
-                              print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
-                            } */
-                          },
-                          textColor: Colors.white,
-                          iconLeft: Icons.calendar_month,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Costo",
+                              style: titleLable.copyWith(
+                                  fontSize: 25,
+                                  color: ColorPrimary.primaryColor),
+                            ),
+                            Text(
+                              "${service.horas.toString()} bono",
+                              style: bodyText1,
+                            ),
+                          ],
                         ),
                       ),
                       Padding(
@@ -166,19 +191,27 @@ class ServiceDetail extends StatelessWidget {
                       ),
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          children: [
-                            Text(
-                              "Costo",
-                              style: titleLable.copyWith(
-                                  fontSize: 25,
-                                  color: ColorPrimary.primaryColor),
-                            ),
-                            Text(
-                              "${service.horas.toString()} bono",
-                              style: bodyText1,
-                            ),
-                          ],
+                        child: BounceButton(
+                          backgroundColor: ColorPrimary.primaryColor,
+                          buttonSize: ButtonSize.medium,
+                          type: ButtonType.primary,
+                          textColor: ColorNeutral.neutralWhite,
+                          label: "Comentar",
+                          onPressed: () async {
+                            print("Se esta comentando un servicio");
+                            Navigator.of(context).pushNamed("/service/comment",
+                                arguments: service);
+                            /* bool isServiceRequested = await _servicesRepository
+                                .requestServices(service); */
+                            //bool isServiceRequested;
+
+                            /* if (isServiceRequested) {
+                              print("SE SOLICITO CON EXITO");
+                            } else {
+                              print("HUBO UN PROBLEMA SOLICITANDO EL SERVICIO");
+                            } */
+                          },
+                          iconLeft: Icons.comment,
                         ),
                       ),
                     ],

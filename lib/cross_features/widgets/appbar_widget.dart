@@ -41,7 +41,7 @@ class CustomAppBar extends PreferredSize {
       title: title,
       backgroundColor: ColorPrimary.primaryColor,
       centerTitle: centerTitle ?? false,
-      actions: [
+      /* actions: [
         InkWell(
           child: Icon(Icons.notifications),
           onTap: () {
@@ -49,7 +49,7 @@ class CustomAppBar extends PreferredSize {
           },
         ),
         horizontalSpace16,
-      ],
+      ], */
     );
   }
 }

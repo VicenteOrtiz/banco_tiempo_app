@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/comment_service_payload.dart';
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/report_service_payload.dart';
+
 import '../../../../core/config/services/secure_storage.dart';
 import '../payload/service_payload.dart';
 import '../../../../secrets.dart';
@@ -50,6 +53,53 @@ class ServiceDataSource {
           'Accept': 'application/json',
         },
         body: json.encode(requestBody),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> reportService(ReportServicePayload reportServicePayload) async {
+    var url = Uri.https(baseUrl, "/api/denunciarServicio");
+    var token = await _storageService.getToken();
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          'Authorization': token!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: json.encode(reportServicePayload),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> commentService(
+      CommentServicePayload commentServicePayload) async {
+    var url = Uri.https(baseUrl, "/api/publicarComentario");
+    var token = await _storageService.getToken();
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          'Authorization': token!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: json.encode(commentServicePayload),
       );
       if (response.statusCode == 200) {
         return true;

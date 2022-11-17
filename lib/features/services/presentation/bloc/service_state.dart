@@ -38,3 +38,7 @@ class ServiceLoaded extends ServiceState {
 }
 
 class ServiceError extends ServiceState {}
+
+class ServiceReported extends ServiceState {}
+
+class ServiceCommented extends ServiceState {}

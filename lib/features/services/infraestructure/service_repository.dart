@@ -1,3 +1,6 @@
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/comment_service_payload.dart';
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/report_service_payload.dart';
+
 import 'datasource/service_datasource.dart';
 import 'payload/service_payload.dart';
 
@@ -26,4 +29,11 @@ class ServicesRepository {
     bool isServiceRequested = await _datasource.requestService(service);
     return isServiceRequested;
   }
+
+  Future<bool> reportService(ReportServicePayload reportServicePayload) async =>
+      await _datasource.reportService(reportServicePayload);
+
+  Future<bool> commentService(
+          CommentServicePayload commentServicePayload) async =>
+      await _datasource.commentService(commentServicePayload);
 }

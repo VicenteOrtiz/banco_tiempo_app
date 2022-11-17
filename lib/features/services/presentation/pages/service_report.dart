@@ -1,8 +1,7 @@
 import 'package:banco_tiempo_app/cross_features/authentication/presentation/bloc/authentication_bloc.dart';
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/registration/domain/registration_form_entity.dart';
-import 'package:banco_tiempo_app/features/services/infraestructure/payload/comment_service_payload.dart';
-import 'package:banco_tiempo_app/features/services/presentation/bloc/service_bloc.dart';
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/report_service_payload.dart';
 import 'package:banco_tiempo_app/features/settings/domain/edit_profile_entity.dart';
 import 'package:banco_tiempo_app/features/settings/infraestructure/payload/change_password_payload.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/bloc/settings_bloc.dart';
@@ -22,19 +21,20 @@ import '../../../../app/presentation/shared_widgets/bounce_button.dart';
 import '../../../../cross_features/authentication/presentation/widgets/input_field.dart';
 import '../../../profile/domain/profile_entity.dart';
 import '../../domain/service_entity.dart';
+import '../bloc/service_bloc.dart';
 
-class CommentServicePage extends StatelessWidget {
+class ReportServicePage extends StatelessWidget {
   final Service service;
-  const CommentServicePage({Key? key, required this.service}) : super(key: key);
+  const ReportServicePage({Key? key, required this.service}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CustomAppBar(
-          title: Text("Consulta y/o Comentario"),
+          title: Text("Denunciar Servicio"),
           centerTitle: true,
         ),
-        body: CommentServiceBody(
+        body: ReportServiceBody(
           service: service,
         ));
   }
@@ -42,37 +42,38 @@ class CommentServicePage extends StatelessWidget {
 
 //TODO: missing upload images because API is unclear.
 
-class CommentServiceBody extends StatefulWidget {
+class ReportServiceBody extends StatefulWidget {
   final Service service;
-  const CommentServiceBody({Key? key, required this.service}) : super(key: key);
+  const ReportServiceBody({Key? key, required this.service}) : super(key: key);
 
   @override
-  State<CommentServiceBody> createState() => _CommentServiceBodyState();
+  State<ReportServiceBody> createState() => _ReportServiceBodyState();
 }
 
-class _CommentServiceBodyState extends State<CommentServiceBody> {
-  late FocusNode commentFocus;
-  late TextEditingController commentController;
+class _ReportServiceBodyState extends State<ReportServiceBody> {
+  late FocusNode reasonFocus;
+  late TextEditingController reasonController;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    commentFocus = FocusNode();
+    reasonFocus = FocusNode();
 
-    commentController = TextEditingController();
+    reasonController = TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ServiceBloc, ServiceState>(
       listener: (context, state) {
-        if (state is ServiceCommented) {
+        if (state is ServiceReported) {
           print("Fue un exito");
           showDialog(
             context: context,
             builder: (context) => CustomPopup(
-              message: "Has comentado con éxito!",
+              message:
+                  "Has denunciado con éxito. Un administrador revisará tu denuncia.",
               buttonAccept: BounceButton(
                 textColor: Colors.white,
                 type: ButtonType.primary,
@@ -84,12 +85,13 @@ class _CommentServiceBodyState extends State<CommentServiceBody> {
           ).then((value) {
             Navigator.of(context).pop();
             Navigator.of(context).pop();
+            //Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
           });
-        } else if (state is SettingsError) {
+        } else if (state is ServiceError) {
           showDialog(
             context: context,
             builder: (context) => CustomPopup(
-              message: "No se ha podido enviar tu comentario.",
+              message: "No se pudo realizar tu denuncia.",
               buttonAccept: BounceButton(
                 textColor: Colors.white,
                 type: ButtonType.primary,
@@ -104,7 +106,7 @@ class _CommentServiceBodyState extends State<CommentServiceBody> {
         // TODO: implement listener
       },
       builder: (context, state) {
-        if (state is PasswordChanging) {
+        if (state is ServiceLoading) {
           return Center(
             child: CircularProgressIndicator(),
           );
@@ -131,17 +133,18 @@ class _CommentServiceBodyState extends State<CommentServiceBody> {
                               Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 15),
                                 child: Text(
-                                  "Consulta y/o Comentario",
+                                  "¿Por que razón desea denunciar este servicio?",
                                   style: appTextTheme.titleLarge!.copyWith(
                                       color: ColorPrimary.primaryColor),
                                 ),
                               ),
+                              verticalSpace10,
                               InputField(
                                 padding: EdgeInsets.symmetric(horizontal: 15),
-                                focusNode: commentFocus,
-                                textController: commentController,
-                                label: "Escriba su consulta y/o comentario",
-                                icons: const Icon(Icons.person,
+                                focusNode: reasonFocus,
+                                textController: reasonController,
+                                label: "Razón(es)",
+                                icons: const Icon(Icons.textsms,
                                     color: ColorNeutral.neutralWhite),
                                 isPassword: false,
                                 backgroundColor: ColorPrimary.primaryColor,
@@ -150,43 +153,43 @@ class _CommentServiceBodyState extends State<CommentServiceBody> {
                           ),
                           verticalSpace20,
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(15.0),
                             child: BounceButton(
                               buttonSize: ButtonSize.medium,
                               type: ButtonType.primary,
-                              label: "Enviar Consulta y/o Comentario",
+                              label: "Denunciar",
                               onPressed: () async {
                                 showDialog(
                                   context: context,
                                   builder: (context) => CustomPopup(
-                                    message:
-                                        "Quieres enviar esta consulta y/o comentario?",
+                                    message: "Quieres denunciar el servicio?",
                                     buttonCancel: BounceButton(
                                       textColor: Colors.white,
                                       type: ButtonType.primary,
                                       buttonSize: ButtonSize.small,
                                       label: "SI",
                                       onPressed: () {
-                                        print("Se quiere comentar");
-
-                                        var commentServicePayload =
-                                            CommentServicePayload(
-                                          servicioId: widget.service.id,
-                                          texto: commentController.text,
-                                        );
+                                        print("Se quiere denunciar");
+                                        var reportServicePayload =
+                                            ReportServicePayload(
+                                                servicioId: widget.service.id,
+                                                razon: reasonController.text);
 
                                         BlocProvider.of<ServiceBloc>(context)
-                                          ..add(CommentService(
-                                              commentServicePayload));
+                                          ..add(ReportService(
+                                              reportServicePayload));
+
                                         /* var changePasswordPayload =
                                             ChangePasswordPayload(
                                           password:
-                                              commentController.text,
+                                              reasonController.text,
                                           newPasswordConfirmation:
                                               repeatNewPasswordController.text,
                                           newPassword:
                                               newPasswordController.text,
                                         );
+
+                                        
 
                                         BlocProvider.of<SettingsBloc>(context)
                                           ..add(EditPassword(
@@ -229,7 +232,7 @@ class _CommentServiceBodyState extends State<CommentServiceBody> {
 /* bool validator(RegistrationForm registrationForm) {
   if (registrationForm.name != "" &&
       registrationForm.lastName != "" &&
-      registrationForm.comment != "" &&
+      registrationForm.reason != "" &&
       registrationForm.repeatNewPassword != "" &&
       registrationForm.rut != "" &&
       registrationForm.email != "" &&

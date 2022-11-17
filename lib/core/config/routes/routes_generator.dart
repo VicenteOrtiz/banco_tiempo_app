@@ -3,6 +3,7 @@ import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pendin
 import 'package:banco_tiempo_app/features/profile/domain/profile_entity.dart';
 import 'package:banco_tiempo_app/features/register/register_page.dart';
 import 'package:banco_tiempo_app/features/registration/presentation/views/registration_page.dart';
+import 'package:banco_tiempo_app/features/services/presentation/pages/service_report.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/pages/change_password_page.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/pages/contact_data_edit_page.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/pages/personal_data_edit_page.dart';
@@ -83,8 +84,21 @@ class RouteGenerator {
         return _errorRoute();
 
       case '/service/comment':
-        return MaterialPageRoute(builder: ((context) => CommentServicePage()));
-
+        if (args is Service) {
+          return MaterialPageRoute(
+              builder: ((context) => CommentServicePage(
+                    service: args,
+                  )));
+        }
+        return _errorRoute();
+      case '/service/report':
+        if (args is Service) {
+          return MaterialPageRoute(
+              builder: ((context) => ReportServicePage(
+                    service: args,
+                  )));
+        }
+        return _errorRoute();
       case '/my-services':
         return MaterialPageRoute(builder: (((context) => MyServicesPage())));
 

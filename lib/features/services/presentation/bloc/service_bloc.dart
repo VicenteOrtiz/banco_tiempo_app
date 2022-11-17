@@ -1,3 +1,6 @@
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/comment_service_payload.dart';
+import 'package:banco_tiempo_app/features/services/infraestructure/payload/report_service_payload.dart';
+
 import '../../../../core/config/services/secure_storage.dart';
 import '../../../../cross_features/category/domain/category_entity.dart';
 import '../../infraestructure/payload/service_payload.dart';
@@ -88,5 +91,43 @@ class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
     });
 
     on<RequestService>((event, emit) async {});
+
+    on<ReportService>(
+      (event, emit) async {
+        emit(ServiceLoading());
+
+        try {
+          var reportService = await _servicesRepository
+              .reportService(event.reportServicePayload);
+
+          if (reportService) {
+            emit(ServiceReported());
+          } else {
+            emit(ServiceError());
+          }
+        } catch (e) {
+          emit(ServiceError());
+        }
+      },
+    );
+
+    on<CommentService>(
+      (event, emit) async {
+        emit(ServiceLoading());
+
+        try {
+          var commentService = await _servicesRepository
+              .commentService(event.commentServicePayload);
+
+          if (commentService) {
+            emit(ServiceCommented());
+          } else {
+            emit(ServiceError());
+          }
+        } catch (e) {
+          emit(ServiceError());
+        }
+      },
+    );
   }
 }
