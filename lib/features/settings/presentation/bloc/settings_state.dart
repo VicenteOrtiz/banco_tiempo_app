@@ -15,4 +15,12 @@ class ContactEditing extends SettingsState {}
 
 class ContactEdited extends SettingsState {}
 
-class SettingsError extends SettingsState {}
+class SettingsError extends SettingsState {
+  final String error;
+
+  SettingsError(this.error);
+}
+
+class PasswordChanging extends SettingsState {}
+
+class PasswordChanged extends SettingsState {}

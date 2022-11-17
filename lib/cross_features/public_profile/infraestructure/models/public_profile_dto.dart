@@ -31,7 +31,7 @@ class PublicProfileDto {
       PublicProfileDto(
         comentarios: List<Comentario>.from(
             json["comentarios"].map((x) => Comentario.fromJson(x))),
-        puntaje: json["puntaje"],
+        puntaje: json["puntaje"] ?? 0,
         cualidades: List<Cualidad>.from(
             json["cualidades"].map((x) => Cualidad.fromJson(x))),
       );

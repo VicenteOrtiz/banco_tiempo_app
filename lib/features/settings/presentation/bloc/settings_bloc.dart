@@ -1,4 +1,5 @@
 import 'package:banco_tiempo_app/features/settings/domain/edit_profile_entity.dart';
+import 'package:banco_tiempo_app/features/settings/infraestructure/payload/change_password_payload.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
@@ -18,11 +19,30 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       try {
         var editProfile =
             await _settingsRepository.getProfile(event.editProfileForm);
-        editProfile ? emit(ProfileEdited()) : emit(SettingsError());
+        editProfile
+            ? emit(ProfileEdited())
+            : emit(SettingsError("Hubo un problema"));
       } catch (e) {
         print(e);
-        emit(SettingsError());
+        emit(SettingsError(e.toString()));
       }
     });
+
+    on<EditPassword>(
+      (event, emit) async {
+        print("Se quiere editar la clave");
+        emit(PasswordChanging());
+        try {
+          var changePassword = await _settingsRepository
+              .changePassword(event.changePasswordPayload);
+          if (changePassword == "") {
+            emit(PasswordChanged());
+          } else {
+            emit(SettingsError(changePassword));
+            print("ALGO PASO");
+          }
+        } catch (e) {}
+      },
+    );
   }
 }

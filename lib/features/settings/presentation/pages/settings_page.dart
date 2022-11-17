@@ -81,7 +81,10 @@ class SettingsPage extends StatelessWidget {
                           buttonSize: ButtonSize.medium,
                           type: ButtonType.primary,
                           label: "Datos de Contacto",
-                          onPressed: () async {},
+                          onPressed: () async {
+                            Navigator.of(context)
+                                .pushNamed("/contact/edit", arguments: profile);
+                          },
                           textColor: ColorNeutral.neutralWhite,
                           iconLeft: Icons.edit_attributes,
                           backgroundColor: ColorPrimary.primaryColor,
@@ -91,7 +94,9 @@ class SettingsPage extends StatelessWidget {
                           buttonSize: ButtonSize.medium,
                           type: ButtonType.primary,
                           label: "Cambiar Contraseña",
-                          onPressed: () async {},
+                          onPressed: () async {
+                            Navigator.of(context).pushNamed("/change-password");
+                          },
                           textColor: ColorNeutral.neutralWhite,
                           iconLeft: Icons.password,
                           backgroundColor: ColorPrimary.primaryColor,

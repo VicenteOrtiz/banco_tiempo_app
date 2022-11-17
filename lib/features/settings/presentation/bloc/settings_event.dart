@@ -10,3 +10,9 @@ class EditProfile extends SettingsEvent {
 }
 
 class EditContact extends SettingsEvent {}
+
+class EditPassword extends SettingsEvent {
+  final ChangePasswordPayload changePasswordPayload;
+
+  EditPassword(this.changePasswordPayload);
+}
