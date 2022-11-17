@@ -1,7 +1,10 @@
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
+import 'package:banco_tiempo_app/features/profile/domain/profile_entity.dart';
 import 'package:banco_tiempo_app/features/register/register_page.dart';
 import 'package:banco_tiempo_app/features/registration/presentation/views/registration_page.dart';
+import 'package:banco_tiempo_app/features/settings/presentation/pages/personal_data_edit_page.dart';
+import 'package:banco_tiempo_app/features/settings/presentation/pages/settings_page.dart';
 
 import '../../../cross_features/badges/domain/badges_entity.dart';
 import '../../../features/messages_poc/presentation/views/chat_screen.dart';
@@ -140,6 +143,20 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => PendingMessagesPage(),
         );
+
+      case '/profile/edit':
+        if (args is Profile) {
+          return MaterialPageRoute(
+            builder: (context) => PersonalDataEditPage(
+              profile: args,
+            ),
+          );
+        }
+        return _errorRoute();
+
+      //TODO: get this route working
+      /* case '/settings':
+        return MaterialPageRoute(builder: (context) => SettingsPage()); */
 
       default:
         return _errorRoute();

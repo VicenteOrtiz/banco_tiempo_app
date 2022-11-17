@@ -1,5 +1,6 @@
 import 'package:banco_tiempo_app/features/profile/presentation/widgets/attribute_list.dart';
 import 'package:banco_tiempo_app/features/profile/presentation/widgets/comment_list.dart';
+import 'package:banco_tiempo_app/features/settings/presentation/pages/settings_page.dart';
 
 import '../../../../cross_features/public_profile/domain/public_profile.dart';
 import '../../../../cross_features/widgets/appbar_widget.dart';
@@ -24,15 +25,6 @@ class ProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: ColorPrimary.primaryColor,
         elevation: 0,
-        actions: [
-          InkWell(
-            child: Icon(Icons.settings),
-            onTap: () {
-              print("Pasa algo");
-            },
-          ),
-          horizontalSpace10
-        ],
       ),
       //drawer: DrawerWidget(context),
       body: BlocProvider<ProfileBloc>(
@@ -61,7 +53,7 @@ class ProfilePage extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.only(
-                right: 8.0, left: 8.0, top: 10, bottom: 40),
+                right: 8.0, left: 8.0, top: 10, bottom: 20),
             child: Column(
               //mainAxisAlignment: MainAxisAlignment.spaceAround,
               //crossAxisAlignment: CrossAxisAlignment.center,
@@ -78,12 +70,32 @@ class ProfilePage extends StatelessWidget {
                 ),
                 verticalSpace20,
                 Column(
-                  //mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  //mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
                       "${profile.name} ${profile.lastName}",
                       style: TextStyle(color: Colors.white, fontSize: 30),
+                    ),
+                    verticalSpace10,
+                    InkWell(
+                      child: Icon(
+                        Icons.mode_edit,
+                        color: Colors.white,
+                      ),
+                      onTap: () {
+                        print("HA EDITAR");
+                        Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SettingsPage(
+                                        profile: profile,
+                                        publicProfile: publicProfile)))
+                            .then((value) {
+                          BlocProvider.of<ProfileBloc>(context)
+                            ..add(GetProfile());
+                        });
+                      },
                     ),
                     /* Text(
                       profile.name,
