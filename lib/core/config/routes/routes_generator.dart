@@ -1,4 +1,5 @@
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
+import 'package:banco_tiempo_app/features/help/presentation/pages/help_page.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
 import 'package:banco_tiempo_app/features/profile/domain/profile_entity.dart';
 import 'package:banco_tiempo_app/features/register/register_page.dart';
@@ -6,6 +7,7 @@ import 'package:banco_tiempo_app/features/registration/presentation/views/regist
 import 'package:banco_tiempo_app/features/services/presentation/pages/service_report.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/pages/change_password_page.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/pages/contact_data_edit_page.dart';
+import 'package:banco_tiempo_app/features/help/presentation/pages/help_chat_screen.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/pages/personal_data_edit_page.dart';
 import 'package:banco_tiempo_app/features/settings/presentation/pages/settings_page.dart';
 
@@ -189,6 +191,15 @@ class RouteGenerator {
         }
         return _errorRoute();
 
+      case '/help':
+        return MaterialPageRoute(
+          builder: (context) => HelpPage(),
+        );
+
+      case '/help/messages':
+        return MaterialPageRoute(
+          builder: (context) => HelpChatScreen(),
+        );
       //TODO: get this route working
       /* case '/settings':
         return MaterialPageRoute(builder: (context) => SettingsPage()); */

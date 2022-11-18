@@ -36,7 +36,7 @@ Widget CardWidget(int opt, BuildContext context) {
         Navigator.of(context).pushNamed('/pending-messages');
       } else if (opt == 4) {
         //Navigator.of(context).pushNamed('/services-list');
-        dialog(context);
+        Navigator.of(context).pushNamed('/help');
       } else if (opt == 5) {
         Navigator.of(context).pushNamed('/profile');
       }

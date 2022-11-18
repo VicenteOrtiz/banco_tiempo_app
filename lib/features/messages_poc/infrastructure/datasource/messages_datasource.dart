@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:banco_tiempo_app/features/messages_poc/infrastructure/models/help_messages_dto.dart';
 import 'package:banco_tiempo_app/features/messages_poc/infrastructure/models/messages_dto.dart';
 
 import '../../../my_services/infraestructure/models/pending_services_dto.dart';
@@ -84,6 +85,63 @@ class MessagesDatasource {
           {
             "texto": msg,
             "transaccionID": serviceId,
+          },
+        ),
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        print(response.body);
+        return false;
+      }
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
+  Future<HelpMessagesDto?> getHelpMessages() async {
+    var url = Uri.https(baseUrl, "/api/mensajesAyuda");
+    var token = await _storageService.getToken();
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          'Authorization': token!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        var jsonResponse =
+            convert.jsonDecode(response.body) as Map<String, dynamic>;
+
+        return HelpMessagesDto.fromJson(jsonResponse);
+      } else {
+        return null;
+      }
+    } catch (e, s) {
+      print(e);
+      print(s);
+      print("PASA ALGO?");
+      return null;
+    }
+  }
+
+  Future<bool> sendHelpMessage(String message) async {
+    var url = Uri.https(baseUrl, "/api/enviarMensajeAyuda");
+    var token = await _storageService.getToken();
+    try {
+      var response = await http.post(
+        url,
+        headers: {
+          'Authorization': token!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: json.encode(
+          {
+            "texto": message,
           },
         ),
       );

@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/features/messages_poc/infrastructure/models/help_messages_dto.dart';
+
 import 'datasource/messages_datasource.dart';
 import 'models/messages_dto.dart';
 import 'models/pending_messages_dto.dart';
@@ -35,4 +37,10 @@ class MessagesRepository {
 
   Future<bool> sendMessage(String msg, String serviceId) async =>
       await _datasource.sendMessage(msg, serviceId);
+
+  Future<bool> sendHelpMessage(String message) async =>
+      await _datasource.sendHelpMessage(message);
+
+  Future<HelpMessagesDto?> getHelpMessages() async =>
+      await _datasource.getHelpMessages();
 }

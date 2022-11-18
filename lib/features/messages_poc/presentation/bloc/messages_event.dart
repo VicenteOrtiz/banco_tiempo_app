@@ -9,3 +9,5 @@ class GetMessages extends MessagesEvent {
   final String serviceId;
   GetMessages({required this.serviceId});
 }
+
+class GetHelpMessages extends MessagesEvent {}

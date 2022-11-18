@@ -21,3 +21,12 @@ class MessagesLoaded extends MessagesState {
   final MessagesDto messages;
   MessagesLoaded({required this.messages});
 }
+
+class HelpMessagesLoading extends MessagesState {}
+
+class HelpMessagesLoaded extends MessagesState {
+  final HelpMessagesDto messages;
+  HelpMessagesLoaded({required this.messages});
+}
+
+class HelpMessagesError extends MessagesState {}
