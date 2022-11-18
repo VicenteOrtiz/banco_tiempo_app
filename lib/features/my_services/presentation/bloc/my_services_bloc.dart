@@ -1,3 +1,5 @@
+import 'package:banco_tiempo_app/features/my_services/infraestructure/models/historic_transactions_dto.dart';
+
 import '../../domain/my_services_entity.dart';
 import '../../infraestructure/my_services_repository.dart';
 import '../../infraestructure/payload/confirm_service_payload.dart';
@@ -93,6 +95,23 @@ class MyServicesBloc extends Bloc<MyServicesEvent, MyServicesState> {
             emit(MyServicesFinished());
           } else {
             print("No se pudo finalizar el servicio");
+          }
+        } catch (e) {
+          emit(MyServicesError());
+        }
+      },
+    );
+
+    on<GetHistoricServices>(
+      (event, emit) async {
+        emit(HistoricTransactionsLoading());
+        try {
+          List<HistoricTransactionsDto>? historicTransactions =
+              await _myServicesRepository.getHistoricTransactions();
+          if (historicTransactions != null) {
+            emit(HistoricTransactionsLoaded(historicTransactions));
+          } else {
+            emit(MyServicesError());
           }
         } catch (e) {
           emit(MyServicesError());

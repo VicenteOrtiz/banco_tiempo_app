@@ -30,3 +30,11 @@ class MyServicesLoaded extends MyServicesState {
 }
 
 class MyServicesError extends MyServicesState {}
+
+class HistoricTransactionsLoaded extends MyServicesState {
+  final List<HistoricTransactionsDto> historicTransactionsDto;
+
+  HistoricTransactionsLoaded(this.historicTransactionsDto);
+}
+
+class HistoricTransactionsLoading extends MyServicesState {}

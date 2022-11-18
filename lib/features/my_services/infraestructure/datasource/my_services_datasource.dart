@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:banco_tiempo_app/features/my_services/infraestructure/models/historic_transactions_dto.dart';
+
 import '../models/pending_services_dto.dart';
 import '../payload/confirm_service_payload.dart';
 import '../../../../secrets.dart';
@@ -129,6 +131,32 @@ class MyServicesDataSource {
     } catch (e) {
       print("NO SE PUDO ACEPTAR: $e");
       return false;
+    }
+  }
+
+  Future<List<HistoricTransactionsDto>?> getHistoricTransactions() async {
+    var url = Uri.https(baseUrl, "/api/historialTransacciones");
+    var token = await _storageService.getToken();
+    try {
+      var response = await http.get(
+        url,
+        headers: {
+          'Authorization': token!,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      );
+      if (response.statusCode == 200) {
+        var jsonResponse = convert.jsonDecode(response.body);
+        return historicTransactionsDtoFromJson(response.body);
+      } else {
+        return null;
+      }
+    } catch (e, s) {
+      print("LLEGO ACA?");
+      print(s);
+      print(e);
+      return null;
     }
   }
 }

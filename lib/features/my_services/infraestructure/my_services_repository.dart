@@ -1,5 +1,6 @@
 import '../domain/my_services_entity.dart';
 import 'datasource/my_services_datasource.dart';
+import 'models/historic_transactions_dto.dart';
 import 'models/pending_services_dto.dart';
 
 import 'payload/confirm_service_payload.dart';
@@ -32,4 +33,7 @@ class MyServicesRepository {
   Future<bool> finishService(
           ConfirmServicePayload confirmServicePayload) async =>
       await _datasource.finishService(confirmServicePayload);
+
+  Future<List<HistoricTransactionsDto>?> getHistoricTransactions() async =>
+      await _datasource.getHistoricTransactions();
 }

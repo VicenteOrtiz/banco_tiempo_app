@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/features/my_services/presentation/bloc/my_services_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../app/presentation/app_theme.dart';
@@ -87,12 +88,25 @@ Widget buildMenuItems(BuildContext context) => Container(
           ),
           ListTile(
             leading: const Icon(
+              Icons.history,
+              color: ColorPrimary.primaryColor,
+            ),
+            title: const Text("Historial de Transacciones"),
+            onTap: () {
+              BlocProvider.of<MyServicesBloc>(context)
+                ..add(GetHistoricServices());
+              Navigator.of(context).pushNamed('/historic-transactions');
+            },
+          ),
+          ListTile(
+            leading: const Icon(
               Icons.help,
               color: ColorPrimary.primaryColor,
             ),
             title: const Text("Ayuda"),
             onTap: () {
               dialog(context);
+              Navigator.of(context).pushNamed('/help');
             },
           ),
           ListTile(

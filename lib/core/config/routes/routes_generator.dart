@@ -1,6 +1,7 @@
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/help/presentation/pages/help_page.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
+import 'package:banco_tiempo_app/features/my_services/presentation/pages/historic_transactions_page.dart';
 import 'package:banco_tiempo_app/features/profile/domain/profile_entity.dart';
 import 'package:banco_tiempo_app/features/register/register_page.dart';
 import 'package:banco_tiempo_app/features/registration/presentation/views/registration_page.dart';
@@ -121,6 +122,11 @@ class RouteGenerator {
                   )));
         }
         return _errorRoute();
+
+      case '/historic-transactions':
+        return MaterialPageRoute(
+          builder: ((context) => HistoricTransactionsPage()),
+        );
 
       //TODO: FALTO MAPEARLO A RUTA
       /* case '/my-services/review':

@@ -28,3 +28,5 @@ class FinishService extends MyServicesEvent {
 
   FinishService({required this.confirmServicePayload});
 }
+
+class GetHistoricServices extends MyServicesEvent {}
