@@ -54,3 +54,7 @@ class AuthenticationError extends AuthenticationState {
   final String? message;
   AuthenticationError(this.message);
 }
+
+class PasswordRecovering extends AuthenticationState {}
+
+class PasswordRecovered extends AuthenticationState {}

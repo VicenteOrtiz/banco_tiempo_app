@@ -84,4 +84,24 @@ class AuthenticationDatasource {
       //return LoginResponseDto.withError(e.toString());
     }
   }
+
+  Future<bool> recoverPassword(String mail) async {
+    var url = Uri.https(baseUrl, "/api/recuperarPassword");
+    try {
+      var response = await http.post(
+        url,
+        body: {
+          "email": mail,
+        },
+      );
+      if (response.statusCode == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e, s) {
+      print("$e $s");
+      return false;
+    }
+  }
 }

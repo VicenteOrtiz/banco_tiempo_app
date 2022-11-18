@@ -44,11 +44,8 @@ class AuthenticationBloc
                 .getUserDetails("Bearer ${loginResponse.token!}");
             _storageService.setUserId(userDetails.id);
             final userProfile = await _profileRepository.getProfile();
-            //print(userProfile!.name);
             appPreferences.isFirstTime = false;
             appPreferences.userName = event.username;
-            //print("isFirstTime ${appPreferences.isFirstTime}");
-            //TODO: guardar el nombre en vez del username
             emit(AuthenticationLoaded(
               userDetails.id,
               "${userProfile?.name} ${userProfile?.lastName}",
@@ -79,36 +76,24 @@ class AuthenticationBloc
       },
     );
 
+    on<RecoverPassword>(
+      (event, emit) async {
+        emit(PasswordRecovering());
+        var recoverPassword =
+            await _authenticationRepository.recoverPassword(event.mail);
+        if (recoverPassword) {
+          emit(PasswordRecovered());
+        } else {
+          emit(AuthenticationError("Hay un problema con el envío del correo"));
+        }
+      },
+    );
+
     on<Initialize>(
       ((event, emit) {
         print("Se inicializo");
         emit(AuthenticationInitial());
       }),
     );
-
-    /*  on<AuthenticationEvent>((event, emit) async {
-      // TODO: implement event handler
-      LoginUserEntity loginUserEntity = LoginUserEntity();
-      if (event is Login) {
-        if (event.username.isEmpty || event.password.isEmpty) {
-          emit(AuthenticationError("Ingrese datos válidos porfavor."));
-        } else {
-          emit(AuthenticationLoading());
-          loginUserEntity.username = event.username;
-          loginUserEntity.password = event.password;
-          final loginResponse =
-              await _authenticationRepository.logIn(loginUserEntity);
-          if (loginResponse.error == null) {
-            _storageService.setToken(loginResponse.token!);
-            emit(AuthenticationLoaded(event.username));
-          } else {
-            emit(AuthenticationError(loginResponse.error));
-          }
-        }
-      } else if (event is Initialize) {
-        print("Se inicializo");
-        emit(AuthenticationInitial());
-      }
-    }); */
   }
 }

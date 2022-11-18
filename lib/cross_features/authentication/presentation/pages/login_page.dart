@@ -116,6 +116,15 @@ class _LoginPageState extends State<LoginPage> {
                 icons: const Icon(Icons.lock, color: ColorNeutral.neutralWhite),
                 isPassword: true,
               ),
+              InkWell(
+                child: Text(
+                  "Si olvidaste tu contraseña, haz click AQUÍ",
+                  style: labels.copyWith(color: ColorNeutral.neutralWhite),
+                ),
+                onTap: () {
+                  Navigator.of(context).pushNamed('/recover-password');
+                },
+              ),
               verticalSpace40,
               LoginButton(
                 focusNode: loginBtnFocus,

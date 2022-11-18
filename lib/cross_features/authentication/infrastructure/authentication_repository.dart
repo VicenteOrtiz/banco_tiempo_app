@@ -19,4 +19,7 @@ class AuthenticationRepository {
 
   Future<bool> register(RegistrationForm registrationForm) =>
       _datasource.register(registrationForm);
+
+  Future<bool> recoverPassword(String email) =>
+      _datasource.recoverPassword(email);
 }

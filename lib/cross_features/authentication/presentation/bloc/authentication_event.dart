@@ -17,3 +17,9 @@ class Register extends AuthenticationEvent {
 }
 
 class Initialize extends AuthenticationEvent {}
+
+class RecoverPassword extends AuthenticationEvent {
+  final String mail;
+
+  RecoverPassword(this.mail);
+}

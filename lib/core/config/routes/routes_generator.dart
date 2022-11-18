@@ -1,3 +1,4 @@
+import 'package:banco_tiempo_app/cross_features/authentication/presentation/pages/forgot_password_page.dart';
 import 'package:banco_tiempo_app/cross_features/category/domain/category_entity.dart';
 import 'package:banco_tiempo_app/features/help/presentation/pages/help_page.dart';
 import 'package:banco_tiempo_app/features/messages_poc/presentation/views/pending_messages_page.dart';
@@ -60,6 +61,9 @@ class RouteGenerator {
         return MaterialPageRoute(
           builder: (context) => ChangePasswordPagePage(),
         );
+
+      case '/recover-password':
+        return MaterialPageRoute(builder: ((context) => ForgotPasswordPage()));
 
       case '/dashboard':
         return MaterialPageRoute(
