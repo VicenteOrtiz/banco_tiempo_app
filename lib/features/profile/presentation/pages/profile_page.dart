@@ -41,6 +41,15 @@ class ProfilePage extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorPrimary.primaryColor,
+        child: Icon(Icons.home),
+        onPressed: () {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/dashboard', (route) => false);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 

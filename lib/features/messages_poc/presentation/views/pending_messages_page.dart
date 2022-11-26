@@ -16,6 +16,15 @@ class PendingMessagesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorPrimary.primaryColor,
+        child: Icon(Icons.home),
+        onPressed: () {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/dashboard', (route) => false);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       key: _scaffoldKey,
       appBar: CustomAppBar(
         title: Text("Mensajes"),

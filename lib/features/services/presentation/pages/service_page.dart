@@ -22,17 +22,27 @@ class ServicePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(
-          title: Text("Servicios, Talentos o Bienes"),
-        ),
-        drawer: DrawerWidget(context),
-        body: BlocProvider(
-          create: (context) => ServiceBloc()
-            ..add(
-              RefreshServices(),
-            ),
-          child: ServiceBody(),
-        ));
+      appBar: CustomAppBar(
+        title: Text("Servicios, Talentos o Bienes"),
+      ),
+      drawer: DrawerWidget(context),
+      body: BlocProvider(
+        create: (context) => ServiceBloc()
+          ..add(
+            RefreshServices(),
+          ),
+        child: ServiceBody(),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: ColorPrimary.primaryColor,
+        child: Icon(Icons.home),
+        onPressed: () {
+          Navigator.pushNamedAndRemoveUntil(
+              context, '/dashboard', (route) => false);
+        },
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+    );
   }
 }
 

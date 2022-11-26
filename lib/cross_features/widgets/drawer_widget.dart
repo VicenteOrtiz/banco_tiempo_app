@@ -52,6 +52,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             ),
             title: const Text("Buscar Servicio"),
             onTap: () {
+              Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/service');
             },
           ),
@@ -62,6 +63,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             ),
             title: const Text("Mis Servicios"),
             onTap: () {
+              Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/my-services');
             },
           ),
@@ -72,6 +74,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             ),
             title: const Text("Mis Publicaciones"),
             onTap: () {
+              Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/publications');
             },
           ),
@@ -82,6 +85,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             ),
             title: const Text("Mensajes"),
             onTap: () {
+              Navigator.of(context).pop();
               BlocProvider.of<MessagesBloc>(context)..add(GetPendingMessages());
               Navigator.of(context).pushNamed('/pending-messages');
             },
@@ -93,6 +97,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             ),
             title: const Text("Historial de Transacciones"),
             onTap: () {
+              Navigator.of(context).pop();
               BlocProvider.of<MyServicesBloc>(context)
                 ..add(GetHistoricServices());
               Navigator.of(context).pushNamed('/historic-transactions');
@@ -105,7 +110,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             ),
             title: const Text("Ayuda"),
             onTap: () {
-              dialog(context);
+              Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/help');
             },
           ),
@@ -116,6 +121,7 @@ Widget buildMenuItems(BuildContext context) => Container(
             ),
             title: const Text("Mi Cuenta"),
             onTap: () {
+              Navigator.of(context).pop();
               Navigator.of(context).pushNamed('/profile');
             },
           ),
